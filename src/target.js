@@ -33,7 +33,8 @@ export default function Target() {
 
   const handleSubmit = () => {
     // Send the data of the input field to the server
-    fetch('/submit-data', {
+    fetch('https://gamechecker.vercel.app
+/submit-data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
