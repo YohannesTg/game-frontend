@@ -31,27 +31,27 @@ export default function Target() {
     }
   };
 
-  const handleSubmit = () => {
-    // Send the data of the input field to the server
-    fetch('https://gamechecker.vercel.app/submit-data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chatId: chatId,
-        userId: userId,
-        inputValue: aim,
-      }),
+const handleSubmit = () => {
+  fetch('https://gamechecker.vercel.app/submit-data', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chatId: chatId,
+      userId: userId,
+      inputValue: aim,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Server response:', data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Server response:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
 
   return (
     <div>
