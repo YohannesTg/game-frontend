@@ -80,7 +80,7 @@ const handleSubmit = () => {
           </div>
         </div>
       ) : (
-        <App />
+        <App chatId={chatId} userId={userId}/>
       )}
     </div>
   );
