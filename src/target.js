@@ -80,7 +80,7 @@ const handleSubmit = () => {
           </div>
         </div>
       ) : (
-        <App target={aim} />
+        <App />
       )}
     </div>
   );
