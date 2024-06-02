@@ -30,12 +30,11 @@ export default function Guess(props){
 
     async function checkOnServer() {
         try {
-            const response = await fetch('/check', {
-                method: 'POST',
+            const response = await fetch(`/check?guess=${guess}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ guess: guess})
+                }
             });
             const data = await response.json();
             setNumberState(data.number);
