@@ -32,6 +32,7 @@ export default function Guess(props){
         try {
             const response = await fetch(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`, {
                 method: 'GET',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json'
                 }
