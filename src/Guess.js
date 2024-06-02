@@ -37,7 +37,9 @@ export default function Guess(props){
                     'Content-Type': 'application/json'
                 }
             });
+            console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
             const data = await response.json();
+            console.log(data);
             setNumberState(data.Number);
             setOrderState(data.Order);
 
