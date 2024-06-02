@@ -31,27 +31,26 @@ export default function Target() {
     }
   };
 
-  const handleSubmit = () => {
-    fetch('https://gamechecker.vercel.app/submit-data', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chatId: chatId,
-        userId: userId,
-        inputValue: aim,
-      }),
+const handleSubmit = () => {
+  // Construct the URL with the necessary query parameters
+  const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}`;
+
+  // Make the GET request
+  fetch(url, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Server response:', data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Server response:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }; // Added the closing curly brace here
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
 
   return (
     <div>
