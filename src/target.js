@@ -51,7 +51,7 @@ export default function Target() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  };
+  }; // Added the closing curly brace here
 
   return (
     <div>
