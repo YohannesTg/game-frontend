@@ -34,7 +34,6 @@ async function checkOnServer() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://g-game.vercel.app'
       }
     });
 
