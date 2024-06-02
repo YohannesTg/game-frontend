@@ -41,15 +41,14 @@ async function checkOnServer() {
       throw new Error(`HTTP error ${response.status}`);
     }
 
-    const data = await response.text();
+    const data = await response.json();
     console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
     console.log(data);
 
-    const parsedData = JSON.parse(data);
-    setNumberState(parsedData.Number);
-    setOrderState(parsedData.Order);
+    setNumberState(data.Number);
+    setOrderState(data.Order);
 
-    if (parsedData.Order === 4 && parsedData.Number === 4) {
+    if (data.Order === 4 && data.Number === 4) {
       alert("CONGRATULATIONS");
       confetti.render();
     } else {
