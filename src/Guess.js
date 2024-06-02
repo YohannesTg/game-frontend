@@ -30,7 +30,7 @@ export default function Guess(props){
 
     async function checkOnServer() {
         try {
-            const response = await fetch(`/check?guess=${guess}`, {
+            const response = await fetch(`/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
