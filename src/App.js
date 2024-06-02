@@ -16,7 +16,7 @@ setTrialNum((prevValue)=>[...prevValue, prevValue[prevValue.length-1]+1])
 
   return(<div className="container-fluid text-center  ">
     <Header trialNum={trailNum.length}/>
- {trailNum.map((value)=><Guess key={value} name={value} NewGuess={NewGuess}/>)}
+ {trailNum.map((value)=><Guess key={value} chatId={props.chatId} userId={props.userId} name={value} NewGuess={NewGuess}/>)}
 
  
     </div>
