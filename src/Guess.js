@@ -3,7 +3,6 @@ import ConfettiGenerator from "confetti-js";
 
 export default function Guess(props){
     const [clicked, setClicked] = React.useState(false);
-    const actualString = props.actualNum.toString();
     const [guess, setGuess] = React.useState("");
     const [numberState, setNumberState] = React.useState(0);
     const [orderState, setOrderState] = React.useState(0);
@@ -36,7 +35,7 @@ export default function Guess(props){
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ guess: guess, actualNum: actualString })
+                body: JSON.stringify({ guess: guess})
             });
             const data = await response.json();
             setNumberState(data.number);
