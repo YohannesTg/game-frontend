@@ -37,10 +37,10 @@ export default function Guess(props){
                 }
             });
             const data = await response.json();
-            setNumberState(data.number);
-            setOrderState(data.order);
+            setNumberState(data.Number);
+            setOrderState(data.Order);
 
-            if (data.order === 4 && data.number === 4) {
+            if (data.Order === 4 && data.Number === 4) {
                 alert("CONGRATULATIONS");
                 confetti.render();
             } else {
