@@ -28,31 +28,37 @@ export default function Guess(props){
         }
     }
 
-    async function checkOnServer() {
-        try {
-            const response = await fetch(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`, {
-                method: 'GET',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
-            const data = await response.json();
-            console.log(data);
-            setNumberState(data.Number);
-            setOrderState(data.Order);
+async function checkOnServer() {
+  try {
+    const response = await fetch(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-            if (data.Order === 4 && data.Number === 4) {
-                alert("CONGRATULATIONS");
-                confetti.render();
-            } else {
-                props.NewGuess();
-            }
-        } catch (error) {
-            console.error('Error checking on server:', error);
-        }
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
     }
+
+    const data = await response.text();
+    console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
+    console.log(data);
+
+    const parsedData = JSON.parse(data);
+    setNumberState(parsedData.Number);
+    setOrderState(parsedData.Order);
+
+    if (parsedData.Order === 4 && parsedData.Number === 4) {
+      alert("CONGRATULATIONS");
+      confetti.render();
+    } else {
+      props.NewGuess();
+    }
+  } catch (error) {
+    console.error('Error checking on server:', error);
+  }
+}
 
     return (
         <div className="container">
