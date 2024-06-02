@@ -33,7 +33,8 @@ async function checkOnServer() {
     const response = await fetch(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://g-game.vercel.app'
       }
     });
 
