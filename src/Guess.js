@@ -6,6 +6,7 @@ export default function Guess(props){
     const [guess, setGuess] = React.useState("");
     const [numberState, setNumberState] = React.useState(0);
     const [orderState, setOrderState] = React.useState(0);
+    const [gameResult, setGameResult] = React.useState(null);
     var confettiElement = document.getElementById('my-canvas');
     var confettiSettings = { target: confettiElement };
     var confetti = new ConfettiGenerator(confettiSettings);
@@ -49,9 +50,11 @@ async function checkOnServer() {
     setOrderState(data.Order);
 
     if (data.Order === 4 && data.Number === 4) {
+      setGameResult("win");
       alert("CONGRATULATIONS");
       confetti.render();
     } else {
+      setGameResult("loss");
       props.NewGuess();
     }
   } catch (error) {
@@ -68,6 +71,11 @@ async function checkOnServer() {
                 <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
                 <div className="col-2 col-md-1 btn btn-secondary me-2">{orderState}</div>
                 <div className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`} onClick={() => { trigger() }}>GO</div>
+                {gameResult === "win" && (
+                    <div className="col-3 col-md-3 col-lg-1 btn btn-primary" onClick={() => { setGuess(""); setNumberState(0); setOrderState(0); setGameResult(null); }}>
+                        Replay
+                    </div>
+                )}
             </div>
         </div>
     );
