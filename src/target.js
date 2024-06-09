@@ -61,7 +61,7 @@ const handleSubmit = () => {
               <h1 className="text-white">Welcome to the Guessing Game</h1>
               <div className="col-3 input-group input-group-lg">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control bg-secondary text-center text-white shadow-lg"
                   value={aim}
                   onChange={handleInputChange}
