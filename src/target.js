@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import App from './App';
 import './App.css';
 
@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 export default function Target() {
   const [aim, setAim] = useState('');
-  const [clicked, setClicked] = useState(true);
+  const [clicked, setClicked] = useState(false);
   const [chatId, setChatId] = useState('');
   const [userId, setUserId] = useState('');
 
@@ -20,14 +20,8 @@ export default function Target() {
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-    const change = inputValue[inputValue.length - 1];
-    parseInt(inputValue);
-    if (!inputValue.slice(0, inputValue.length - 1).includes(parseInt(change))) {
-      if (inputValue.length <= 4) {
-        setAim(inputValue);
-      } else {
-        setAim(inputValue.slice(0, 4));
-      }
+    if (inputValue.length <= 4 && /^\d*$/.test(inputValue)) {
+      setAim(inputValue);
     }
   };
 
@@ -54,27 +48,27 @@ export default function Target() {
 
   return (
     <div>
-      {clicked ? (
+      {!clicked ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
           <div className="container text-center">
             <div className="row">
               <h1 className="text-white">Welcome to the Guessing Game</h1>
               <div className="col-3 input-group input-group-lg">
                 <input
-                  type="number"
+                  type="text"
                   className="form-control bg-secondary text-center text-white shadow-lg"
                   value={aim}
                   onChange={handleInputChange}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      setClicked((clicked) => !clicked);
+                      setClicked(true);
                       handleSubmit();
                     }
                   }}
                 />
                 <button
                   onClick={() => {
-                    setClicked((clicked) => !clicked);
+                    setClicked(true);
                     handleSubmit();
                   }}
                   className="btn btn-primary shadow-lg"
