@@ -82,7 +82,7 @@ export default function Target() {
           </div>
         </div>
       ) : (
-        <App chatId={chatId} userId={userId} />
+        <App chatId={chatId} userId={userId} userName={userName}/>
       )}
     </div>
   );
