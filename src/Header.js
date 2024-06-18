@@ -8,7 +8,7 @@ export default function Guess(props) {
                     <div className='rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mb-2' style={{ width: "40px", height: "40px" }}>
                         {props.trialNum}
                     </div>
-                    <h5>{props.userName}</h5>
+                    <div style={{height: "10px"}}>{props.userName}<div>
                 </div>
             </div>
             <div className="row justify-content-center mt-3">
