@@ -10,12 +10,14 @@ export default function Target() {
   const [clicked, setClicked] = useState(false);
   const [chatId, setChatId] = useState('');
   const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     // Get the chat ID and user ID from the URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     setChatId(urlParams.get('chatId') || '');
     setUserId(urlParams.get('userId') || '');
+    setUserName(urlParams.get('userName') || '');
   }, []);
 
   const handleInputChange = (e) => {
@@ -27,7 +29,7 @@ export default function Target() {
 
   const handleSubmit = () => {
     // Construct the URL with the necessary query parameters
-    const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}`;
+    const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
 
     // Make the GET request
     fetch(url, {
