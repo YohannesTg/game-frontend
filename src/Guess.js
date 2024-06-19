@@ -7,7 +7,7 @@ export default function Guess(props) {
   const [numberState, setNumberState] = useState(0);
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
-  const [opponentUsername, setOpponentUsername] = useState("");
+  
   var confettiElement = document.getElementById('my-canvas');
   var confettiSettings = { target: confettiElement };
   var confetti = new ConfettiGenerator(confettiSettings);
