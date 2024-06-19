@@ -15,7 +15,12 @@ export default function Guess(props) {
   useEffect(() => {
     const fetchOpponentUsername = async () => {
       try {
-        const response = await fetch(`https://gamechecker.vercel.app/opponent?chatId=${props.chatId}&userId=${props.userId}`);
+        const response = await fetch(`https://gamechecker.vercel.app/opponent?chatId=${props.chatId}&userId=${props.userId}`,   {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error ${response.status}`);
         }
