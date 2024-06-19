@@ -8,14 +8,14 @@ export default function Guess(props) {
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
   
-  var confettiElement = document.getElementById('my-canvas');
-  var confettiSettings = { target: confettiElement };
-  var confetti = new ConfettiGenerator(confettiSettings);
+  const confettiElement = document.getElementById('my-canvas');
+  const confettiSettings = { target: confettiElement };
+  const confetti = new ConfettiGenerator(confettiSettings);
 
   useEffect(() => {
     const fetchOpponentUsername = async () => {
       try {
-        const response = await fetch(`https://gamechecker.vercel.app/opponent?chatId=${props.chatId}&userId=${props.userId}`,   {
+        const response = await fetch(`https://gamechecker.vercel.app/opponent?chatId=${props.chatId}&userId=${props.userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function Guess(props) {
     };
 
     fetchOpponentUsername();
-  }, []);
+  }, [props.chatId, props.userId, props.oppName]);
 
   function trigger() {
     checkOnServer();
@@ -46,7 +46,6 @@ export default function Guess(props) {
   function toggler(e) {
     const inputValue = e.target.value;
     const change = inputValue[inputValue.length - 1];
-    parseInt(inputValue);
     if (!inputValue.slice(0, inputValue.length - 1).includes(parseInt(change))) {
       if (inputValue.length <= 4) {
         setGuess(inputValue);
@@ -124,7 +123,6 @@ export default function Guess(props) {
           </div>
         )}
       </div>
-      {opponentUsername && <p>Opponent: {opponentUsername}</p>}
     </div>
   );
 }
