@@ -12,6 +12,7 @@ function App(props) {
 
   function oppName(name){
     setOpponentUsername(name)
+    console.log(name)
   }
 
   function NewGuess(){
