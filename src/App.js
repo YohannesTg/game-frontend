@@ -8,7 +8,7 @@ import Header from './Header'
 function App(props) { 
   
   const [trailNum, setTrialNum]=React.useState([1])
-  const [opponentUsername, setOpponentUsername] = useState("");
+  const [opponentUsername, setOpponentUsername] =React.useState("");
 
   function oppName(name){
     setOpponentUsername(name)
