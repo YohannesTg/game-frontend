@@ -7,20 +7,11 @@ export default function Guess(props) {
   const [numberState, setNumberState] = useState(0);
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
-  const [confettiInstance, setConfettiInstance] = useState(null);
-  const confettiCanvasRef = useRef(null);
+  
+  const confettiElement = document.getElementById('my-canvas');
+  const confettiSettings = { target: confettiElement };
+  const confetti = new ConfettiGenerator(confettiSettings);
 
-  useEffect(() => {
-    const confettiElement = confettiCanvasRef.current;
-    const confettiSettings = { target: confettiElement };
-    const confetti = new ConfettiGenerator(confettiSettings);
-    setConfettiInstance(confetti);
-
-    // Cleanup function to stop the confetti animation when the component unmounts
-    return () => {
-      confetti.clear();
-    };
-  }, []);
 
   useEffect(() => {
     const fetchOpponentUsername = async () => {
@@ -101,7 +92,7 @@ export default function Guess(props) {
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
-        confettiInstance?.render();
+        confetti.render();
       } else {
         setGameResult("loss");
         props.NewGuess();
