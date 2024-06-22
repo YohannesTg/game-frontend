@@ -56,7 +56,7 @@ export default function Guess(props) {
     };
 
     fetchOpponentUsername();
-  }, [props.chatId, props.userId, props.oppName]);
+  }, []);
 
   function trigger() {
     checkOnServer();
@@ -142,7 +142,6 @@ export default function Guess(props) {
             Replay
           </div>
         )}
-        <canvas ref={confettiCanvasRef} id="my-canvas" />
       </div>
     </div>
   );
