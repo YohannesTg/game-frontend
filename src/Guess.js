@@ -35,12 +35,12 @@ export default function Guess(props) {
           throw new Error(`HTTP error ${response.status}`);
         }
         const data = await response.json();
-        props.oppName(data.username);
-        console.log(data.username);
+        props.oppName(data.userName);
+        console.log(data.userName);
       } catch (error) {
         console.error('Error fetching opponent username:', error);
         // Try again in 2 seconds, but limit the number of retries
-        const maxRetries = 3;
+        const maxRetries = 10;
         let retryCount = 0;
         const retryFetchOpponentUsername = async () => {
           if (retryCount < maxRetries) {
