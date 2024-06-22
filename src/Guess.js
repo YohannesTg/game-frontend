@@ -120,7 +120,10 @@ export default function Guess(props) {
         <div className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`} onClick={() => { trigger() }}>
           GO
         </div>
-        {gameResult === "win" && (
+      
+      </div>
+  <div className="row justify-content-center mt-4 ">
+    {gameResult === "win" && (
           <div
             className="col-3 col-md-3 col-lg-1 btn btn-primary"
             onClick={() => {
@@ -133,7 +136,7 @@ export default function Guess(props) {
             Replay
           </div>
         )}
-      </div>
+  </div>
     </div>
   );
 }
