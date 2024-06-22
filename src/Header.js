@@ -9,7 +9,7 @@ export default function Guess(props) {
                     <div className='rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mb-2' style={{ width: "40px", height: "40px" }}>
                         {props.trialNum}
                     </div>
-                    <div style={{ height: "10px" }}>{props.userName}</div>
+                    <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
                 </div>
 
                 {/* Opponent Section */}
@@ -17,7 +17,7 @@ export default function Guess(props) {
                     <div className='rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mb-2' style={{ width: "40px", height: "40px" }}>
                         {props.trialNum}
                     </div>
-                    <div style={{ height: "10px" }}>{props.oppName && "?"}</div>
+                    <div className="text-white" style={{ height: "10px" }}>props.oppName</div>
                 </div>
             </div>
 
