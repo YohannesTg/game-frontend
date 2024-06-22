@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ConfettiGenerator from "confetti-js";
 
 export default function Guess(props) {
@@ -7,10 +7,20 @@ export default function Guess(props) {
   const [numberState, setNumberState] = useState(0);
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
-  
-  const confettiElement = document.getElementById('my-canvas');
-  const confettiSettings = { target: confettiElement };
-  const confetti = new ConfettiGenerator(confettiSettings);
+  const [confettiInstance, setConfettiInstance] = useState(null);
+  const confettiCanvasRef = useRef(null);
+
+  useEffect(() => {
+    const confettiElement = confettiCanvasRef.current;
+    const confettiSettings = { target: confettiElement };
+    const confetti = new ConfettiGenerator(confettiSettings);
+    setConfettiInstance(confetti);
+
+    // Cleanup function to stop the confetti animation when the component unmounts
+    return () => {
+      confetti.clear();
+    };
+  }, []);
 
   useEffect(() => {
     const fetchOpponentUsername = async () => {
@@ -28,10 +38,19 @@ export default function Guess(props) {
         props.oppName(data.username);
       } catch (error) {
         console.error('Error fetching opponent username:', error);
-        // Try again in 2 seconds
-        setTimeout(() => {
-          fetchOpponentUsername();
-        }, 2000);
+        // Try again in 2 seconds, but limit the number of retries
+        const maxRetries = 3;
+        let retryCount = 0;
+        const retryFetchOpponentUsername = async () => {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(retryFetchOpponentUsername, 2000);
+            await fetchOpponentUsername();
+          } else {
+            console.error('Maximum number of retries reached. Unable to fetch opponent username.');
+          }
+        };
+        retryFetchOpponentUsername();
       }
     };
 
@@ -81,7 +100,7 @@ export default function Guess(props) {
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
-        confetti.render();
+        confettiInstance?.render();
       } else {
         setGameResult("loss");
         props.NewGuess();
@@ -122,6 +141,7 @@ export default function Guess(props) {
             Replay
           </div>
         )}
+        <canvas ref={confettiCanvasRef} id="my-canvas" />
       </div>
     </div>
   );
