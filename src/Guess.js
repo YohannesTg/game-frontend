@@ -83,8 +83,6 @@ export default function Guess(props) {
       }
 
       const data = await response.json();
-      console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
-      console.log(data);
 
       setNumberState(data.Number);
       setOrderState(data.Order);
@@ -96,6 +94,8 @@ export default function Guess(props) {
       } else {
         setGameResult("loss");
         props.NewGuess();
+        const inputField=document.getElementById("Ginput");
+        inputField.focus();
       }
     } catch (error) {
       console.error('Error checking on server:', error);
@@ -107,6 +107,7 @@ export default function Guess(props) {
         <div className="col-3 col-md-3 col-lg-1">
           <input
             className="form-control text-center me-2 px-0"
+            id="Ginput"
             style={{ "min-width": "40px" }}
             value={guess}
             type="number"
