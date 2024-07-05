@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ConfettiGenerator from "confetti-js";
-
 export default function Guess(props) {
   const [clicked, setClicked] = useState(false);
   const [guess, setGuess] = useState("");
@@ -11,8 +10,6 @@ export default function Guess(props) {
   const confettiElement = document.getElementById('my-canvas');
   const confettiSettings = { target: confettiElement };
   const confetti = new ConfettiGenerator(confettiSettings);
-
-
   useEffect(() => {
     const fetchOpponentUsername = async () => {
       try {
@@ -45,15 +42,12 @@ export default function Guess(props) {
         retryFetchOpponentUsername();
       }
     };
-
     fetchOpponentUsername();
   }, []);
-
   function trigger() {
     checkOnServer();
     setClicked((prevValue) => !prevValue);
   }
-
   function toggler(e) {
     const inputValue = e.target.value;
     const change = inputValue[inputValue.length - 1];
@@ -65,7 +59,6 @@ export default function Guess(props) {
       }
     }
   }
-
   async function checkOnServer() {
     try {
       const response = await fetch(
@@ -77,16 +70,16 @@ export default function Guess(props) {
           },
         }
       );
-
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
 
       const data = await response.json();
+      console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
+      console.log(data);
 
       setNumberState(data.Number);
       setOrderState(data.Order);
-
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
@@ -100,19 +93,17 @@ export default function Guess(props) {
       console.error('Error checking on server:', error);
     }
   }
-
   return (
       <div className="row justify-content-center mt-2 ">
         <div className="col-3 col-md-3 col-lg-1">
           <input
             className="form-control text-center me-2 px-0"
-            id="inputNum"
+            autofocus
             style={{ "min-width": "40px" }}
             value={guess}
             type="number"
             readOnly={clicked}
             onChange={toggler}
-            autofocus
           ></input>
         </div>
         <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
