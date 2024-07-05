@@ -103,7 +103,6 @@ export default function Guess(props) {
   }
 
   return (
-    <div className="container">
       <div className="row justify-content-center mt-4 ">
         <div className="col-3 col-md-3 col-lg-1">
           <input
@@ -122,21 +121,7 @@ export default function Guess(props) {
         </div>
       
       </div>
-  <div className="row justify-content-center mt-4 ">
-    {gameResult === "win" && (
-          <div
-            className="col-3 col-md-3 col-lg-1 btn btn-primary"
-            onClick={() => {
-              setGuess("");
-              setNumberState(0);
-              setOrderState(0);
-              setGameResult(null);
-            }}
-          >
-            Replay
-          </div>
-        )}
-  </div>
-    </div>
+ 
+   
   );
 }
