@@ -80,6 +80,8 @@ export default function Guess(props) {
 
       setNumberState(data.Number);
       setOrderState(data.Order);
+
+      
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
@@ -87,15 +89,15 @@ export default function Guess(props) {
       } else {
         setGameResult("loss");
         props.NewGuess();
-        document.onload = function() {
-        document.getElementById('Ginput').focus();
-        };
+     
 
       }
     } catch (error) {
       console.error('Error checking on server:', error);
     }
   }
+
+
   return (
       <div className="row justify-content-center mt-2 ">
         <div className="col-3 col-md-3 col-lg-1">
