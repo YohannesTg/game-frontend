@@ -87,6 +87,9 @@ export default function Guess(props) {
       } else {
         setGameResult("loss");
         props.NewGuess();
+        document.onload = function() {
+        document.getElementById('Ginput').focus();
+        };
 
       }
     } catch (error) {
@@ -98,6 +101,7 @@ export default function Guess(props) {
         <div className="col-3 col-md-3 col-lg-1">
           <input
             className="form-control text-center me-2 px-0"
+            id="Ginput"
             style={{ "min-width": "40px" }}
             value={guess}
             type="number"
