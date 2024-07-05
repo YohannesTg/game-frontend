@@ -98,12 +98,12 @@ export default function Guess(props) {
         <div className="col-3 col-md-3 col-lg-1">
           <input
             className="form-control text-center me-2 px-0"
-            autofocus
             style={{ "min-width": "40px" }}
             value={guess}
             type="number"
             readOnly={clicked}
             onChange={toggler}
+            autofocus
           ></input>
         </div>
         <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
