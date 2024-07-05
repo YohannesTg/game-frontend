@@ -103,7 +103,7 @@ export default function Guess(props) {
   }
 
   return (
-      <div className="row justify-content-center mt-4 ">
+      <div className="row justify-content-center mt-2 ">
         <div className="col-3 col-md-3 col-lg-1">
           <input
             className="form-control text-center me-2 px-0"
