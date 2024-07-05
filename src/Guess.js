@@ -96,6 +96,7 @@ export default function Guess(props) {
         props.NewGuess();
 const inputField = document.getElementById("Ginput");
 const lastElement = inputField.lastElementChild;
+console.log(lastElement)
 lastElement.querySelector("#inputNum").focus();
 inputNum.focus();
       }
