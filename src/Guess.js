@@ -94,11 +94,7 @@ export default function Guess(props) {
       } else {
         setGameResult("loss");
         props.NewGuess();
-const inputField = document.getElementById("Ginput");
-const lastElement = inputField.lastElementChild;
-console.log(lastElement)
-lastElement.querySelector("#inputNum").focus();
-inputNum.focus();
+
       }
     } catch (error) {
       console.error('Error checking on server:', error);
@@ -116,6 +112,7 @@ inputNum.focus();
             type="number"
             readOnly={clicked}
             onChange={toggler}
+            autofocus
           ></input>
         </div>
         <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
