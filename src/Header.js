@@ -5,33 +5,31 @@ export default function Guess(props) {
         <div className="container pt-4">
 <div className="row justify-content-between mt-2 mb-3">
   {/* Opponent 1 Section */}
-  <div className="col-6 text-start">
-    <div className="row">
-      <div className="col-6 btn btn-warning me-2">
+  <div className="col-3 text-start">
+    <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
+      <div className="row btn btn-warning me-2">
         <span>Score:</span>
         3
       </div>
-      <div className="col-6 btn btn-warning me-2">
+      <div className="row btn btn-warning me-2">
         <span>Trial:</span>
         {props.trialNum}
-      </div>
     </div>
-    <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
+    
   </div>
 
   {/* Opponent 2 Section */}
-  <div className="col-6 text-end">
-    <div className="row">
-      <div className="col-6 btn btn-warning me-2">
+  <div className="col-3 text-end">
+    <div className="text-white" style={{ height: "10px" }}>{props.oppName}</div>
+      <div className="row btn btn-warning me-2">
         <span>Score:</span>
         3
       </div>
-      <div className="col-6 btn btn-warning me-2">
+      <div className="row btn btn-warning me-2">
         <span>Trial:</span>
         {props.trialNum}
-      </div>
     </div>
-    <div className="text-white" style={{ height: "10px" }}>{props.oppName}</div>
+    
   </div>
 </div>
             <div className="row justify-content-center mt-3">
