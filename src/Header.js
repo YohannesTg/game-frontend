@@ -3,7 +3,7 @@ import React from 'react';
 export default function Guess(props) {
     return (
         <div className="container pt-4">
-<div className="row justify-content-between mt-2 mb-3">
+<div className="row justify-content-evenly mt-2 mb-3">
   {/* Opponent 1 Section */}
   <div className="col-3 col-sm-2">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}>{props.userName}</div>
