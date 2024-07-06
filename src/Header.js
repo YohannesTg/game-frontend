@@ -7,11 +7,11 @@ export default function Guess(props) {
   {/* Opponent 1 Section */}
   <div className="col-3 text-start">
     <div className="row">
-      <div className="col-6 btn btn-secondary me-2">
+      <div className="col-6 btn btn-warning me-2">
         <span>Score:</span>
         3
       </div>
-      <div className="col-6 btn btn-secondary me-2">
+      <div className="col-6 btn btn-warning me-2">
         <span>Trial:</span>
         {props.trialNum}
       </div>
@@ -19,22 +19,14 @@ export default function Guess(props) {
     <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
   </div>
 
-  {/* Player Section */}
-  <div className="col d-flex flex-column align-items-center">
-    <div className='rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mb-2' style={{ width: "40px", height: "40px" }}>
-      {props.trialNum}
-    </div>
-    <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
-  </div>
-
   {/* Opponent 2 Section */}
   <div className="col-3 text-end">
     <div className="row">
-      <div className="col-6 btn btn-secondary me-2">
+      <div className="col-6 btn btn-warning me-2">
         <span>Score:</span>
         3
       </div>
-      <div className="col-6 btn btn-secondary me-2">
+      <div className="col-6 btn btn-warning me-2">
         <span>Trial:</span>
         {props.trialNum}
       </div>
