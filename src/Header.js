@@ -8,7 +8,7 @@ export default function Guess(props) {
   <div className="col-3 text-start">
     <div className="row">
       <div className="col-6 btn btn-secondary me-2">3</div>
-      <div className="col-6 btn btn-secondary me-2">{props.trailNum}</div>
+      <div className="col-6 btn btn-secondary me-2">{props.trialNum}</div>
     </div>
     <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
   </div>
