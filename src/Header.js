@@ -7,11 +7,11 @@ export default function Guess(props) {
   {/* Opponent 1 Section */}
   <div className="col-3 col-sm-2">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}>{props.userName}</div>
-      <div className="row btn btn-warning me-2">
+      <div className="row btn btn-warning">
         <span>Score:</span>
         3
       </div>
-      <div className="row btn btn-warning me-2">
+      <div className="row btn btn-warning">
         <span>Trial:</span>
         {props.trialNum}
     </div>
@@ -21,11 +21,11 @@ export default function Guess(props) {
   {/* Opponent 2 Section */}
   <div className="col-3 col-sm-2">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}>{props.oppName}</div>
-      <div className="row btn btn-warning me-2">
+      <div className="row btn btn-warning">
         <span>Score:</span>
         3
       </div>
-      <div className="row btn btn-warning me-2">
+      <div className="row btn btn-warning">
         <span>Trial:</span>
         {props.trialNum}
     </div>
