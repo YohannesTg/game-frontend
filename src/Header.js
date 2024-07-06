@@ -5,7 +5,7 @@ export default function Guess(props) {
         <div className="container pt-4">
 <div className="row justify-content-between mt-2 mb-3">
   {/* Opponent 1 Section */}
-  <div className="col-3 text-start">
+  <div className="col-6 text-start">
     <div className="row">
       <div className="col-6 btn btn-warning me-2">
         <span>Score:</span>
@@ -20,7 +20,7 @@ export default function Guess(props) {
   </div>
 
   {/* Opponent 2 Section */}
-  <div className="col-3 text-end">
+  <div className="col-6 text-end">
     <div className="row">
       <div className="col-6 btn btn-warning me-2">
         <span>Score:</span>
