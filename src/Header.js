@@ -3,9 +3,10 @@ import React from 'react';
 export default function Guess(props) {
     return (
         <div className="container pt-4">
-<div className="row justify-content-evenly mt-2 mb-3">
+<div className="row justify-content-between ">
   {/* Opponent 1 Section */}
-  <div className="container col-4">
+  <div className="col-4 text-start">
+        <div className="container">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}><span>{props.userName}</span></div>
       <div className="row btn btn-warning">
         <span>Score:</span>
@@ -15,11 +16,13 @@ export default function Guess(props) {
         <span>Trial:</span>
         {props.trialNum}
     </div>
+        </div>
     
   </div>
 
   {/* Opponent 2 Section */}
-  <div className="container col-4">
+  <div className="col-4 text-end">
+    <div className="container">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}><span>{props.oppName}</span></div>
       <div className="row btn btn-warning">
         <span>Score:</span>
@@ -29,7 +32,7 @@ export default function Guess(props) {
         <span>Trial:</span>
         {props.trialNum}
     </div>
-    
+    </div>
   </div>
 </div>
             <div className="row justify-content-center mt-3">
