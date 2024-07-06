@@ -3,12 +3,26 @@ import React from 'react';
 export default function Guess(props) {
     return (
         <div className="container pt-4">
-        <div className="row justify-content-between mt-2 mb-3">
+<div className="row justify-content-between mt-2 mb-3">
   {/* Opponent 1 Section */}
   <div className="col-3 text-start">
     <div className="row">
-      <div className="col-6 btn btn-secondary me-2">3</div>
-      <div className="col-6 btn btn-secondary me-2">{props.trialNum}</div>
+      <div className="col-6 btn btn-secondary me-2">
+        <span>Score:</span>
+        3
+      </div>
+      <div className="col-6 btn btn-secondary me-2">
+        <span>Trial:</span>
+        {props.trialNum}
+      </div>
+    </div>
+    <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
+  </div>
+
+  {/* Player Section */}
+  <div className="col d-flex flex-column align-items-center">
+    <div className='rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mb-2' style={{ width: "40px", height: "40px" }}>
+      {props.trialNum}
     </div>
     <div className="text-white" style={{ height: "10px" }}>{props.userName}</div>
   </div>
@@ -16,8 +30,14 @@ export default function Guess(props) {
   {/* Opponent 2 Section */}
   <div className="col-3 text-end">
     <div className="row">
-      <div className="col-6 btn btn-secondary me-2">5</div>
-      <div className="col-6 btn btn-secondary me-2">{props.trialNum}</div>
+      <div className="col-6 btn btn-secondary me-2">
+        <span>Score:</span>
+        3
+      </div>
+      <div className="col-6 btn btn-secondary me-2">
+        <span>Trial:</span>
+        {props.trialNum}
+      </div>
     </div>
     <div className="text-white" style={{ height: "10px" }}>{props.oppName}</div>
   </div>
