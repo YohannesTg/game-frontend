@@ -22,7 +22,7 @@ export default function Guess(props) {
   <div className="col-3 col-sm-2">
     <div className="row text-white bg-secondary" style={{ height: "6 px" }}>{props.oppName}</div>
       <div className="row btn btn-warning">
-        <span>Score:</span>
+        <span>Trial:</span>
         3
       </div>
       <div className="row btn btn-warning">
