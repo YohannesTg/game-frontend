@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ConfettiGenerator from "confetti-js";
+
 export default function Guess(props) {
   const [clicked, setClicked] = useState(false);
   const [guess, setGuess] = useState("");
   const [numberState, setNumberState] = useState(0);
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
-  
+  const inputRef = useRef(null);
+
   const confettiElement = document.getElementById('my-canvas');
   const confettiSettings = { target: confettiElement };
   const confetti = new ConfettiGenerator(confettiSettings);
+
   useEffect(() => {
     const fetchOpponentUsername = async () => {
       try {
@@ -43,11 +46,16 @@ export default function Guess(props) {
       }
     };
     fetchOpponentUsername();
+
+    // Focus on the input field when the component mounts
+    inputRef.current.focus();
   }, []);
+
   function trigger() {
     checkOnServer();
     setClicked((prevValue) => !prevValue);
   }
+
   function toggler(e) {
     const inputValue = e.target.value;
     const change = inputValue[inputValue.length - 1];
@@ -59,6 +67,7 @@ export default function Guess(props) {
       }
     }
   }
+
   async function checkOnServer() {
     try {
       const response = await fetch(
@@ -80,7 +89,6 @@ export default function Guess(props) {
       setNumberState(data.Number);
       setOrderState(data.Order);
 
-
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
@@ -88,41 +96,31 @@ export default function Guess(props) {
       } else {
         setGameResult("loss");
         props.NewGuess();
-        document.onload = function() {
-        document.getElementById('Ginput').focus();
-        };
-
-
       }
     } catch (error) {
       console.error('Error checking on server:', error);
     }
   }
 
-
   return (
-      <div className="row justify-content-center mt-2 ">
-        <div className="col-3 col-md-3 col-lg-1">
-          <input
-            className="form-control text-center me-2 px-0"
-            id="Ginput"
-            style={{ "min-width": "40px" }}
-            value={guess}
-            type="number"
-            autofocus
-            readOnly={clicked}
-            onChange={toggler}
-            
-          ></input>
-        </div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{orderState}</div>
-        <div className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`} onClick={() => { trigger() }}>
-          GO
-        </div>
-      
+    <div className="row justify-content-center mt-2 ">
+      <div className="col-3 col-md-3 col-lg-1">
+        <input
+          className="form-control text-center me-2 px-0"
+          id="Ginput"
+          style={{ "min-width": "40px" }}
+          value={guess}
+          type="number"
+          readOnly={clicked}
+          onChange={toggler}
+          ref={inputRef} // Assign the reference to the input field
+        ></input>
       </div>
- 
-   
+      <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
+      <div className="col-2 col-md-1 btn btn-secondary me-2">{orderState}</div>
+      <div className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`} onClick={() => { trigger() }}>
+        GO
+      </div>
+    </div>
   );
 }
