@@ -5,20 +5,20 @@ export default function Guess(props) {
        <div className="container pt-4">
   <div className="row justify-content-between">
     {/* Opponent 1 Section */}
-    <div className="col-2 text-start">
+    <div className="col-4 text-start">
       <div className="container">
         <div className="row text-white bg-secondary" style={{ height: "30px" }}>
           <div className="col d-flex align-items-center">
             <span>{props.userName}</span>
           </div>
         </div>
-        <div className="row btn btn-warning my-2">
+        <div className="row bg-warning my-2">
           <div className="col d-flex align-items-center">
             <span>Score:</span>
             3
           </div>
         </div>
-        <div className="row btn btn-warning my-2">
+        <div className="row bg-warning my-2">
           <div className="col d-flex align-items-center">
             <span>Trial:</span>
             {props.trialNum}
@@ -28,20 +28,20 @@ export default function Guess(props) {
     </div>
 
     {/* Opponent 2 Section */}
-    <div className="col-2 text-end">
+    <div className="col-4 text-end">
       <div className="container">
         <div className="row text-white bg-secondary" style={{ height: "30px" }}>
           <div className="col d-flex align-items-center justify-content-end">
             <span>{props.oppName}</span>
           </div>
         </div>
-        <div className="row btn btn-warning my-2">
+        <div className="row bg-warning my-2">
           <div className="col d-flex align-items-center justify-content-end">
             <span>Score:</span>
             5
           </div>
         </div>
-        <div className="row btn btn-warning my-2">
+        <div className="row bg-warning my-2">
           <div className="col d-flex align-items-center justify-content-end">
             <span>Trial:</span>
             {props.trialNum}
