@@ -5,7 +5,7 @@ export default function Guess(props) {
        <div className="container pt-4">
   <div className="row justify-content-between">
     {/* Opponent 1 Section */}
-    <div className="col-4 col-md-5  text-start">
+    <div className="col-4 col-sm-5">
       <div className="container">
         <div className="row text-white bg-secondary rounded-5" style={{ height: "30px" }}>
           <div className="col d-flex align-items-center justify-content-center">
@@ -28,10 +28,10 @@ export default function Guess(props) {
     </div>
 
     {/* Opponent 2 Section */}
-    <div className="col-4 col-md-5 text-end">
+    <div className="col-4 col-sm-5">
       <div className="container">
         <div className="row text-white bg-secondary rounded-5" style={{ height: "30px" }}>
-          <div className="col d-flex align-items-center  justify-content-end">
+          <div className="col d-flex align-items-center  justify-content-center">
             <span>{props.oppName}</span>
           </div>
         </div>
