@@ -30,9 +30,9 @@ setTrialNum((prevValue)=>[...prevValue, prevValue[prevValue.length-1]+1])
 
 
   return(<div className="container-fluid text-center  ">
-    <Header trialNum={trailNum.length} userName={props.userName} oppName={opponentUsername} gameScore={gameScore} />
+    <Header trialNum={trailNum.length} userName={props.userName} oppName={opponentUsername} trial2={trial2} score1={score1} score2={score2}/>
 
- {trailNum.map((value)=><Guess key={value} chatId={props.chatId} userId={props.userId} oppName={oppName} name={value} NewGuess={NewGuess}/>)}
+ {trailNum.map((value)=><Guess key={value} chatId={props.chatId} userId={props.userId} oppName={oppName} name={value} gameScore={gameScore} NewGuess={NewGuess}/>)}
       
 
  
