@@ -38,7 +38,7 @@ export default function Guess(props) {
         <div className="row bg-warning my-1 rounded-5">
           <div className="col d-flex align-items-center justify-content-center">
             <span>Score:</span>
-            props.score2
+            {props.score2}
           </div>
         </div>
         <div className="row bg-warning my-1 rounded-5">
