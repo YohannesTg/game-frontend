@@ -9,7 +9,7 @@ function App(props) {
   
   const [trailNum, setTrialNum]=React.useState([1])
   const [opponentUsername, setOpponentUsername] =React.useState("");
-  const [trail2, setTrial2]=React.useState([1])
+  const [trial2, setTrial2]=React.useState([1])
   const [score1, setScore1]=React.useState([0])
   const [score2, setScore2]=React.useState([0])
 
