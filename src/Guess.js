@@ -27,7 +27,7 @@ export default function Guess(props) {
         }
         const data = await response.json();
         props.oppName(data.userName);
-        props.gameScore(data.trial1, data.score1, data.score2)
+        props.gameScore(data.trial2, data.score1, data.score2)
       } catch (error) {
         console.error('Error fetching opponent username:', error);
         // Try again in 2 seconds, but limit the number of retries
