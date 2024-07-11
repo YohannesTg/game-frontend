@@ -27,7 +27,7 @@ export default function Guess(props) {
         }
         const data = await response.json();
         props.oppName(data.userName);
-        props.gameScore(data.trial2, data.score1, data.score2)
+        
       } catch (error) {
         console.error('Error fetching opponent username:', error);
         // Try again in 2 seconds, but limit the number of retries
@@ -88,7 +88,7 @@ export default function Guess(props) {
 
       setNumberState(data.Number);
       setOrderState(data.Order);
-
+      props.gameScore(data.trial2, data.score1, data.score2)
       if (data.Order === 4 && data.Number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
