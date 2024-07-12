@@ -86,10 +86,10 @@ export default function Guess(props) {
       console.log(`https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`);
       console.log(data);
 
-      setNumberState(data.Number);
-      setOrderState(data.Order);
+      setNumberState(data.number);
+      setOrderState(data.order);
       props.gameScore(data.trial2, data.score1, data.score2)
-      if (data.Order === 4 && data.Number === 4) {
+      if (data.order === 4 && data.number === 4) {
         setGameResult("win");
         alert("CONGRATULATIONS");
         confetti.render();
