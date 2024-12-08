@@ -54,9 +54,8 @@ export default function Target() {
             {/* News ticker effect */}
             <div className="ticker-container">
               <div className="ticker-wrapper">
-                {/* Duplicate text for seamless scrolling */}
                 <div className="ticker-content">Welcome to the Guess My Number (GMN) game</div>
-                <div className="ticker-content">Welcome to the Guess My Number (GMN) game</div>
+              
               </div>
             </div>
             <div className="col-3 input-group input-group-lg">
