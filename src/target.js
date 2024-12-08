@@ -53,7 +53,7 @@ export default function Target() {
   return (
     <div>
       {!clicked ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
           <div className="container text-center">
             <div className="row">
               <div className="ticker-container">
