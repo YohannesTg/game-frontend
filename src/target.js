@@ -53,33 +53,39 @@ export default function Target() {
   return (
     <div>
       {!clicked ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
-          <div className="container text-center">
-            <div className="row">
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+          <div className="container text-center w-100">
+            {/* Welcome Message */}
+            <div className="row mb-3">
               <div className="ticker-container">
                 <div className="ticker-content">
                   Welcome to the Guess My Number (GMN) game
                 </div>
               </div>
-              <div className="col-3 input-group input-group-lg">
-                <input
-                  type="text"
-                  className="form-control bg-secondary text-center text-white shadow-lg"
-                  value={aim}
-                  onChange={handleInputChange}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleSubmit();
-                    }
-                  }}
-                />
-                <button
-                  onClick={handleSubmit}
-                  className="btn btn-primary shadow-lg"
-                  disabled={!aim.trim()}
-                >
-                  SET
-                </button>
+            </div>
+            {/* Input + Button Responsive Row */}
+            <div className="row justify-content-center align-items-center">
+              <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div className="input-group input-group-lg mb-3">
+                  <input
+                    type="text"
+                    className="form-control bg-secondary text-center text-white shadow-sm"
+                    value={aim}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSubmit();
+                      }
+                    }}
+                  />
+                  <button
+                    onClick={handleSubmit}
+                    className="btn btn-primary shadow-sm"
+                    disabled={!aim.trim()}
+                  >
+                    SET
+                  </button>
+                </div>
               </div>
             </div>
           </div>
