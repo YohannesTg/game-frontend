@@ -12,7 +12,7 @@ export default function Target() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    // Get the chat ID and user ID from the URL parameters
+    // Parse URL query string parameters safely
     const urlParams = new URLSearchParams(window.location.search);
     setChatId(urlParams.get('chatId') || '');
     setUserId(urlParams.get('userId') || '');
@@ -26,25 +26,28 @@ export default function Target() {
     }
   };
 
-  const handleSubmit = () => {
-    // Construct the URL with the necessary query parameters
-    const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
+  const handleSubmit = async () => {
+    try {
+      const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
 
-    // Make the GET request
-    fetch(url, {
-      method: 'GET',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Server response:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
+      }
+
+      const data = await response.json();
+      console.log('Server response:', data);
+    } catch (error) {
+      console.error('Error while making server request:', error);
+    }
+
+    setClicked(true); // Trigger navigation *only after server call completes*
   };
 
   return (
@@ -66,17 +69,14 @@ export default function Target() {
                   onChange={handleInputChange}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      setClicked(true);
                       handleSubmit();
                     }
                   }}
                 />
                 <button
-                  onClick={() => {
-                    setClicked(true);
-                    handleSubmit();
-                  }}
+                  onClick={handleSubmit}
                   className="btn btn-primary shadow-lg"
+                  disabled={!aim.trim()}
                 >
                   SET
                 </button>
