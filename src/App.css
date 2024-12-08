@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100vh;
+  height: 100%;
   margin: 0; /* Ensure no unwanted default margins */
   background: linear-gradient(to right, #121212, #292b2c, #3b3f47);
   font-family: 'Arial', sans-serif; /* Use a clean modern font */
