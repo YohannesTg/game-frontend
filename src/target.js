@@ -51,10 +51,10 @@ export default function Target() {
   };
 
   return (
-    <div>
+    <div style={{ overflow: 'hidden', height: '100vh' }}>
       {!clicked ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-          <div className="container text-center w-100">
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
+          <div className="container text-center w-100" style={{ maxWidth: '100%' }}>
             {/* Welcome Message */}
             <div className="row mb-3">
               <div className="ticker-container">
@@ -66,7 +66,7 @@ export default function Target() {
             {/* Input + Button Responsive Row */}
             <div className="row justify-content-center align-items-center">
               <div className="col-12 col-sm-8 col-md-6 col-lg-4">
-                <div className="input-group input-group-lg mb-3">
+                <div className="input-group input-group-lg mb-3" style={{ maxWidth: '100%' }}>
                   <input
                     type="text"
                     className="form-control bg-secondary text-center text-white shadow-sm"
@@ -77,11 +77,13 @@ export default function Target() {
                         handleSubmit();
                       }
                     }}
+                    style={{ maxWidth: '100%', overflowWrap: 'break-word' }}
                   />
                   <button
                     onClick={handleSubmit}
                     className="btn btn-primary shadow-sm"
                     disabled={!aim.trim()}
+                    style={{ maxWidth: '100%' }}
                   >
                     SET
                   </button>
