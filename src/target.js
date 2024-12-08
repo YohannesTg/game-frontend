@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import App from './App';
 import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -54,7 +53,11 @@ export default function Target() {
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
           <div className="container text-center">
             <div className="row">
-              <h1 className="text-white">Welcome to the Guessing Game</h1>
+              <div className="ticker-container">
+                <div className="ticker-content">
+                  Welcome to the Guess My Number (GMN) game
+                </div>
+              </div>
               <div className="col-3 input-group input-group-lg">
                 <input
                   type="text"
@@ -82,7 +85,7 @@ export default function Target() {
           </div>
         </div>
       ) : (
-        <App chatId={chatId} userId={userId} userName={userName}/>
+        <App chatId={chatId} userId={userId} userName={userName} />
       )}
     </div>
   );
