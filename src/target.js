@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import App from './App';
 import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -28,8 +27,10 @@ export default function Target() {
   };
 
   const handleSubmit = () => {
+    // Construct the URL with the necessary query parameters
     const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
 
+    // Make the GET request
     fetch(url, {
       method: 'GET',
       mode: 'no-cors',
@@ -51,35 +52,35 @@ export default function Target() {
       {!clicked ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
           <div className="container text-center">
-            {/* News ticker effect */}
-            <div className="ticker-container">
-              <div className="ticker-wrapper">
-                <div className="ticker-content">Welcome to the Guess My Number (GMN) game</div>
-              
+            <div className="row">
+              <div className="ticker-container">
+                <div className="ticker-content">
+                  Welcome to the Guess My Number (GMN) game
+                </div>
               </div>
-            </div>
-            <div className="col-3 input-group input-group-lg">
-              <input
-                type="text"
-                className="form-control bg-secondary text-center text-white shadow-lg"
-                value={aim}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+              <div className="col-3 input-group input-group-lg">
+                <input
+                  type="text"
+                  className="form-control bg-secondary text-center text-white shadow-lg"
+                  value={aim}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setClicked(true);
+                      handleSubmit();
+                    }
+                  }}
+                />
+                <button
+                  onClick={() => {
                     setClicked(true);
                     handleSubmit();
-                  }
-                }}
-              />
-              <button
-                onClick={() => {
-                  setClicked(true);
-                  handleSubmit();
-                }}
-                className="btn btn-primary shadow-lg"
-              >
-                SET
-              </button>
+                  }}
+                  className="btn btn-primary shadow-lg"
+                >
+                  SET
+                </button>
+              </div>
             </div>
           </div>
         </div>
