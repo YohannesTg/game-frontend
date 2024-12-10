@@ -66,7 +66,7 @@ export default function Target() {
             </div>
             {/* Notes Section */}
             <div className="row mb-3">
-              <div className="text-start">
+              <div className="text-center">
                 <ul className="list-unstyled small" style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
                   <li>1. Your secret number must have unique digits.</li>
                   <li>2. "N" indicates correct digits, regardless of position.</li>
