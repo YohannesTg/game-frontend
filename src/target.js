@@ -67,7 +67,7 @@ export default function Target() {
             {/* Notes Section */}
             <div className="row mb-3">
               <div className="text-start">
-                <ul className="list-unstyled small">
+                <ul className="list-unstyled small" style={{ color: '#212529' }}>
                   <li>1. Your secret number must have unique digits.</li>
                   <li>2. "N" indicates correct digits, regardless of position.</li>
                   <li>3. "O" indicates correct digits in the correct position.</li>
