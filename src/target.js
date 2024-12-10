@@ -21,7 +21,8 @@ export default function Target() {
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.length <= 4 && /^\d*$/.test(inputValue)) {
+    const hasUniqueDigits = new Set(inputValue).size === inputValue.length;
+    if (inputValue.length <= 4 && /^\d*$/.test(inputValue) && hasUniqueDigits) {
       setAim(inputValue);
     }
   };
@@ -61,6 +62,16 @@ export default function Target() {
                 <div className="ticker-content">
                   Welcome to the Guess My Number (GMN) game
                 </div>
+              </div>
+            </div>
+            {/* Notes Section */}
+            <div className="row mb-3">
+              <div className="text-start">
+                <ul className="list-unstyled small">
+                  <li>1. Your secret number must have unique digits.</li>
+                  <li>2. "N" indicates correct digits, regardless of position.</li>
+                  <li>3. "O" indicates correct digits in the correct position.</li>
+                </ul>
               </div>
             </div>
             {/* Input + Button Responsive Row */}
