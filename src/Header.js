@@ -3,27 +3,72 @@ import React from 'react';
 export default function Guess(props) {
   return (
     <div className="container pt-4">
+      {/* Names Section */}
+      <div className="row mb-4">
+        {/* User Name */}
+        <div className="col-6 d-flex justify-content-end">
+          <div
+            style={{
+              background: "linear-gradient(90deg, #6a11cb, #2575fc)",
+              color: "#ffffff",
+              padding: "10px 20px",
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              borderRadius: "20px 0 0 20px",
+              position: "relative",
+            }}
+          >
+            {props.userName}
+            <div
+              style={{
+                content: "",
+                position: "absolute",
+                top: "50%",
+                right: "-10px",
+                transform: "translateY(-50%)",
+                borderWidth: "10px",
+                borderStyle: "solid",
+                borderColor: "transparent transparent transparent #6a11cb",
+              }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Opponent Name */}
+        <div className="col-6 d-flex justify-content-start">
+          <div
+            style={{
+              background: "linear-gradient(90deg, #ff512f, #dd2476)",
+              color: "#ffffff",
+              padding: "10px 20px",
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              borderRadius: "0 20px 20px 0",
+              position: "relative",
+            }}
+          >
+            {props.oppName}
+            <div
+              style={{
+                content: "",
+                position: "absolute",
+                top: "50%",
+                left: "-10px",
+                transform: "translateY(-50%)",
+                borderWidth: "10px",
+                borderStyle: "solid",
+                borderColor: "transparent #ff512f transparent transparent",
+              }}
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scores and Trials Section */}
       <div className="row justify-content-between">
-        {/* Opponent 1 Section */}
+        {/* User Score and Trial */}
         <div className="col-5 col-md-5">
           <div className="container">
-            <div
-              className="row rounded-5"
-              style={{
-                background: "linear-gradient(90deg, #6a11cb, #2575fc)",
-                color: "#ffffff",
-                height: "auto",
-                padding: "10px",
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                wordWrap: "break-word",
-                textAlign: "center",
-              }}
-            >
-              <div className="col d-flex align-items-center justify-content-center">
-                <span>{props.userName}</span>
-              </div>
-            </div>
             <div
               className="row my-2 rounded-5"
               style={{
@@ -55,26 +100,9 @@ export default function Guess(props) {
           </div>
         </div>
 
-        {/* Opponent 2 Section */}
+        {/* Opponent Score and Trial */}
         <div className="col-5 col-md-5">
           <div className="container">
-            <div
-              className="row rounded-5"
-              style={{
-                background: "linear-gradient(90deg, #ff512f, #dd2476)",
-                color: "#ffffff",
-                height: "auto",
-                padding: "10px",
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                wordWrap: "break-word",
-                textAlign: "center",
-              }}
-            >
-              <div className="col d-flex align-items-center justify-content-center">
-                <span>{props.oppName}</span>
-              </div>
-            </div>
             <div
               className="row my-2 rounded-5"
               style={{
