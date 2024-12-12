@@ -76,7 +76,7 @@ export default function Target() {
             </div>
             {/* Input + Button Responsive Row */}
             <div className="row justify-content-center align-items-center">
-              <div className="col-6 col-sm-8 col-md-10 col-lg-12">
+              <div className="col-4 col-sm-6 col-md-8">
                 <div className="input-group input-group-lg mb-3" style={{ maxWidth: '100%' }}>
                   <input
                     type="text"
