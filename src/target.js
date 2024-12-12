@@ -55,7 +55,7 @@ export default function Target() {
     <div style={{ overflow: 'hidden', height: '100vh' }}>
       {!clicked ? (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
-          <div className="container text-center w-100" style={{ maxWidth: '100%' }}>
+          <div className="container w-100" style={{ maxWidth: '100%' }}>
             {/* Welcome Message */}
             <div className="row mb-3">
               <div className="ticker-container">
@@ -66,13 +66,11 @@ export default function Target() {
             </div>
             {/* Notes Section */}
             <div className="row mb-3">
-              <div className="text-center">
-                <ul className="list-unstyled small" style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
+                <ul className="list-unstyled medium" style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
                   <li>1. Your secret number must have unique digits.</li>
                   <li>2. "N" indicates correct digits, regardless of position.</li>
                   <li>3. "O" indicates correct digits in the correct position.</li>
                 </ul>
-              </div>
             </div>
             {/* Input + Button Responsive Row */}
             <div className="row justify-content-center align-items-center">
