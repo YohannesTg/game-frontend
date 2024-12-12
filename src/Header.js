@@ -5,19 +5,19 @@ export default function Guess(props) {
     <div className="container pt-4">
       <div className="row justify-content-between">
         {/* Opponent 1 Section */}
-        <div className="col-4 col-sm-5">
+        <div className="col-5 col-md-5">
           <div className="container">
             <div
               className="row rounded-5"
               style={{
                 background: "linear-gradient(90deg, #6a11cb, #2575fc)",
                 color: "#ffffff",
-                height: "40px",
+                height: "auto",
+                padding: "10px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                wordWrap: "break-word",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -31,6 +31,7 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -44,6 +45,7 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -54,19 +56,19 @@ export default function Guess(props) {
         </div>
 
         {/* Opponent 2 Section */}
-        <div className="col-4 col-sm-5">
+        <div className="col-5 col-md-5">
           <div className="container">
             <div
               className="row rounded-5"
               style={{
                 background: "linear-gradient(90deg, #ff512f, #dd2476)",
                 color: "#ffffff",
-                height: "40px",
+                height: "auto",
+                padding: "10px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                wordWrap: "break-word",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -80,6 +82,7 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -93,6 +96,7 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
+                textAlign: "center",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
