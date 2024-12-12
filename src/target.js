@@ -64,13 +64,25 @@ export default function Target() {
                 </div>
               </div>
             </div>
-            {/* Notes Section */}
+            {/* Rules Section */}
             <div className="row mb-3">
-                <ul className="list-unstyled medium" style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
+              <div className="text-center">
+                <h3 style={{ color: 'white', marginBottom: '1rem' }}>Rules</h3>
+                <ul
+                  className="list-unstyled medium"
+                  style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
+                >
                   <li>1. Your secret number must have unique digits.</li>
                   <li>2. "N" indicates correct digits, regardless of position.</li>
                   <li>3. "O" indicates correct digits in the correct position.</li>
                 </ul>
+              </div>
+            </div>
+            {/* Input Section */}
+            <div className="row mb-3">
+              <div className="text-center">
+                <p style={{ color: 'white', fontSize: '1.2rem' }}>Please insert your secret 4-digit number</p>
+              </div>
             </div>
             {/* Input + Button Responsive Row */}
             <div className="row justify-content-center align-items-center">
