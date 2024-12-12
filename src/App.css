@@ -37,10 +37,10 @@ html {
 
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%); /* Start from the right */
+    transform: translateX(100vw); /* Start from the right */
   }
   100% {
-    transform: translateX(-100%); /* Move completely off-screen to the left */
+    transform: translateX(-100vh); /* Move completely off-screen to the left */
   }
 }
 
