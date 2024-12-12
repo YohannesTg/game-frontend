@@ -12,19 +12,15 @@ export default function Guess(props) {
               style={{
                 background: "linear-gradient(90deg, #6a11cb, #2575fc)",
                 color: "#ffffff",
-                height: "auto",
+                height: "40px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
-                wordWrap: "break-word",
-                textAlign: "center",
-                padding: "10px",
-                maxWidth: "100%",
                 overflow: "hidden",
-                whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>{props.userName}</span>
               </div>
             </div>
@@ -35,11 +31,9 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
-                textAlign: "center",
-                padding: "5px 10px",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>Score:</span>&nbsp;{props.score1}
               </div>
             </div>
@@ -50,11 +44,9 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
-                textAlign: "center",
-                padding: "5px 10px",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>Trial:</span>&nbsp;{props.trialNum}
               </div>
             </div>
@@ -69,19 +61,15 @@ export default function Guess(props) {
               style={{
                 background: "linear-gradient(90deg, #ff512f, #dd2476)",
                 color: "#ffffff",
-                height: "auto",
+                height: "40px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
-                wordWrap: "break-word",
-                textAlign: "center",
-                padding: "10px",
-                maxWidth: "100%",
                 overflow: "hidden",
-                whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>{props.oppName}</span>
               </div>
             </div>
@@ -92,11 +80,9 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
-                textAlign: "center",
-                padding: "5px 10px",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>Score:</span>&nbsp;{props.score2}
               </div>
             </div>
@@ -107,11 +93,9 @@ export default function Guess(props) {
                 color: "#333333",
                 fontSize: "1rem",
                 fontWeight: "bold",
-                textAlign: "center",
-                padding: "5px 10px",
               }}
             >
-              <div className="col">
+              <div className="col d-flex align-items-center justify-content-center">
                 <span>Trial:</span>&nbsp;{props.trial2}
               </div>
             </div>
@@ -130,8 +114,7 @@ export default function Guess(props) {
             fontSize: "1.2rem",
             borderRadius: "10px",
             textAlign: "center",
-            padding: "10px",
-            cursor: "pointer",
+            padding: "5px 10px",
           }}
         >
           N
@@ -145,8 +128,7 @@ export default function Guess(props) {
             fontSize: "1.2rem",
             borderRadius: "10px",
             textAlign: "center",
-            padding: "10px",
-            cursor: "pointer",
+            padding: "5px 10px",
           }}
         >
           O
