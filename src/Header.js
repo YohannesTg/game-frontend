@@ -15,6 +15,9 @@ export default function Guess(props) {
                 height: "40px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -61,6 +64,9 @@ export default function Guess(props) {
                 height: "40px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
               }}
             >
               <div className="col d-flex align-items-center justify-content-center">
@@ -116,7 +122,7 @@ export default function Guess(props) {
         <div
           className="col-2 col-md-1"
           style={{
-            background: "linear-gradient(90deg, #ff512f, #dd2476)",
+            background: "linear-gradient(90deg, #6a11cb, #2575fc)",
             color: "#ffffff",
             fontWeight: "bold",
             fontSize: "1.2rem",
