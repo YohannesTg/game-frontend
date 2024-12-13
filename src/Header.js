@@ -6,7 +6,7 @@ export default function Guess(props) {
       {/* Names Section */}
       <div className="row mb-4">
         {/* User Name */}
-        <div className="col-6 d-flex justify-content-end">
+        <div className="col-6 d-flex justify-content-start">
           <div
             style={{
               background: "linear-gradient(90deg, #6a11cb, #2575fc)",
@@ -35,7 +35,7 @@ export default function Guess(props) {
         </div>
 
         {/* Opponent Name */}
-        <div className="col-6 d-flex justify-content-start">
+        <div className="col-6 d-flex justify-content-end">
           <div
             style={{
               background: "linear-gradient(90deg, #ff512f, #dd2476)",
