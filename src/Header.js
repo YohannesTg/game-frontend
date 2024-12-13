@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Guess(props) {
   return (
-    <div className="container pt-4">
+    <div className="container pt-4" style={{ position: 'relative', height: '100vh' }}>
       {/* Names Section */}
-      <div className="row mb-4">
+      <div className="row mb-4" style={{ position: 'absolute', top: '20px', width: '100%' }}>
         {/* User Name */}
         <div className="col-6 d-flex justify-content-start">
           <div
@@ -65,7 +65,7 @@ export default function Guess(props) {
       </div>
 
       {/* Scores and Trials Section */}
-      <div className="row justify-content-between">
+      <div className="row justify-content-between" style={{ position: 'absolute', top: '130px', width: '100%' }}>
         {/* User Score and Trial */}
         <div className="col-5 col-md-5">
           <div className="container">
@@ -136,7 +136,7 @@ export default function Guess(props) {
       </div>
 
       {/* Buttons Section */}
-      <div className="row justify-content-center mt-4">
+      <div className="row justify-content-center mt-4" style={{ position: 'absolute', top: '300px', width: '100%' }}>
         <div
           className="col-2 col-md-1 me-3"
           style={{
