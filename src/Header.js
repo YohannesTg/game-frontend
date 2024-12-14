@@ -40,8 +40,8 @@ export default function Guess(props) {
             style={{
               background: "linear-gradient(90deg, #ff512f, #dd2476)",
               color: "#ffffff",
-              padding: "10px 20px",
-              fontSize: "1.2rem",
+              padding: "10px 10px",
+              fontSize: "1rem",
               fontWeight: "bold",
               borderRadius: "0 20px 20px 0",
               position: "relative",
