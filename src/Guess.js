@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ConfettiGenerator from "confetti-js";
+import Confetti from 'react-confetti';
+import './Guess.css'; // Import the CSS file for styling
 
-export default function Guess(props) {
+const Guess = ({ chatId, userId, oppName, gameScore, NewGuess }) => {
   const [clicked, setClicked] = useState(false);
-  const [guess, setGuess] = useState("");
+  const [guess, setGuess] = useState('');
   const [numberState, setNumberState] = useState(0);
   const [orderState, setOrderState] = useState(0);
   const [gameResult, setGameResult] = useState(null);
-  const [confetti, setConfetti] = useState(null);
+  const [confetti, setConfetti] = useState(false);
   const inputRef = useRef(null);
-  const canvasRef = useRef(null);
 
   // Fetch opponent username with retries if needed
   useEffect(() => {
     const fetchOpponentUsername = async () => {
       try {
         const response = await fetch(
-          `https://gamechecker.vercel.app/opponent?chatId=${props.chatId}&userId=${props.userId}`,
+          `https://gamechecker.vercel.app/opponent?chatId=${chatId}&userId=${userId}`,
           { method: 'GET', headers: { 'Content-Type': 'application/json' } }
         );
         if (!response.ok) {
           throw new Error(`HTTP error ${response.status}`);
         }
         const data = await response.json();
-        props.oppName(data.userName);
+        oppName(data.userName);
       } catch (error) {
         console.error('Error fetching opponent username:', error);
       }
@@ -31,13 +31,13 @@ export default function Guess(props) {
 
     fetchOpponentUsername();
     inputRef.current?.focus();
-  }, [props.chatId, props.userId, props.oppName]);
+  }, [chatId, userId, oppName]);
 
   // Trigger server check
-  async function checkOnServer() {
+  const checkOnServer = async () => {
     try {
       const response = await fetch(
-        `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`,
+        `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${chatId}&userId=${userId}`,
         { method: 'GET', headers: { 'Content-Type': 'application/json' } }
       );
       if (!response.ok) {
@@ -45,37 +45,29 @@ export default function Guess(props) {
       }
 
       const data = await response.json();
-      console.log(data);
-
       setNumberState(data.number);
       setOrderState(data.order);
-      props.gameScore(data.trial2, data.score1, data.score2);
+      gameScore(data.trial2, data.score1, data.score2);
 
       if (data.order === 4 && data.number === 4) {
-        setGameResult("win");
-        alert("CONGRATULATIONS");
-
-        // Trigger confetti
-        if (canvasRef.current && !confetti) {
-          const confettiInstance = new ConfettiGenerator({ target: canvasRef.current });
-          confettiInstance.render();
-          setConfetti(confettiInstance);
-        }
+        setGameResult('win');
+        alert('CONGRATULATIONS');
+        setConfetti(true);
       } else {
-        setGameResult("loss");
-        props.NewGuess();
+        setGameResult('loss');
+        NewGuess();
       }
     } catch (error) {
       console.error('Error during server communication:', error);
     }
-  }
+  };
 
-  function handleClick() {
+  const handleClick = () => {
     checkOnServer();
     setClicked((prev) => !prev);
-  }
+  };
 
-  function handleInputChange(e) {
+  const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const change = inputValue[inputValue.length - 1];
     if (!inputValue.slice(0, inputValue.length - 1).includes(parseInt(change))) {
@@ -85,47 +77,30 @@ export default function Guess(props) {
         setGuess(inputValue.slice(0, 4));
       }
     }
-  }
+  };
 
   return (
     <>
-      {/* Canvas for confetti */}
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1000,
-        }}
-      />
-
-      {/* Main Game UI */}
-      <div className="row justify-content-center mt-2">
-        <div className="col-3 col-md-3 col-lg-1">
-          <input
-            className="form-control text-center me-2 px-0"
-            id="Ginput"
-            style={{ minWidth: "40px" }}
-            value={guess}
-            type="number"
-            readOnly={clicked}
-            onChange={handleInputChange}
-            ref={inputRef}
-          />
-        </div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{orderState}</div>
-        <div
-          className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`}
-          onClick={handleClick}
-        >
+      {confetti && <Confetti />}
+      <div className="guess-container">
+        <input
+          className="guess-input"
+          value={guess}
+          type="number"
+          readOnly={clicked}
+          onChange={handleInputChange}
+          ref={inputRef}
+        />
+        <button className="guess-button" onClick={handleClick} disabled={clicked}>
           GO
+        </button>
+        <div className="guess-info">
+          <div>Number: {numberState}</div>
+          <div>Order: {orderState}</div>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default Guess;
