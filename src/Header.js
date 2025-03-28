@@ -16,6 +16,7 @@ export default function Guess(props) {
               fontWeight: "bold",
               borderRadius: "20px 0 0 20px",
               position: "relative",
+              zIndex: 100, // Keeps the nav bar above other elements
             }}
           >
             {props.userName}
