@@ -1,8 +1,18 @@
 import React from 'react';
 
-export default function Guess(props) {
+export default function Header(props) {
   return (
-    <div className="container pt-4">
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000, // Ensure the header stays on top of other content
+        backgroundColor: 'white', // Optional, to ensure readability
+        padding: '10px', // Add some padding if necessary
+      }}
+    >
       {/* Names Section */}
       <div className="row mb-4">
         {/* User Name */}
@@ -16,22 +26,9 @@ export default function Guess(props) {
               fontWeight: "bold",
               borderRadius: "20px 0 0 20px",
               position: "relative",
-              zIndex: 100, // Keeps the nav bar above other elements
             }}
           >
             {props.userName}
-            <div
-              style={{
-                content: "",
-                position: "absolute",
-                top: "50%",
-                right: "-10px",
-                transform: "translateY(-50%)",
-                borderWidth: "10px",
-                borderStyle: "solid",
-                borderColor: "transparent transparent transparent #6a11cb",
-              }}
-            ></div>
           </div>
         </div>
 
@@ -49,25 +46,12 @@ export default function Guess(props) {
             }}
           >
             {props.oppName}
-            <div
-              style={{
-                content: "",
-                position: "absolute",
-                top: "50%",
-                left: "-10px",
-                transform: "translateY(-50%)",
-                borderWidth: "10px",
-                borderStyle: "solid",
-                borderColor: "transparent #ff512f transparent transparent",
-              }}
-            ></div>
           </div>
         </div>
       </div>
 
       {/* Scores and Trials Section */}
       <div className="row justify-content-between">
-        {/* User Score and Trial */}
         <div className="col-5 col-md-5">
           <div className="container">
             <div
@@ -101,7 +85,6 @@ export default function Guess(props) {
           </div>
         </div>
 
-        {/* Opponent Score and Trial */}
         <div className="col-5 col-md-5">
           <div className="container">
             <div
@@ -133,38 +116,6 @@ export default function Guess(props) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Buttons Section */}
-      <div className="row justify-content-center mt-4">
-        <div
-          className="col-2 col-md-1 me-3"
-          style={{
-            background: "linear-gradient(90deg, #6a11cb, #2575fc)",
-            color: "#ffffff",
-            fontWeight: "bold",
-            fontSize: "1.2rem",
-            borderRadius: "10px",
-            textAlign: "center",
-            padding: "5px 10px",
-          }}
-        >
-          N
-        </div>
-        <div
-          className="col-2 col-md-1"
-          style={{
-            background: "linear-gradient(90deg, #6a11cb, #2575fc)",
-            color: "#ffffff",
-            fontWeight: "bold",
-            fontSize: "1.2rem",
-            borderRadius: "10px",
-            textAlign: "center",
-            padding: "5px 10px",
-          }}
-        >
-          O
         </div>
       </div>
     </div>
