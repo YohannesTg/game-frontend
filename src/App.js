@@ -26,7 +26,7 @@ function App(props) {
 
   return (
     <div className="container-fluid text-center">
-      {/* Static Header */}
+      {/* Fixed Header */}
       <Header
         trialNum={trailNum.length}
         userName={props.userName}
@@ -39,7 +39,8 @@ function App(props) {
       {/* Scrollable Content */}
       <div
         style={{
-          maxHeight: 'calc(100vh - 100px)', // Adjust this value based on your header height
+          marginTop: '150px', // Adjust this value based on the height of the header
+          maxHeight: 'calc(100vh - 150px)', // Makes the content area scrollable
           overflowY: 'auto',
         }}
       >
