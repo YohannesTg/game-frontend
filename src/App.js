@@ -1,6 +1,7 @@
 import React from 'react';
 import Guess from './Guess';
 import Header from './Header';
+import './App.css'; // Import the CSS file for styling
 
 function App(props) {
   const [trailNum, setTrialNum] = React.useState([1]);
@@ -25,7 +26,7 @@ function App(props) {
   }
 
   return (
-    <div className="container-fluid text-center">
+    <div className="app-container">
       {/* Fixed Header */}
       <Header
         trialNum={trailNum.length}
@@ -37,13 +38,7 @@ function App(props) {
       />
 
       {/* Scrollable Content */}
-      <div
-        style={{
-          marginTop: '150px', // Adjust this value based on the height of the header
-          maxHeight: 'calc(100vh - 150px)', // Makes the content area scrollable
-          overflowY: 'auto',
-        }}
-      >
+      <div className="scrollable-content">
         {trailNum.map((value) => (
           <Guess
             key={value}
