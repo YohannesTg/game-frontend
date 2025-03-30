@@ -8,7 +8,6 @@ function App(props) {
   const [score2, setScore2] = useState(0);
   const [trialNum, setTrialNum] = useState(0);
   const [trial2, setTrial2] = useState(0);
-  const [opponentUsername, setOpponentUsername] = useState('');
 
   const handleNewGuess = (guess, n, o) => {
     setGuesses(prev => [...prev, { guess, n, o }]);
@@ -24,7 +23,7 @@ function App(props) {
     <div className="container-fluid">
       <Header
         userName={props.userName}
-        oppName={opponentUsername}
+        oppName={props.oppName}
         score1={score1}
         score2={score2}
         trialNum={trialNum}
@@ -57,7 +56,6 @@ function App(props) {
         {/* Current Guess Input */}
         <Guess 
           onNewGuess={handleNewGuess}
-          setOpponent={setOpponentUsername}
           chatId={props.chatId}
           userId={props.userId}
           setTrial2={setTrial2}
