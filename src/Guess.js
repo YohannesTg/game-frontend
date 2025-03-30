@@ -88,8 +88,7 @@ export default function Guess(props) {
   }
 
   return (
-    <>
-      {/* Canvas for confetti */}
+  <>
       <canvas
         ref={canvasRef}
         style={{
@@ -103,27 +102,47 @@ export default function Guess(props) {
         }}
       />
 
-      {/* Main Game UI */}
-      <div className="row justify-content-center mt-2">
-        <div className="col-3 col-md-3 col-lg-1">
+      <div className="row justify-content-center mt-4 g-3">
+        <div className="col-auto">
           <input
-            className="form-control text-center me-2 px-0"
+            className="form-control modern-input text-center"
+            style={{
+              width: '140px',
+              fontSize: '1.4rem',
+              letterSpacing: '0.5rem',
+              padding: '12px',
+            }}
             id="Ginput"
-            style={{ minWidth: "40px" }}
             value={guess}
             type="number"
             readOnly={clicked}
             onChange={handleInputChange}
             ref={inputRef}
+            placeholder="____"
           />
         </div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{numberState}</div>
-        <div className="col-2 col-md-1 btn btn-secondary me-2">{orderState}</div>
-        <div
-          className={`col-3 col-md-3 col-lg-1 btn btn-success ${clicked && "invisible"}`}
-          onClick={handleClick}
-        >
-          GO
+        
+        <div className="col-auto d-flex gap-2">
+          <div className="result-badge bg-primary">
+            N: {numberState}
+          </div>
+          <div className="result-badge bg-success">
+            O: {orderState}
+          </div>
+        </div>
+
+        <div className="col-auto">
+          <button 
+            className={`glow-button btn btn-lg px-4 py-2 rounded-pill ${clicked && "opacity-50"}`}
+            onClick={handleClick}
+            disabled={clicked}
+          >
+            {clicked ? (
+              <><i className="bi bi-hourglass-split me-2"></i>Checking...</>
+            ) : (
+              <><i className="bi bi-send-check me-2"></i>Check</>
+            )}
+          </button>
         </div>
       </div>
     </>
