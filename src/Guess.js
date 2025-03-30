@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
 
-export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTrial2 }) {
+export default function Guess({ onNewGuess, chatId, userId, setTrial2 }) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
