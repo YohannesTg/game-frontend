@@ -88,7 +88,7 @@ export default function Guess(props) {
   }
 
   return (
-   <>
+    <>
       <canvas ref={canvasRef} style={{
         position: 'fixed',
         top: 0,
@@ -99,39 +99,45 @@ export default function Guess(props) {
         zIndex: 1000,
       }} />
 
-      <div className="guess-row">
-        <input
-          className="form-control modern-input guess-input"
-          style={{
-            flex: '1 1 auto',
-            maxWidth: '200px',
-            fontSize: '1.4rem',
-            letterSpacing: '0.5rem',
-            padding: '12px 20px',
-          }}
-          id="Ginput"
-          value={guess}
-          type="number"
-          readOnly={clicked}
-          onChange={handleInputChange}
-          ref={inputRef}
-          placeholder="____"
-        />
-        
-        <button 
-          className={`glow-button btn btn-lg px-4 py-2 rounded-pill flex-shrink-0 ${
-            clicked ? 'opacity-75' : ''
-          }`}
-          onClick={handleClick}
-          disabled={clicked}
-          style={{ minWidth: '140px' }}
-        >
-          {clicked ? (
-            <><i className="bi bi-hourglass-split me-2"></i>Checking...</>
-          ) : (
-            <><i className="bi bi-send-check me-2"></i>Check</>
-          )}
-        </button>
+      <div className="guess-container">
+        {/* Column Headers */}
+        <div className="row g-2 mb-2 d-none d-md-flex">
+          <div className="col-md-6 text-muted small">GUESS</div>
+          <div className="col-md-2 text-center text-muted small">N</div>
+          <div className="col-md-2 text-center text-muted small">O</div>
+          <div className="col-md-2"></div>
+        </div>
+
+        {/* Guess Row */}
+        <div className="guess-row">
+          <div className="guess-input-container">
+            <input
+              className="form-control modern-input"
+              style={{
+                fontSize: '1.2rem',
+                letterSpacing: '0.5rem',
+                padding: '12px 20px',
+              }}
+              // ... other props
+            />
+          </div>
+          
+          <div className="result-indicators">
+            <div className="n-indicator bg-primary">{numberState}</div>
+            <div className="o-indicator bg-success">{orderState}</div>
+          </div>
+
+          <button 
+            className={`glow-button btn rounded-pill`}
+            // ... other props
+          >
+            {clicked ? (
+              <><i className="bi bi-hourglass-split me-2"></i>Checking</>
+            ) : (
+              <><i className="bi bi-send-check me-2"></i>Check</>
+            )}
+          </button>
+        </div>
       </div>
     </>
   );
