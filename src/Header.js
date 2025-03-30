@@ -9,145 +9,56 @@ export default function Header(props) {
         left: 0,
         right: 0,
         zIndex: 1000,
-        background: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Gradient background
-        color: 'white',
-        padding: '15px 0',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
-        fontFamily: "'Roboto', sans-serif", // Modern font
-        fontSize: '1.2rem',
+        background: 'rgba(16, 18, 27, 0.7)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        padding: '12px 0',
+        fontFamily: "'Inter', sans-serif",
       }}
     >
       <div className="container">
-        <div className="row mb-4">
+        <div className="row mb-4 align-items-center">
           {/* User Name */}
           <div className="col-6 d-flex justify-content-start">
-            <div
-              style={{
-                background: "linear-gradient(90deg, #6a11cb, #2575fc)",
-                color: "#ffffff",
-                padding: "12px 20px",
-                fontSize: "1rem",
-                fontWeight: "bold",
-                borderRadius: "25px 0 0 25px",
-                position: "relative",
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.15)',
-              }}
-            >
-              {props.userName}
-              <div
-                style={{
-                  content: "",
-                  position: "absolute",
-                  top: "50%",
-                  right: "-10px",
-                  transform: "translateY(-50%)",
-                  borderWidth: "10px",
-                  borderStyle: "solid",
-                  borderColor: "transparent transparent transparent #6a11cb",
-                }}
-              ></div>
+            <div className="glass-card px-3 py-2 d-flex align-items-center">
+              <i className="bi bi-person-fill me-2 text-primary"></i>
+              <span className="fw-medium">{props.userName}</span>
             </div>
           </div>
 
           {/* Opponent Name */}
           <div className="col-6 d-flex justify-content-end">
-            <div
-              style={{
-                background: "linear-gradient(90deg, #ff512f, #dd2476)",
-                color: "#ffffff",
-                padding: "12px 20px",
-                fontSize: "1rem",
-                fontWeight: "bold",
-                borderRadius: "0 25px 25px 0",
-                position: "relative",
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.15)',
-              }}
-            >
-              {props.oppName}
-              <div
-                style={{
-                  content: "",
-                  position: "absolute",
-                  top: "50%",
-                  left: "-10px",
-                  transform: "translateY(-50%)",
-                  borderWidth: "10px",
-                  borderStyle: "solid",
-                  borderColor: "transparent #ff512f transparent transparent",
-                }}
-              ></div>
+            <div className="glass-card px-3 py-2 d-flex align-items-center">
+              <i className="bi bi-person-fill me-2 text-danger"></i>
+              <span className="fw-medium">{props.oppName}</span>
             </div>
           </div>
         </div>
 
         {/* Scores and Trials Section */}
-        <div className="row justify-content-between">
-          <div className="col-5 col-md-5">
-            <div className="container">
-              <div
-                className="row my-2 rounded-5"
-                style={{
-                  background: "linear-gradient(90deg, #fbd786, #f7797d)",
-                  color: "#333333",
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                <div className="col d-flex align-items-center justify-content-center">
-                  <span>Score:</span>&nbsp;{props.score1}
-                </div>
+        <div className="row justify-content-center g-3">
+          <div className="col-md-5">
+            <div className="glass-card p-3 text-center">
+              <div className="d-flex justify-content-between mb-2">
+                <span className="text-muted">Your Score</span>
+                <span className="fw-bold text-success">{props.score1}</span>
               </div>
-              <div
-                className="row my-2 rounded-5"
-                style={{
-                  background: "linear-gradient(90deg, #fbd786, #f7797d)",
-                  color: "#333333",
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                <div className="col d-flex align-items-center justify-content-center">
-                  <span>Trial:</span>&nbsp;{props.trialNum}
-                </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-muted">Trials</span>
+                <span className="fw-bold text-info">{props.trialNum}</span>
               </div>
             </div>
           </div>
 
-          <div className="col-5 col-md-5">
-            <div className="container">
-              <div
-                className="row my-2 rounded-5"
-                style={{
-                  background: "linear-gradient(90deg, #fbd786, #f7797d)",
-                  color: "#333333",
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                <div className="col d-flex align-items-center justify-content-center">
-                  <span>Score:</span>&nbsp;{props.score2}
-                </div>
+          <div className="col-md-5">
+            <div className="glass-card p-3 text-center">
+              <div className="d-flex justify-content-between mb-2">
+                <span className="text-muted">Opponent Score</span>
+                <span className="fw-bold text-success">{props.score2}</span>
               </div>
-              <div
-                className="row my-2 rounded-5"
-                style={{
-                  background: "linear-gradient(90deg, #fbd786, #f7797d)",
-                  color: "#333333",
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                <div className="col d-flex align-items-center justify-content-center">
-                  <span>Trial:</span>&nbsp;{props.trial2}
-                </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-muted">Trials</span>
+                <span className="fw-bold text-info">{props.trial2}</span>
               </div>
             </div>
           </div>
