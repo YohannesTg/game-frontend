@@ -8,20 +8,11 @@ function App(props) {
   const [trial2, setTrial2] = React.useState(1);
   const [score1, setScore1] = React.useState(0);
   const [score2, setScore2] = React.useState(0);
-  const [numberState, setNumberState] = React.useState(0);
-  const [orderState, setOrderState] = React.useState(0);
 
-  function gameScore(trialB, scoreA, scoreB, number, order) {
+  function gameScore(trialB, scoreA, scoreB) {
     setTrial2(trialB);
     setScore1(scoreA);
     setScore2(scoreB);
-    setNumberState(number);
-    setOrderState(order);
-  }
-
-  function oppName(name) {
-    setOpponentUsername(name);
-    console.log(name);
   }
 
   function NewGuess() {
@@ -29,21 +20,17 @@ function App(props) {
   }
 
   return (
-   <div className="container-fluid">
+    <div className="container-fluid">
       <Header
         trialNum={trailNum.length}
-        userName={props.userName}
-        oppName={opponentUsername}
-        trial2={trial2}
         score1={score1}
         score2={score2}
-        numberState={numberState}
-        orderState={orderState}
+        trial2={trial2}
       />
 
       <div style={{
-        marginTop: '220px',
-        maxHeight: 'calc(100vh - 220px)',
+        marginTop: '180px',
+        maxHeight: 'calc(100vh - 180px)',
         overflowY: 'auto',
         padding: '2rem',
         scrollBehavior: 'smooth'
@@ -54,8 +41,6 @@ function App(props) {
               key={value}
               chatId={props.chatId}
               userId={props.userId}
-              oppName={setOpponentUsername}
-              name={value}
               gameScore={gameScore}
               NewGuess={NewGuess}
             />
