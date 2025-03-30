@@ -3,7 +3,7 @@ import Guess from './Guess';
 import Header from './Header';
 
 function App(props) {
-  const [trailNum, setTrailNum] = React.useState([1]);
+  const [guesses, setGuesses] = React.useState([]);
   const [opponentUsername, setOpponentUsername] = React.useState("");
   const [trial2, setTrial2] = React.useState(1);
   const [score1, setScore1] = React.useState(0);
@@ -15,8 +15,16 @@ function App(props) {
     setScore2(newScore2);
   };
 
-  const NewGuess = () => {
-    setTrailNum(prev => [...prev, prev[prev.length - 1] + 1]); // Fixed line
+  const NewGuess = (guess, numberState, orderState) => {
+    setGuesses(prev => [
+      ...prev,
+      {
+        value: guess,
+        n: numberState,
+        o: orderState,
+        id: Date.now()
+      }
+    ]);
   };
 
   return (
@@ -24,7 +32,7 @@ function App(props) {
       <Header
         userName={props.userName}
         oppName={opponentUsername}
-        trialNum={trailNum.length}
+        trialNum={guesses.length}
         trial2={trial2}
         score1={score1}
         score2={score2}
@@ -32,16 +40,28 @@ function App(props) {
 
       <div className="game-content">
         <div className="container">
-          {trailNum.map((value) => (
-            <Guess
-              key={value}
-              chatId={props.chatId}
-              userId={props.userId}
-              gameScore={gameScore}
-              NewGuess={NewGuess}
-              oppName={setOpponentUsername}
-            />
+          {/* Existing guesses */}
+          {guesses.map((guess) => (
+            <div key={guess.id} className="guess-result">
+              <div className="previous-guess">
+                {guess.value}
+                <div className="result-indicators">
+                  <span className="n-indicator">{guess.n}</span>
+                  <span className="o-indicator">{guess.o}</span>
+                </div>
+              </div>
+            </div>
           ))}
+          
+          {/* Current input */}
+          <Guess
+            key="current-guess"
+            chatId={props.chatId}
+            userId={props.userId}
+            gameScore={gameScore}
+            NewGuess={NewGuess}
+            oppName={setOpponentUsername}
+          />
         </div>
       </div>
     </div>
