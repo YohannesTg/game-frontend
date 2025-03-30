@@ -6,7 +6,6 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
 
-  // Fetch opponent name
   useEffect(() => {
     const fetchOpponent = async () => {
       try {
@@ -23,7 +22,6 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     if(chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
-  // Confetti setup
   useEffect(() => {
     if(canvasRef.current) {
       const confetti = new ConfettiGenerator({ target: canvasRef.current });
