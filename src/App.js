@@ -3,38 +3,34 @@ import Guess from './Guess';
 import Header from './Header';
 
 function App(props) {
-  const [trailNum, setTrialNum] = React.useState([1]);
+  const [trailNum, setTrailNum] = React.useState([1]);
   const [opponentUsername, setOpponentUsername] = React.useState("");
   const [trial2, setTrial2] = React.useState(1);
   const [score1, setScore1] = React.useState(0);
   const [score2, setScore2] = React.useState(0);
 
-  function gameScore(trialB, scoreA, scoreB) {
-    setTrial2(trialB);
-    setScore1(scoreA);
-    setScore2(scoreB);
-  }
+  const gameScore = (newTrial2, newScore1, newScore2) => {
+    setTrial2(newTrial2);
+    setScore1(newScore1);
+    setScore2(newScore2);
+  };
 
-  function NewGuess() {
-    setTrialNum((prevValue) => [...prevValue, prevValue[prevValue.length - 1] + 1]);
-  }
+  const NewGuess = () => {
+    setTrailNum(prev => [...prev, prev[prev.length - 1] + 1);
+  };
 
   return (
     <div className="container-fluid">
       <Header
+        userName={props.userName}
+        oppName={opponentUsername}
         trialNum={trailNum.length}
+        trial2={trial2}
         score1={score1}
         score2={score2}
-        trial2={trial2}
       />
 
-      <div style={{
-        marginTop: '180px',
-        maxHeight: 'calc(100vh - 180px)',
-        overflowY: 'auto',
-        padding: '2rem',
-        scrollBehavior: 'smooth'
-      }}>
+      <div className="game-content">
         <div className="container">
           {trailNum.map((value) => (
             <Guess
@@ -43,6 +39,7 @@ function App(props) {
               userId={props.userId}
               gameScore={gameScore}
               NewGuess={NewGuess}
+              oppName={setOpponentUsername}
             />
           ))}
         </div>
