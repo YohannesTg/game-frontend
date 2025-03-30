@@ -65,6 +65,7 @@ export default function Guess(props) {
         setGameResult("loss");
         props.NewGuess();
       }
+      setClicked(true);
     } catch (error) {
       console.error('Error during server communication:', error);
     }
@@ -88,7 +89,7 @@ export default function Guess(props) {
   }
 
   return (
-    <>
+      <>
       <canvas ref={canvasRef} style={{
         position: 'fixed',
         top: 0,
@@ -100,20 +101,12 @@ export default function Guess(props) {
       }} />
 
       <div className="guess-container">
-        {/* Column Headers */}
-        <div className="row g-2 mb-2 d-none d-md-flex">
-          <div className="col-md-6 text-muted small">GUESS</div>
-          <div className="col-md-2 text-center text-muted small">N</div>
-          <div className="col-md-2 text-center text-muted small">O</div>
-          <div className="col-md-2"></div>
-        </div>
-
-        {/* Guess Row */}
-        <div className="guess-row">
-          <div className="guess-input-container">
+        {!clicked ? (
+          <div className="guess-row">
             <input
               className="form-control modern-input"
               style={{
+                flex: '1 1 auto',
                 fontSize: '1.2rem',
                 letterSpacing: '0.5rem',
                 padding: '12px 20px',
@@ -126,25 +119,20 @@ export default function Guess(props) {
               ref={inputRef}
               placeholder="____"
             />
+            
+            <button 
+              className="glow-button btn rounded-pill px-4"
+              onClick={handleClick}
+            >
+              <i className="bi bi-send-check me-2"></i>Check
+            </button>
           </div>
-          
-          <div className="result-indicators">
+        ) : (
+          <div className="result-row">
             <div className="n-indicator bg-primary">{numberState}</div>
             <div className="o-indicator bg-success">{orderState}</div>
           </div>
-
-          <button 
-            className={`glow-button btn rounded-pill px-4`}
-            onClick={handleClick}
-            disabled={clicked}
-          >
-            {clicked ? (
-              <><i className="bi bi-hourglass-split me-2"></i>Checking</>
-            ) : (
-              <><i className="bi bi-send-check me-2"></i>Check</>
-            )}
-          </button>
-        </div>
+        )}
       </div>
     </>
   );
