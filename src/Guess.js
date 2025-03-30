@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
 
-export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
+export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTrial2 }) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
@@ -28,6 +28,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
       }
       
       onNewGuess(guess, data.number, data.order);
+      setTrial2(prev => prev + 1);
       setGuess('');
 
     } catch(error) {
@@ -60,8 +61,9 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
           type="number"
           value={guess}
           onChange={handleInput}
-          placeholder="Enter 4 unique digits"
+          placeholder="____"
           disabled={isSubmitting}
+          maxLength="4"
         />
         
         <button
