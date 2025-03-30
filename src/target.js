@@ -52,70 +52,83 @@ export default function Target() {
   };
 
   return (
-    <div style={{ overflow: 'hidden', height: '100vh' }}>
+    <div style={{ 
+      overflow: 'hidden', 
+      height: '100vh',
+      background: 'linear-gradient(45deg, #0f0c29 0%, #302b63 100%)' 
+    }}>
       {!clicked ? (
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="container">
+          <div className="container py-5">
+            {/* Ticker */}
             <div className="row mb-5">
               <div className="ticker-container">
                 <div className="ticker-content">
-                  🎮 Welcome to Guess My Number • 🚀 Modern UI Edition • 🏆 Compete with Friends
+                  🚀 WELCOME TO GUESS MY NUMBER • 🎯 MODERN EDITION • 🏆 COMPETE WITH FRIENDS
                 </div>
               </div>
             </div>
 
+            {/* Rules Section */}
             <div className="row mb-5">
-              <div className="col-12">
-                <div className="glass-card p-4 mx-auto" style={{ maxWidth: '800px' }}>
-                  <h3 className="text-center mb-4 fw-bold">Game Rules</h3>
-                  <ul className="list-unstyled">
-                    <li className="d-flex align-items-center mb-4">
-                      <i className="bi bi-1-circle-fill me-3 fs-4 text-primary"></i>
-                      <div>
-                        <h5 className="mb-1">Unique Digits</h5>
-                        <p className="mb-0 text-muted">All digits in your secret number must be unique</p>
+              <div className="col-12 col-lg-10 mx-auto">
+                <div className="glass-card p-4 p-lg-5">
+                  <h2 className="text-center mb-4 fw-bold" style={{color: '#6ab7ff'}}>
+                    <i className="bi bi-info-circle me-2"></i>
+                    Game Rules
+                  </h2>
+                  <div className="row g-4">
+                    <div className="col-md-4">
+                      <div className="text-center p-3">
+                        <i className="bi bi-unique text-primary fs-1 mb-3"></i>
+                        <h4 className="text-primary mb-2">Unique Digits</h4>
+                        <p className="text-muted mb-0">All digits must be distinct</p>
                       </div>
-                    </li>
-                    <li className="d-flex align-items-center mb-4">
-                      <i className="bi bi-2-circle-fill me-3 fs-4 text-info"></i>
-                      <div>
-                        <h5 className="mb-1">Number Match (N)</h5>
-                        <p className="mb-0 text-muted">Count of correct digits regardless of position</p>
+                    </div>
+                    <div className="col-md-4">
+                      <div className="text-center p-3">
+                        <i className="bi bi-123 text-info fs-1 mb-3"></i>
+                        <h4 className="text-info mb-2">Number Match (N)</h4>
+                        <p className="text-muted mb-0">Correct digits in any position</p>
                       </div>
-                    </li>
-                    <li className="d-flex align-items-center">
-                      <i className="bi bi-3-circle-fill me-3 fs-4 text-success"></i>
-                      <div>
-                        <h5 className="mb-1">Position Match (O)</h5>
-                        <p className="mb-0 text-muted">Count of digits in correct position</p>
+                    </div>
+                    <div className="col-md-4">
+                      <div className="text-center p-3">
+                        <i className="bi bi-geo-alt text-success fs-1 mb-3"></i>
+                        <h4 className="text-success mb-2">Position Match (O)</h4>
+                        <p className="text-muted mb-0">Digits in correct position</p>
                       </div>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
+            {/* Input Section */}
             <div className="row justify-content-center">
               <div className="col-12 col-md-8 col-lg-6">
                 <div className="glass-card p-4">
-                  <h4 className="text-center mb-4">
-                    <i className="bi bi-lock-fill me-2"></i>
+                  <h3 className="text-center mb-4" style={{color: '#ff6b6b'}}>
+                    <i className="bi bi-key-fill me-2"></i>
                     Enter Secret Number
-                  </h4>
+                  </h3>
                   <div className="input-group">
                     <input
                       type="text"
                       className="form-control modern-input text-center fs-3 py-3"
+                      style={{letterSpacing: '0.5rem'}}
                       value={aim}
                       onChange={handleInputChange}
                       onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                      placeholder="4 digits"
                     />
                     <button
                       onClick={handleSubmit}
                       className="glow-button btn btn-lg px-5"
                       disabled={!aim.trim()}
+                      style={{background: 'var(--primary-gradient)'}}
                     >
-                      <i className="bi bi-check2-circle me-2"></i>
+                      <i className="bi bi-play-fill me-2"></i>
                       Start Game
                     </button>
                   </div>
