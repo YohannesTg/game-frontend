@@ -54,60 +54,71 @@ export default function Target() {
   return (
     <div style={{ overflow: 'hidden', height: '100vh' }}>
       {!clicked ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
-          <div className="container w-100" style={{ maxWidth: '100%' }}>
-            {/* Welcome Message */}
-            <div className="row mb-3">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <div className="container">
+            <div className="row mb-5">
               <div className="ticker-container">
                 <div className="ticker-content">
-                  Welcome to the Guess My Number (GMN) game
+                  🎮 Welcome to Guess My Number • 🚀 Modern UI Edition • 🏆 Compete with Friends
                 </div>
               </div>
             </div>
-            {/* Rules Section */}
-            <div className="row mb-3">
-              <div className="text-center">
-                <h3 style={{ color: 'white', marginBottom: '1rem' }}>Rules</h3>
-                <ul
-                  className="list-unstyled medium"
-                  style={{ color: 'white', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
-                >
-                  <li>1. Your secret number must have unique digits.</li>
-                  <li>2. "N" indicates correct digits, regardless of position.</li>
-                  <li>3. "O" indicates correct digits in the correct position.</li>
-                </ul>
+
+            <div className="row mb-5">
+              <div className="col-12">
+                <div className="glass-card p-4 mx-auto" style={{ maxWidth: '800px' }}>
+                  <h3 className="text-center mb-4 fw-bold">Game Rules</h3>
+                  <ul className="list-unstyled">
+                    <li className="d-flex align-items-center mb-4">
+                      <i className="bi bi-1-circle-fill me-3 fs-4 text-primary"></i>
+                      <div>
+                        <h5 className="mb-1">Unique Digits</h5>
+                        <p className="mb-0 text-muted">All digits in your secret number must be unique</p>
+                      </div>
+                    </li>
+                    <li className="d-flex align-items-center mb-4">
+                      <i className="bi bi-2-circle-fill me-3 fs-4 text-info"></i>
+                      <div>
+                        <h5 className="mb-1">Number Match (N)</h5>
+                        <p className="mb-0 text-muted">Count of correct digits regardless of position</p>
+                      </div>
+                    </li>
+                    <li className="d-flex align-items-center">
+                      <i className="bi bi-3-circle-fill me-3 fs-4 text-success"></i>
+                      <div>
+                        <h5 className="mb-1">Position Match (O)</h5>
+                        <p className="mb-0 text-muted">Count of digits in correct position</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-            {/* Input Section */}
-            <div className="row mb-3">
-              <div className="text-center">
-                <p style={{ color: 'white', fontSize: '1.2rem' }}>Please insert your secret 4-digit number</p>
-              </div>
-            </div>
-            {/* Input + Button Responsive Row */}
-            <div className="row justify-content-center align-items-center">
-              <div className="col-8">
-                <div className="input-group input-group-lg mb-3" style={{ maxWidth: '100%' }}>
-                  <input
-                    type="text"
-                    className="form-control bg-secondary text-center text-white shadow-sm"
-                    value={aim}
-                    onChange={handleInputChange}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        handleSubmit();
-                      }
-                    }}
-                    style={{ maxWidth: '100%', overflowWrap: 'break-word' }}
-                  />
-                  <button
-                    onClick={handleSubmit}
-                    className="btn btn-primary shadow-sm"
-                    disabled={!aim.trim()}
-                    style={{ maxWidth: '100%' }}
-                  >
-                    SET
-                  </button>
+
+            <div className="row justify-content-center">
+              <div className="col-12 col-md-8 col-lg-6">
+                <div className="glass-card p-4">
+                  <h4 className="text-center mb-4">
+                    <i className="bi bi-lock-fill me-2"></i>
+                    Enter Secret Number
+                  </h4>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className="form-control modern-input text-center fs-3 py-3"
+                      value={aim}
+                      onChange={handleInputChange}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                    />
+                    <button
+                      onClick={handleSubmit}
+                      className="glow-button btn btn-lg px-5"
+                      disabled={!aim.trim()}
+                    >
+                      <i className="bi bi-check2-circle me-2"></i>
+                      Start Game
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
