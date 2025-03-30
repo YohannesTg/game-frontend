@@ -38,14 +38,23 @@ body {
   padding: 0 1rem;
 }
 
+.player-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #6ab7ff;
+}
+
+.opponent-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ff6b6b;
+}
+
 .score-label {
   font-size: 0.9rem;
   color: var(--text-secondary);
-}
-
-.score-value {
-  font-size: 1.2rem;
-  font-weight: 700;
 }
 
 /* Game Area */
@@ -60,19 +69,31 @@ body {
   margin: 0 auto 2rem;
 }
 
+.guess-header {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 .guess-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .guess-number {
   letter-spacing: 0.5rem;
   font-size: 1.2rem;
+  font-family: 'Space Mono', monospace;
 }
 
 .guess-results {
@@ -81,13 +102,15 @@ body {
 }
 
 .result-bubble {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .n-result {
@@ -104,17 +127,19 @@ body {
   margin: 0 auto;
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .guess-input {
-  flex: 1;
+  width: 200px;
   font-size: 1.2rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.8rem;
   padding: 12px 20px;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: #fff;
   border-radius: 12px;
+  font-family: 'Space Mono', monospace;
 }
 
 .glow-button {
@@ -145,10 +170,17 @@ body {
   
   .guess-number {
     font-size: 1rem;
+    letter-spacing: 0.3rem;
   }
   
   .result-bubble {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .guess-input {
+    width: 160px;
+    font-size: 1rem;
   }
 }
