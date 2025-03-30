@@ -30,6 +30,20 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem 0;
 }
+.previous-guess {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.result-indicators {
+  display: flex;
+  gap: 1rem;
+}
 
 .player-name {
   font-size: 1.1rem;
