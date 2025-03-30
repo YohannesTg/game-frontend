@@ -18,15 +18,64 @@ body {
   overflow-x: hidden;
 }
 
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+/* Header Styles */
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(16, 18, 27, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+}
+
+.player-name {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Game Area */
+.game-content {
+  margin-top: 160px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding: 2rem;
+  scroll-behavior: smooth;
+}
+
+/* Guess Component */
+.guess-container {
+  margin: 1rem 0;
+}
+
+.guess-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
 }
 
 .modern-input {
+  flex: 1 1 auto;
+  font-size: 1.2rem;
+  letter-spacing: 0.5rem;
+  padding: 12px 20px !important;
   background: rgba(255, 255, 255, 0.1) !important;
   border: none !important;
   color: #fff !important;
@@ -34,94 +83,79 @@ body {
   transition: all 0.3s ease !important;
 }
 
+.modern-input:focus {
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(106, 183, 255, 0.2) !important;
+}
+
 .glow-button {
   transition: all 0.3s ease;
   background-image: var(--primary-gradient);
   border: none;
+  padding: 12px 24px;
+  border-radius: 25px !important;
 }
 
-/* Header Styles */
-.header-container {
-  backdrop-filter: blur(16px) !important;
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(106, 183, 255, 0.3);
 }
 
-.score-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.score-value {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-/* Guess Component */
-.guess-container {
-  margin: 1rem 0;
-  padding: 0 1rem;
-}
-
-.guess-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  gap: 1rem;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-.result-indicators {
+.result-row {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
 }
 
 .n-indicator, .o-indicator {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.n-indicator { background: #6ab7ff; }
+.o-indicator { background: #76ff7a; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .game-content {
+    margin-top: 140px;
+    padding: 1rem;
+  }
+
   .guess-row {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
-  
-  .result-indicators {
-    justify-content: center;
-  }
-  
+
   .glow-button {
     width: 100%;
   }
-  
-  .score-value {
+
+  .player-name {
     font-size: 1rem;
   }
-}
 
-/* Target Page */
-.ticker-container {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  padding: 12px;
-  margin: 2rem auto;
-  max-width: 90%;
-}
+  .score-label {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
 
-.ticker-content {
-  display: inline-block;
-  animation: scroll-left 20s linear infinite;
-  font-family: 'Space Mono', monospace;
-  color: #6ab7ff;
-}
-
-@keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  .modern-input {
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
+    padding: 10px 15px !important;
+  }
 }
