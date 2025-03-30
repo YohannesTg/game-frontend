@@ -1,0 +1,55 @@
+html,
+body {
+  height: 100%;
+  overflow-wrap: break-word; /* Enable word wrapping for text */
+  word-break: break-word; /* Handle word breaks for long words */
+  white-space: normal; /* Allow text to wrap */
+  margin: 0; /* Ensure no unwanted default margins */
+  background: linear-gradient(to right, #121212, #292b2c, #3b3f47);
+  font-family: 'Arial', sans-serif; /* Use a clean modern font */
+  color: #f0f0f0; /* Light text for better contrast on dark backgrounds */
+  justify-content: center;
+}
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+
+/* Optional smooth scrolling effect */
+html {
+  scroll-behavior: smooth;
+}
+
+.ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%; /* Full width */
+  background-color: #000; /* Optional background color */
+  color: #fff; /* Text color */
+  font-size: 1.5rem;
+  padding: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.ticker-content {
+  display: inline-block;
+  animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100vw); /* Start from the right */
+  }
+  100% {
+    transform: translateX(-100vh); /* Move completely off-screen to the left */
+  }
+}
+
+
+
