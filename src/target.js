@@ -52,19 +52,19 @@ export default function Target() {
   };
 
   return (
-    <div style={{ 
-      overflow: 'hidden', 
-      height: '100vh',
+        <div style={{ 
+      minHeight: '100vh',
+      overflowY: 'auto',
       background: 'linear-gradient(45deg, #0f0c29 0%, #302b63 100%)' 
     }}>
       {!clicked ? (
-        <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="container py-5">
-            {/* Ticker */}
+        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+          <div className="container py-5 flex-grow-1">
+            {/* Ticker Section */}
             <div className="row mb-5">
               <div className="ticker-container">
                 <div className="ticker-content">
-                  🚀 WELCOME TO GUESS MY NUMBER • 🎯 MODERN EDITION • 🏆 COMPETE WITH FRIENDS
+                  🎮 GUESS MY NUMBER • 🚀 MODERN EDITION • 🏆 COMPETE WITH FRIENDS
                 </div>
               </div>
             </div>
