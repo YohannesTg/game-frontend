@@ -1,7 +1,7 @@
 :root {
   --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
   --secondary-gradient: linear-gradient(45deg, #ff6b6b, #ff8e53);
-  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
   --text-secondary: rgba(255, 255, 255, 0.7);
@@ -34,22 +34,21 @@ body {
 .player-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .player-name {
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
   color: #6ab7ff;
+  margin-bottom: 0.5rem;
 }
 
 .opponent-name {
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
   color: #ff6b6b;
+  margin-bottom: 0.5rem;
 }
 
 .score-label {
@@ -66,28 +65,29 @@ body {
 /* Guess History */
 .guess-history {
   max-width: 600px;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
 }
 
 .guess-header {
-  max-width: 600px;
-  margin: 0 auto 1rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  gap: 1rem;
+  padding: 1rem;
   color: var(--text-secondary);
   font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .guess-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  gap: 1rem;
   align-items: center;
   padding: 1rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .guess-number {
@@ -96,35 +96,16 @@ body {
   font-family: 'Space Mono', monospace;
 }
 
-.guess-results {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.result-bubble {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
+.result-number {
+  text-align: center;
   font-size: 1.2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.n-result {
-  background: #6ab7ff;
-}
-
-.o-result {
-  background: #76ff7a;
+  font-weight: 700;
 }
 
 /* Current Guess */
 .current-guess {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -152,30 +133,27 @@ body {
   transition: all 0.3s ease;
 }
 
-.glow-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
+  .player-info {
+    padding: 0 1rem;
+  }
+  
   .game-content {
     padding: 1rem;
     margin-top: 100px;
   }
   
+  .guess-header,
   .guess-item {
-    padding: 0.75rem;
+    grid-template-columns: 1fr 60px 60px;
   }
   
   .guess-number {
     font-size: 1rem;
-    letter-spacing: 0.3rem;
   }
   
-  .result-bubble {
-    width: 40px;
-    height: 40px;
+  .result-number {
     font-size: 1rem;
   }
   
