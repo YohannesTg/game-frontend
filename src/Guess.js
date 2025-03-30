@@ -88,62 +88,50 @@ export default function Guess(props) {
   }
 
   return (
-  <>
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1000,
-        }}
-      />
+   <>
+      <canvas ref={canvasRef} style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 1000,
+      }} />
 
-      <div className="row justify-content-center mt-4 g-3">
-        <div className="col-auto">
-          <input
-            className="form-control modern-input text-center"
-            style={{
-              width: '140px',
-              fontSize: '1.4rem',
-              letterSpacing: '0.5rem',
-              padding: '12px',
-            }}
-            id="Ginput"
-            value={guess}
-            type="number"
-            readOnly={clicked}
-            onChange={handleInputChange}
-            ref={inputRef}
-            placeholder="____"
-          />
-        </div>
+      <div className="guess-row">
+        <input
+          className="form-control modern-input guess-input"
+          style={{
+            flex: '1 1 auto',
+            maxWidth: '200px',
+            fontSize: '1.4rem',
+            letterSpacing: '0.5rem',
+            padding: '12px 20px',
+          }}
+          id="Ginput"
+          value={guess}
+          type="number"
+          readOnly={clicked}
+          onChange={handleInputChange}
+          ref={inputRef}
+          placeholder="____"
+        />
         
-        <div className="col-auto d-flex gap-2">
-          <div className="result-badge bg-primary">
-            N: {numberState}
-          </div>
-          <div className="result-badge bg-success">
-            O: {orderState}
-          </div>
-        </div>
-
-        <div className="col-auto">
-          <button 
-            className={`glow-button btn btn-lg px-4 py-2 rounded-pill ${clicked && "opacity-50"}`}
-            onClick={handleClick}
-            disabled={clicked}
-          >
-            {clicked ? (
-              <><i className="bi bi-hourglass-split me-2"></i>Checking...</>
-            ) : (
-              <><i className="bi bi-send-check me-2"></i>Check</>
-            )}
-          </button>
-        </div>
+        <button 
+          className={`glow-button btn btn-lg px-4 py-2 rounded-pill flex-shrink-0 ${
+            clicked ? 'opacity-75' : ''
+          }`}
+          onClick={handleClick}
+          disabled={clicked}
+          style={{ minWidth: '140px' }}
+        >
+          {clicked ? (
+            <><i className="bi bi-hourglass-split me-2"></i>Checking...</>
+          ) : (
+            <><i className="bi bi-send-check me-2"></i>Check</>
+          )}
+        </button>
       </div>
     </>
   );
