@@ -7,6 +7,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
   const canvasRef = useRef(null);
   const inputRef = useRef(null);
 
+  // Fetch opponent name
   useEffect(() => {
     const fetchOpponent = async () => {
       try {
@@ -23,6 +24,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     if(chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
+  // Confetti setup
   useEffect(() => {
     if(canvasRef.current) {
       const confetti = new ConfettiGenerator({ target: canvasRef.current });
@@ -30,10 +32,12 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     }
   }, []);
 
-  // Fixed useEffect - removed guesses dependency
+  // Auto-focus after submission completes
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []); // Empty array = run only on mount
+    if (!isSubmitting) {
+      inputRef.current?.focus();
+    }
+  }, [isSubmitting]);
 
   const checkOnServer = async () => {
     try {
@@ -50,7 +54,9 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       onNewGuess(guess, data.number, data.order);
       setTrial2(prev => prev + 1);
       setGuess('');
-      inputRef.current?.focus(); // Re-focus after submission
+      
+      // Force focus after state updates
+      setTimeout(() => inputRef.current?.focus(), 0);
     } catch(error) {
       console.error('Error:', error);
     } finally {
@@ -85,12 +91,15 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
           placeholder="____"
           disabled={isSubmitting}
           maxLength="4"
+          inputMode="numeric"
+          pattern="[0-9]*"
         />
         
         <button
           className="glow-button"
           onClick={checkOnServer}
           disabled={guess.length !== 4 || isSubmitting}
+          tabIndex="-1" // Prevent button from stealing focus
         >
           {isSubmitting ? 'Checking...' : 'Check'}
         </button>
