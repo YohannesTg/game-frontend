@@ -16,7 +16,7 @@ function App(props) {
   };
 
   const NewGuess = () => {
-    setTrailNum(prev => [...prev, prev[prev.length - 1] + 1);
+    setTrailNum(prev => [...prev, prev[prev.length - 1] + 1]); // Fixed line
   };
 
   return (
