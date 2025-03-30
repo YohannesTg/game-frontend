@@ -1,0 +1,30 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main  # or your branch name
+  pull_request:
+    branches:
+      - main  # or your branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # You can specify your Node.js version here
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test  # Optional: run tests if you have them
+
+      - name: Build the project (optional)
+        run: npm run build  # Optional: if you have a build script
