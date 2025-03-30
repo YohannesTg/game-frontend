@@ -1,30 +1,20 @@
-import React from 'react';
-import Guess from './Guess';
+import React, { useState } from 'react';
 import Header from './Header';
+import Guess from './Guess';
 
 function App(props) {
-  const [guesses, setGuesses] = React.useState([]);
-  const [opponentUsername, setOpponentUsername] = React.useState("");
-  const [trial2, setTrial2] = React.useState(1);
-  const [score1, setScore1] = React.useState(0);
-  const [score2, setScore2] = React.useState(0);
+  const [guesses, setGuesses] = useState([]);
+  const [score1, setScore1] = useState(0);
+  const [score2, setScore2] = useState(0);
+  const [opponentUsername, setOpponentUsername] = useState('');
 
-  const gameScore = (newTrial2, newScore1, newScore2) => {
-    setTrial2(newTrial2);
-    setScore1(newScore1);
-    setScore2(newScore2);
-  };
-
-  const NewGuess = (guess, numberState, orderState) => {
-    setGuesses(prev => [
-      ...prev,
-      {
-        value: guess,
-        n: numberState,
-        o: orderState,
-        id: Date.now()
-      }
-    ]);
+  const handleNewGuess = (guess, n, o) => {
+    setGuesses(prev => [...prev, { guess, n, o }]);
+    
+    // Update scores based on game logic
+    if(n === 4 && o === 4) {
+      setScore1(prev => prev + 1);
+    }
   };
 
   return (
@@ -32,37 +22,32 @@ function App(props) {
       <Header
         userName={props.userName}
         oppName={opponentUsername}
-        trialNum={guesses.length}
-        trial2={trial2}
         score1={score1}
         score2={score2}
+        trialNum={guesses.length}
       />
-
+      
       <div className="game-content">
-        <div className="container">
-          {/* Existing guesses */}
-          {guesses.map((guess) => (
-            <div key={guess.id} className="guess-result">
-              <div className="previous-guess">
-                {guess.value}
-                <div className="result-indicators">
-                  <span className="n-indicator">{guess.n}</span>
-                  <span className="o-indicator">{guess.o}</span>
-                </div>
+        {/* Guess History */}
+        <div className="guess-history">
+          {guesses.map((item, index) => (
+            <div key={index} className="guess-item">
+              <div className="guess-number">{item.guess}</div>
+              <div className="guess-results">
+                <div className="result-bubble n-result">N:{item.n}</div>
+                <div className="result-bubble o-result">O:{item.o}</div>
               </div>
             </div>
           ))}
-          
-          {/* Current input */}
-          <Guess
-            key="current-guess"
-            chatId={props.chatId}
-            userId={props.userId}
-            gameScore={gameScore}
-            NewGuess={NewGuess}
-            oppName={setOpponentUsername}
-          />
         </div>
+
+        {/* Current Guess Input */}
+        <Guess 
+          onNewGuess={handleNewGuess}
+          setOpponent={setOpponentUsername}
+          chatId={props.chatId}
+          userId={props.userId}
+        />
       </div>
     </div>
   );
