@@ -1,6 +1,6 @@
 :root {
   --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
-  --secondary-gradient: linear-gradient(45deg, #ff6b6b, #ff8e53);
+  --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
   --glass-bg: rgba(255, 255, 255, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
@@ -38,17 +38,19 @@ body {
 }
 
 .player-name {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #6ab7ff;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(106, 183, 255, 0.3);
 }
 
 .opponent-name {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ff6b6b;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
 }
 
 .score-label {
@@ -73,9 +75,12 @@ body {
   grid-template-columns: 1fr 80px 80px;
   gap: 1rem;
   padding: 1rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  color: #ffd700;
+  font-weight: 600;
+  border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .guess-item {
@@ -85,21 +90,51 @@ body {
   align-items: center;
   padding: 1rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .guess-number {
   letter-spacing: 0.5rem;
   font-size: 1.2rem;
   font-family: 'Space Mono', monospace;
+  color: #ffd700;
+  font-weight: 600;
+  padding-left: 0.5rem;
 }
 
 .result-number {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.n-result {
+  background: rgba(0, 255, 255, 0.15);
+  color: #00ffff;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.o-result {
+  background: rgba(0, 255, 0, 0.15);
+  color: #76ff7a;
+  border: 1px solid rgba(0, 255, 0, 0.3);
 }
 
 /* Current Guess */
@@ -127,10 +162,11 @@ body {
   padding: 12px 24px;
   border: none;
   border-radius: 25px;
-  background: var(--primary-gradient);
-  color: white;
+  background: var(--gold-gradient);
+  color: #000;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 /* Responsive Design */
