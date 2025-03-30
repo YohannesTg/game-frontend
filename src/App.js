@@ -9,6 +9,7 @@ function App(props) {
   const [trialNum, setTrialNum] = useState(0);
   const [trial2, setTrial2] = useState(0);
   const [opponentUsername, setOpponentUsername] = useState('');
+  const [gameWon, setGameWon] = useState(false);
 
   const handleNewGuess = (guess, n, o) => {
     setGuesses(prev => [...prev, { guess, n, o }]);
@@ -17,7 +18,12 @@ function App(props) {
     if(n === 4 && o === 4) {
       setScore1(prev => prev + 1);
       setTrial2(prev => prev + 1);
+      setGameWon(true);
     }
+  };
+
+  const handleReplay = () => {
+    window.location.reload(); // Reset the game
   };
 
   return (
@@ -48,13 +54,24 @@ function App(props) {
           ))}
         </div>
 
-        <Guess 
-          onNewGuess={handleNewGuess}
-          setOpponent={setOpponentUsername}
-          chatId={props.chatId}
-          userId={props.userId}
-          setTrial2={setTrial2}
-        />
+        {!gameWon ? (
+          <Guess 
+            onNewGuess={handleNewGuess}
+            setOpponent={setOpponentUsername}
+            chatId={props.chatId}
+            userId={props.userId}
+            setTrial2={setTrial2}
+          />
+        ) : (
+          <div className="replay-container">
+            <button 
+              className="replay-button"
+              onClick={handleReplay}
+            >
+              Play Again
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
