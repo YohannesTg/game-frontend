@@ -1,11 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
 
-export default function Guess({ onNewGuess, chatId, userId, setTrial2 }) {
+export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTrial2 }) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
 
+  // Fetch opponent name
+  useEffect(() => {
+    const fetchOpponent = async () => {
+      try {
+        const response = await fetch(
+          `https://gamechecker.vercel.app/opponent?chatId=${chatId}&userId=${userId}`
+        );
+        const data = await response.json();
+        setOpponent(data.userName);
+      } catch (error) {
+        console.error('Error fetching opponent:', error);
+      }
+    };
+    
+    if(chatId && userId) fetchOpponent();
+  }, [chatId, userId, setOpponent]);
+
+  // Confetti setup
   useEffect(() => {
     if(canvasRef.current) {
       const confetti = new ConfettiGenerator({ target: canvasRef.current });
@@ -16,11 +34,9 @@ export default function Guess({ onNewGuess, chatId, userId, setTrial2 }) {
   const checkOnServer = async () => {
     try {
       setIsSubmitting(true);
-      
       const response = await fetch(
         `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${chatId}&userId=${userId}`
       );
-      
       const data = await response.json();
       
       if(data.order === 4 && data.number === 4) {
@@ -30,7 +46,6 @@ export default function Guess({ onNewGuess, chatId, userId, setTrial2 }) {
       onNewGuess(guess, data.number, data.order);
       setTrial2(prev => prev + 1);
       setGuess('');
-
     } catch(error) {
       console.error('Error:', error);
     } finally {
