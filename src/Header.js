@@ -15,39 +15,29 @@ export default function Header(props) {
       fontFamily: "'Inter', sans-serif",
     }}>
       <div className="container">
-        <div className="row align-items-center gx-4">
-          {/* User Section */}
-          <div className="col-6 d-flex gap-3">
-            <div className="glass-card p-2 px-3">
-              <div className="d-flex align-items-center gap-2">
-                <i className="bi bi-person-fill text-primary"></i>
-                <div>
-                  <div className="score-value">{props.score1}</div>
-                  <div className="score-label">Score</div>
-                </div>
-                <div className="vr mx-2"></div>
-                <div>
-                  <div className="score-value text-info">{props.trialNum}</div>
-                  <div className="score-label">Trials</div>
-                </div>
+        <div className="row g-2">
+          {/* Player Names */}
+          <div className="col-6">
+            <div className="d-flex flex-column">
+              <div className="player-name text-primary fw-bold mb-1">
+                {props.userName}
+              </div>
+              <div className="d-flex gap-3">
+                <div className="score-label">Score: {props.score1}</div>
+                <div className="score-label">Trial: {props.trialNum}</div>
               </div>
             </div>
           </div>
 
           {/* Opponent Section */}
-          <div className="col-6 d-flex justify-content-end">
-            <div className="glass-card p-2 px-3">
-              <div className="d-flex align-items-center gap-2">
-                <div>
-                  <div className="score-value text-danger">{props.score2}</div>
-                  <div className="score-label">Score</div>
-                </div>
-                <div className="vr mx-2"></div>
-                <div>
-                  <div className="score-value text-warning">{props.trial2}</div>
-                  <div className="score-label">Trials</div>
-                </div>
-                <i className="bi bi-person-fill text-danger"></i>
+          <div className="col-6 text-end">
+            <div className="d-flex flex-column align-items-end">
+              <div className="player-name text-danger fw-bold mb-1">
+                {props.oppName || "Opponent"}
+              </div>
+              <div className="d-flex gap-3">
+                <div className="score-label">Score: {props.score2}</div>
+                <div className="score-label">Trial: {props.trial2}</div>
               </div>
             </div>
           </div>
