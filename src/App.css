@@ -81,6 +81,7 @@ body {
   color: #ffd700;
   font-weight: 600;
   border: 1px solid rgba(255, 215, 0, 0.3);
+  text-align: center;
 }
 
 .guess-item {
@@ -167,6 +168,28 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
+}
+
+/* Replay Button */
+.replay-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.replay-button {
+  background: var(--gold-gradient);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.replay-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 /* Responsive Design */
