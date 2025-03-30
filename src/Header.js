@@ -13,7 +13,7 @@ export default function Header({ userName, oppName, score1, score2, trialNum, tr
           </div>
           
           <div className="text-end">
-            <div className="opponent-name">{oppName || 'Opponent'}</div>
+            <div className="opponent-name">{oppName || '...'}</div>
             <div className="score-label">
               Score: {score2} | Trials: {trial2}
             </div>
