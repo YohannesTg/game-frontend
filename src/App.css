@@ -15,6 +15,7 @@ body {
   font-family: var(--modern-font);
   color: var(--text-primary);
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 .glass-card {
@@ -33,22 +34,10 @@ body {
   transition: all 0.3s ease !important;
 }
 
-.modern-input:focus {
-  background: rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 0 0 3px rgba(106, 183, 255, 0.2) !important;
-}
-
 .glow-button {
   transition: all 0.3s ease;
   background-image: var(--primary-gradient);
   border: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(106, 183, 255, 0.3);
 }
 
 /* Header Styles */
@@ -59,36 +48,59 @@ body {
 .score-label {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  letter-spacing: 0.5px;
 }
 
 .score-value {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
 /* Guess Component */
+.guess-container {
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
 .guess-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
   gap: 1rem;
   align-items: center;
-  padding: 1rem;
-  margin: 1rem 0;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
+  padding: 1rem;
+}
+
+.result-indicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.n-indicator, .o-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
   .guess-row {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
   }
   
-  .guess-input {
-    flex: 1 0 100% !important;
+  .result-indicators {
+    justify-content: center;
+  }
+  
+  .glow-button {
+    width: 100%;
   }
   
   .score-value {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
