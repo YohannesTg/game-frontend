@@ -118,7 +118,13 @@ export default function Guess(props) {
                 letterSpacing: '0.5rem',
                 padding: '12px 20px',
               }}
-              // ... other props
+              id="Ginput"
+              value={guess}
+              type="number"
+              readOnly={clicked}
+              onChange={handleInputChange}
+              ref={inputRef}
+              placeholder="____"
             />
           </div>
           
@@ -128,8 +134,9 @@ export default function Guess(props) {
           </div>
 
           <button 
-            className={`glow-button btn rounded-pill`}
-            // ... other props
+            className={`glow-button btn rounded-pill px-4`}
+            onClick={handleClick}
+            disabled={clicked}
           >
             {clicked ? (
               <><i className="bi bi-hourglass-split me-2"></i>Checking</>
