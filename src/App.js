@@ -24,9 +24,7 @@ function App(props) {
     setTrialNum((prevValue) => [...prevValue, prevValue[prevValue.length - 1] + 1]);
   }
 
-  return (
-    <div className="container-fluid text-center">
-      {/* Fixed Header */}
+  return (    <div className="container-fluid">
       <Header
         trialNum={trailNum.length}
         userName={props.userName}
@@ -36,25 +34,28 @@ function App(props) {
         score2={score2}
       />
 
-      {/* Scrollable Content */}
       <div
         style={{
-          marginTop: '150px', // Adjust this value based on the height of the header
-          maxHeight: 'calc(100vh - 150px)', // Makes the content area scrollable
+          marginTop: '180px',
+          maxHeight: 'calc(100vh - 180px)',
           overflowY: 'auto',
+          padding: '2rem',
+          scrollBehavior: 'smooth'
         }}
       >
-        {trailNum.map((value) => (
-          <Guess
-            key={value}
-            chatId={props.chatId}
-            userId={props.userId}
-            oppName={oppName}
-            name={value}
-            gameScore={gameScore}
-            NewGuess={NewGuess}
-          />
-        ))}
+        <div className="container">
+          {trailNum.map((value) => (
+            <Guess
+              key={value}
+              chatId={props.chatId}
+              userId={props.userId}
+              oppName={oppName}
+              name={value}
+              gameScore={gameScore}
+              NewGuess={NewGuess}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
