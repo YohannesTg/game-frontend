@@ -16,7 +16,7 @@ function App(props) {
     
     if(n === 4 && o === 4) {
       setScore1(prev => prev + 1);
-      setTrial2(prev => prev + 1); // Update opponent's trial on win
+      setTrial2(prev => prev + 1);
     }
   };
 
