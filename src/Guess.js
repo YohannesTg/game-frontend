@@ -30,10 +30,10 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     }
   }, []);
 
+  // Fixed useEffect - removed guesses dependency
   useEffect(() => {
-    // Auto-focus input on mount and after submission
     inputRef.current?.focus();
-  }, [guesses]);
+  }, []); // Empty array = run only on mount
 
   const checkOnServer = async () => {
     try {
@@ -50,6 +50,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       onNewGuess(guess, data.number, data.order);
       setTrial2(prev => prev + 1);
       setGuess('');
+      inputRef.current?.focus(); // Re-focus after submission
     } catch(error) {
       console.error('Error:', error);
     } finally {
