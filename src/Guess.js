@@ -5,6 +5,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const fetchOpponent = async () => {
@@ -28,6 +29,11 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       return () => confetti.clear();
     }
   }, []);
+
+  useEffect(() => {
+    // Auto-focus input on mount and after submission
+    inputRef.current?.focus();
+  }, [guesses]);
 
   const checkOnServer = async () => {
     try {
@@ -70,6 +76,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
 
       <div className="current-guess">
         <input
+          ref={inputRef}
           className="guess-input"
           type="number"
           value={guess}
