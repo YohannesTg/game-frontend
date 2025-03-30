@@ -30,146 +30,125 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem 0;
 }
-.previous-guess {
+
+.player-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-}
-
-.result-indicators {
-  display: flex;
-  gap: 1rem;
-}
-
-.player-name {
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.5rem;
+  padding: 0 1rem;
 }
 
 .score-label {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 12px;
-  border-radius: 20px;
-  display: inline-block;
+}
+
+.score-value {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 /* Game Area */
 .game-content {
-  margin-top: 160px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
+  margin-top: 120px;
   padding: 2rem;
-  scroll-behavior: smooth;
 }
 
-/* Guess Component */
-.guess-container {
-  margin: 1rem 0;
+/* Guess History */
+.guess-history {
+  max-width: 600px;
+  margin: 0 auto 2rem;
 }
 
-.guess-row {
+.guess-item {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  margin-bottom: 1rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
 }
 
-.modern-input {
-  flex: 1 1 auto;
-  font-size: 1.2rem;
+.guess-number {
   letter-spacing: 0.5rem;
-  padding: 12px 20px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: none !important;
-  color: #fff !important;
-  border-radius: 12px !important;
-  transition: all 0.3s ease !important;
+  font-size: 1.2rem;
 }
 
-.modern-input:focus {
-  background: rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 0 0 3px rgba(106, 183, 255, 0.2) !important;
-}
-
-.glow-button {
-  transition: all 0.3s ease;
-  background-image: var(--primary-gradient);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px !important;
-}
-
-.glow-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(106, 183, 255, 0.3);
-}
-
-.result-row {
+.guess-results {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  justify-content: center;
-  animation: fadeIn 0.3s ease;
+  gap: 1.5rem;
 }
 
-.n-indicator, .o-indicator {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
+.result-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.4rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.n-indicator { background: #6ab7ff; }
-.o-indicator { background: #76ff7a; }
+.n-result {
+  background: #6ab7ff;
+}
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.o-result {
+  background: #76ff7a;
+}
+
+/* Current Guess */
+.current-guess {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.guess-input {
+  flex: 1;
+  font-size: 1.2rem;
+  letter-spacing: 0.5rem;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.glow-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: var(--primary-gradient);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glow-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .game-content {
-    margin-top: 140px;
     padding: 1rem;
+    margin-top: 100px;
   }
-
-  .guess-row {
-    flex-direction: column;
+  
+  .guess-item {
+    padding: 0.75rem;
   }
-
-  .glow-button {
-    width: 100%;
-  }
-
-  .player-name {
+  
+  .guess-number {
     font-size: 1rem;
   }
-
-  .score-label {
-    font-size: 0.8rem;
-    padding: 4px 8px;
-  }
-
-  .modern-input {
-    font-size: 1rem;
-    letter-spacing: 0.3rem;
-    padding: 10px 15px !important;
+  
+  .result-bubble {
+    width: 35px;
+    height: 35px;
   }
 }
