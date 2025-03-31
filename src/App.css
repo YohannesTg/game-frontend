@@ -20,7 +20,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Header Styles */
 .header-container {
   position: fixed;
   top: 0;
@@ -35,33 +34,176 @@ body {
 
 .player-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   padding: 0 2rem;
+  gap: 2rem;
 }
 
-.player-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #6ab7ff;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(106, 183, 255, 0.3);
+.player-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(8px);
 }
 
-.opponent-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #ff6b6b;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+.player-card:hover {
+  transform: translateY(-3px);
 }
 
-/* Game Area */
+.player-icon {
+  font-size: 2rem;
+  color: var(--gold-primary);
+  background: var(--gold-gradient);
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.vs-badge {
+  font-weight: 800;
+  color: #ff4757;
+  text-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+  font-size: 2.5rem;
+}
+
+.score-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid var(--gold-primary);
+}
+
 .game-content {
-  margin-top: 120px;
+  margin-top: 140px;
   padding: 2rem;
 }
 
-/* Guess History */
+.secret-input {
+  font-size: 2rem !important;
+  letter-spacing: 1rem !important;
+  padding: 1.5rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+  text-align: center;
+}
+
+.secret-input:focus {
+  border-color: var(--gold-primary) !important;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2) !important;
+}
+
+.guess-item {
+  position: relative;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.guess-item:hover {
+  transform: translateX(10px);
+}
+
+.guess-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gold-gradient);
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.guess-item:hover::after {
+  opacity: 1;
+}
+
+.glow-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  font-size: 1.1rem !important;
+  backdrop-filter: blur(8px);
+}
+
+.glow-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+    transparent,
+    rgba(255, 215, 0, 0.2),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: buttonGlow 3s infinite;
+}
+
+@keyframes buttonGlow {
+  0% { transform: rotate(45deg) translate(-50%, -50%); }
+  100% { transform: rotate(45deg) translate(50%, 50%); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rule-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  height: 100%;
+}
+
+.rule-card:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.rule-icon {
+  font-size: 2.5rem;
+  color: var(--gold-primary);
+  margin-bottom: 1rem;
+}
+
+.rule-number {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background: var(--gold-gradient);
+  color: #000;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
 .guess-history {
   max-width: 100%;
   padding: 0 1rem 1rem;
@@ -76,29 +218,6 @@ body {
   color: var(--gold-primary);
   font-weight: 600;
   min-width: 400px;
-}
-
-.guess-item {
-  display: grid;
-  grid-template-columns: minmax(150px, 2fr) 100px 100px;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-  border-radius: 12px;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  min-width: 400px;
-}
-
-.guess-number {
-  letter-spacing: 0.5rem;
-  font-size: 1.2rem;
-  font-family: 'Space Mono', monospace;
-  color: var(--gold-primary);
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .result-number {
@@ -119,7 +238,6 @@ body {
   color: #76ff7a;
 }
 
-/* Scrollbar */
 .guess-history::-webkit-scrollbar {
   height: 8px;
   background: rgba(255,255,255,0.1);
@@ -130,26 +248,6 @@ body {
   border-radius: 4px;
 }
 
-/* Target Page Styles */
-.target-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  padding: 2rem;
-  color: var(--gold-primary);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 800px;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .player-info {
     flex-direction: column;
