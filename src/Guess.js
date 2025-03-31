@@ -18,6 +18,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
         console.error('Error fetching opponent:', error);
       }
     };
+    
     if(chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
@@ -32,11 +33,23 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
         `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${chatId}&userId=${userId}`
       );
       const data = await response.json();
+      
+      if(data.order === 4 && data.number === 4) {
+        new ConfettiGenerator({ target: canvasRef.current }).render();
+      }
+      
       onNewGuess(guess, data.number, data.order);
       setGuess('');
       inputRef.current?.focus();
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleInput = (e) => {
+    const input = e.target.value;
+    if(input.length <= 4 && /^\d*$/.test(input) && new Set(input).size === input.length) {
+      setGuess(input);
     }
   };
 
@@ -47,14 +60,10 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
         className="form-control secret-input"
         type="number"
         value={guess}
-        onChange={(e) => {
-          const input = e.target.value;
-          if(/^\d{0,4}$/.test(input) && new Set(input).size === input.length) {
-            setGuess(input);
-          }
-        }}
+        onChange={handleInput}
         placeholder="____"
         disabled={isSubmitting}
+        maxLength="4"
       />
       <button
         className="glow-button"
