@@ -74,23 +74,64 @@ body {
 .game-content {
   margin-top: 100px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
 }
 
-.current-guess {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
+.trials-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-grow: 1;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0 1rem;
-  z-index: 1000;
+  flex-direction: column;
+}
+
+.trials-table thead {
+  position: sticky;
+  top: 0;
+  background: rgba(16, 18, 27, 0.95);
+  z-index: 100;
+}
+
+.trials-table tbody {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.trials-table tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+}
+
+.trials-table th,
+.trials-table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trials-table th {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold-primary);
+  position: sticky;
+  top: 0;
+}
+
+.input-row {
+  position: sticky;
+  bottom: 0;
+  background: rgba(16, 18, 27, 0.95);
+  z-index: 100;
 }
 
 .secret-input {
   height: 50px;
-  width: 200px;
+  width: 100%;
   font-size: 1.5rem;
   letter-spacing: 0.5rem;
   padding: 0.5rem;
@@ -118,75 +159,12 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
-}
-
-.trials-table {
   width: 100%;
-  margin: 2rem 0;
-  border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  overflow: hidden;
 }
 
-.trials-table th,
-.trials-table td {
-  padding: 1rem;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.trials-table th {
-  background: rgba(255, 215, 0, 0.1);
-  color: var(--gold-primary);
-}
-
-.target-container {
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.target-content {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  margin: 1.5rem 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.rule-card {
-  padding: 1.5rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  transition: transform 0.3s ease;
-}
-
-.rule-card:hover {
-  transform: translateY(-5px);
-}
-
-.rule-icon {
-  font-size: 2rem;
-  color: var(--gold-primary);
-  margin-bottom: 1rem;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
+.glow-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
@@ -200,15 +178,11 @@ body {
   }
   
   .secret-input {
-    width: 160px;
     font-size: 1.2rem;
   }
   
-  .glass-card {
-    padding: 1.5rem;
-  }
-  
-  .rule-card {
-    padding: 1rem;
+  .trials-table th,
+  .trials-table td {
+    padding: 0.75rem;
   }
 }
