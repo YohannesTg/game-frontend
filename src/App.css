@@ -46,7 +46,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  min-width: 160px;
+  min-width: 140px;
 }
 
 .player-name {
@@ -82,79 +82,81 @@ html, body {
   flex-direction: column;
 }
 
-/* Guess History Table */
-.guess-history {
+/* Modern Guess List */
+.guess-list {
   flex-grow: 1;
   overflow-y: auto;
   margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
 }
 
-.trials-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+.guess-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease;
 }
 
-.trials-table th,
-.trials-table td {
-  padding: 1rem;
-  text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.trials-table th {
-  background: rgba(255, 215, 0, 0.1);
-  color: var(--gold-primary);
-  position: sticky;
-  top: 0;
+.guess-item:hover {
+  transform: translateX(5px);
 }
 
 .guess-number {
-  letter-spacing: 0.8rem;
-  font-size: 1.4rem;
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  padding: 1rem 2rem !important;
+  width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.n-result {
+.result-badge {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.n-badge {
   background: rgba(0, 255, 255, 0.15);
   color: #00ffff;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: 8px;
 }
 
-.o-result {
+.o-badge {
   background: rgba(0, 255, 0, 0.15);
   color: #76ff7a;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: 8px;
 }
 
 /* Input Section */
 .current-guess {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(16, 18, 27, 0.95);
+  padding: 1rem;
   display: flex;
   gap: 1rem;
-  padding: 1rem;
-  background: rgba(16, 18, 27, 0.9);
-  border-radius: 12px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .secret-input {
-  width: 240px;
-  height: 60px;
-  font-size: 2rem;
-  letter-spacing: 0.8rem;
+  flex: 1;
+  height: 50px;
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
   padding: 0.5rem 1rem;
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
@@ -171,8 +173,8 @@ html, body {
 }
 
 .glow-button {
-  height: 60px;
-  padding: 0 2rem;
+  height: 50px;
+  padding: 0 1.5rem;
   background: var(--gold-gradient);
   border: none;
   border-radius: 8px;
@@ -180,7 +182,7 @@ html, body {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .glow-button:disabled {
@@ -198,20 +200,13 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-/* Target Page Styles */
+/* Target Page Adjustments */
 .target-container {
-  padding: 2rem;
+  padding: 1rem;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
-}
-
-.target-content {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .glass-card {
@@ -219,70 +214,14 @@ html, body {
   backdrop-filter: blur(12px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  margin: 2rem 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.rule-card {
-  position: relative;
-  padding: 2rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  transition: all 0.3s ease;
-  height: 100%;
-}
-
-.rule-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
-}
-
-.rule-icon {
-  font-size: 2.5rem;
-  color: var(--gold-primary);
-  margin-bottom: 1rem;
-}
-
-.rule-number {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  background: var(--gold-gradient);
-  color: #000;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-
-.gold-icon {
-  color: var(--gold-primary);
-  margin-right: 0.5rem;
-}
-
-.input-group {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-/* Confetti Canvas */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
+  padding: 1.5rem;
+  margin: 1rem 0;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
+  max-width: 400px;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .player-card {
     min-width: 120px;
   }
@@ -297,67 +236,34 @@ canvas {
     gap: 0.5rem;
   }
 
-  .secret-input {
-    width: 180px;
-    font-size: 1.5rem;
-    letter-spacing: 0.6rem;
+  .guess-item {
+    padding: 0.6rem;
   }
 
-  .glass-card {
-    padding: 1.5rem;
+  .guess-number {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
   }
 
-  .rule-card {
-    padding: 1.5rem;
-  }
-
-  .rule-icon {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .current-guess {
-    width: 90%;
-    padding: 0.8rem;
-    bottom: 10px;
+  .result-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 
   .secret-input {
-    width: 100%;
     font-size: 1.2rem;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.3rem;
+    padding: 0.5rem;
   }
 
   .glow-button {
     padding: 0 1rem;
-    min-width: 90px;
+    min-width: 80px;
   }
 
-  .trials-table th,
-  .trials-table td {
-    padding: 0.75rem;
+  .glass-card {
+    padding: 1rem;
+    margin: 0.5rem 0;
   }
-
-  .rule-number {
-    top: -10px;
-    right: -10px;
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-  }
-}
-
-.error-fallback {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ff6b6b;
-  font-size: 1.5rem;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 2rem;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
 }
