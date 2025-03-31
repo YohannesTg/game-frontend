@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './Header';
-import Guess from './Guess';
 import ConfettiGenerator from "confetti-js";
 import { Icon } from '@iconify/react';
 
@@ -39,7 +38,7 @@ export default function App(props) {
       );
       const data = await response.json();
       
-      setGuesses(prev => [...prev, { guess, n: data.number, o: data.order }]);
+      setGuesses(prev => [{ guess, n: data.number, o: data.order }, ...prev]);
       
       if(data.number === 4 && data.order === 4) {
         setScore1(prev => prev + 1);
@@ -58,8 +57,8 @@ export default function App(props) {
         left: 0,
         width: '100%',
         height: '100%',
-        pointerEvents: 'none',
-        zIndex: 999
+        pointer-events: 'none',
+        z-index: 999
       }} />
       
       <Header
@@ -72,25 +71,14 @@ export default function App(props) {
       />
 
       <div className="game-content">
-        <div className="guess-history">
-          <table className="trials-table">
-            <thead>
-              <tr>
-                <th>Guess</th>
-                <th>N</th>
-                <th>O</th>
-              </tr>
-            </thead>
-            <tbody>
-              {guesses.map((item, index) => (
-                <tr key={index}>
-                  <td className="guess-number">{item.guess}</td>
-                  <td className="n-result">{item.n}</td>
-                  <td className="o-result">{item.o}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="guess-list">
+          {guesses.map((item, index) => (
+            <div key={index} className="guess-item">
+              <span className="guess-number">{item.guess}</span>
+              <div className="result-badge n-badge">{item.n}</div>
+              <div className="result-badge o-badge">{item.o}</div>
+            </div>
+          ))}
         </div>
 
         {!gameWon && (
