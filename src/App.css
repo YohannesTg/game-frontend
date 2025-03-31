@@ -17,6 +17,7 @@ html, body {
   font-family: var(--modern-font);
   color: var(--text-primary);
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* Header Styles */
@@ -197,6 +198,78 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
+/* Target Page Styles */
+.target-container {
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.target-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.rule-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
+}
+
+.rule-icon {
+  font-size: 2.5rem;
+  color: var(--gold-primary);
+  margin-bottom: 1rem;
+}
+
+.rule-number {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background: var(--gold-gradient);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.gold-icon {
+  color: var(--gold-primary);
+  margin-right: 0.5rem;
+}
+
+.input-group {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 /* Confetti Canvas */
 canvas {
   position: fixed;
@@ -222,7 +295,6 @@ canvas {
   .score-label {
     font-size: 0.8rem;
     gap: 0.5rem;
-    flex-direction: column;
   }
 
   .secret-input {
@@ -231,14 +303,16 @@ canvas {
     letter-spacing: 0.6rem;
   }
 
-  .guess-number {
-    font-size: 1.2rem;
-    letter-spacing: 0.5rem;
+  .glass-card {
+    padding: 1.5rem;
   }
 
-  .n-result,
-  .o-result {
-    font-size: 1.2rem;
+  .rule-card {
+    padding: 1.5rem;
+  }
+
+  .rule-icon {
+    font-size: 2rem;
   }
 }
 
@@ -263,6 +337,14 @@ canvas {
   .trials-table th,
   .trials-table td {
     padding: 0.75rem;
+  }
+
+  .rule-number {
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
   }
 }
 
