@@ -17,14 +17,13 @@ function App(props) {
     }
   };
 
-  // Calculate trials count
   const trialNum = guesses.length;
-  const trial2 = 0; // Replace with actual opponent trials if available
+  const trial2 = 0; // Replace with actual opponent data
 
   return (
     <div className="container-fluid">
       <Header
-        userName={props.userName}
+        userName={props.userName || 'Player 1'}
         oppName={opponentUsername}
         score1={score1}
         score2={score2}
@@ -47,9 +46,7 @@ function App(props) {
                 <tr key={`${n}-${o}`}>
                   <td>{n}</td>
                   <td>{o}</td>
-                  <td>
-                    {guesses.filter(g => g.n === n && g.o === o).length}
-                  </td>
+                  <td>{guesses.filter(g => g.n === n && g.o === o).length}</td>
                 </tr>
               ))
             ).flat()}
@@ -64,7 +61,7 @@ function App(props) {
             userId={props.userId}
           />
         ) : (
-          <div className="text-center mt-4">
+          <div className="current-guess">
             <button 
               className="glow-button"
               onClick={() => window.location.reload()}
@@ -77,5 +74,11 @@ function App(props) {
     </div>
   );
 }
+
+App.defaultProps = {
+  userName: 'Player 1',
+  chatId: '',
+  userId: ''
+};
 
 export default App;
