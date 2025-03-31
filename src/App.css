@@ -9,17 +9,17 @@
   --text-secondary: rgba(255, 255, 255, 0.7);
 }
 
-/* Reset and base styles */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
-  font-family: var(--modern-font);
   background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
+  font-family: var(--modern-font);
   color: var(--text-primary);
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/* Header Styles */
 .header-container {
   position: fixed;
   top: 0;
@@ -71,13 +71,11 @@ html, body {
   gap: 1rem;
 }
 
-/* Main Content */
 .game-content {
   margin-top: 100px;
   padding: 1rem;
 }
 
-/* Input Section */
 .current-guess {
   position: fixed;
   bottom: 20px;
@@ -122,16 +120,6 @@ html, body {
   transition: transform 0.2s ease;
 }
 
-.glow-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.glow-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
-
-/* Trials Table */
 .trials-table {
   width: 100%;
   margin: 2rem 0;
@@ -143,7 +131,7 @@ html, body {
 
 .trials-table th,
 .trials-table td {
-  padding: 0.75rem;
+  padding: 1rem;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -153,7 +141,54 @@ html, body {
   color: var(--gold-primary);
 }
 
-/* Responsive Design */
+.target-container {
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.rule-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: transform 0.3s ease;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+}
+
+.rule-icon {
+  font-size: 2rem;
+  color: var(--gold-primary);
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
 @media (max-width: 768px) {
   .player-name, .opponent-name {
     font-size: 1rem;
@@ -169,28 +204,11 @@ html, body {
     font-size: 1.2rem;
   }
   
-  .glow-button {
-    padding: 0 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .secret-input {
-    width: 140px;
-    letter-spacing: 0.3rem;
+  .glass-card {
+    padding: 1.5rem;
   }
   
-  .current-guess {
-    gap: 0.5rem;
+  .rule-card {
+    padding: 1rem;
   }
-}
-
-.error-fallback {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ff6b6b;
-  font-size: 1.5rem;
-  text-align: center;
 }
