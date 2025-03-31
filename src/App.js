@@ -17,6 +17,10 @@ function App(props) {
     }
   };
 
+  // Calculate trials count
+  const trialNum = guesses.length;
+  const trial2 = 0; // Replace with actual opponent trials if available
+
   return (
     <div className="container-fluid">
       <Header
@@ -24,23 +28,33 @@ function App(props) {
         oppName={opponentUsername}
         score1={score1}
         score2={score2}
+        trialNum={trialNum}
+        trial2={trial2}
       />
       
       <div className="game-content">
-        <div className="guess-history">
-          <div className="guess-header">
-            <span>Guess</span>
-            <span>N</span>
-            <span>O</span>
-          </div>
-          {guesses.map((item, index) => (
-            <div key={index} className="guess-item">
-              <div className="guess-number">{item.guess}</div>
-              <div className="result-number n-result">{item.n}</div>
-              <div className="result-number o-result">{item.o}</div>
-            </div>
-          ))}
-        </div>
+        <table className="trials-table">
+          <thead>
+            <tr>
+              <th>N</th>
+              <th>O</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from({length: 5}, (_, n) => 
+              Array.from({length: 5}, (_, o) => (
+                <tr key={`${n}-${o}`}>
+                  <td>{n}</td>
+                  <td>{o}</td>
+                  <td>
+                    {guesses.filter(g => g.n === n && g.o === o).length}
+                  </td>
+                </tr>
+              ))
+            ).flat()}
+          </tbody>
+        </table>
 
         {!gameWon ? (
           <Guess 
