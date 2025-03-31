@@ -19,7 +19,7 @@ export default function Header({ userName, oppName, score1, score2, trialNum, tr
         
         <div className="player-card">
           <div className="opponent-name">
-            <Icon icon="mdi:account-group" />
+            <Icon icon="mdi:account" />
             {oppName || 'Waiting...'}
           </div>
           <div className="score-label">
