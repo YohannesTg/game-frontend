@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import App from './App';
 import './App.css';
+import { Icon } from '@iconify/react';
 
 export default function Target() {
   const [aim, setAim] = useState('');
@@ -40,7 +41,7 @@ export default function Target() {
         <div className="target-content">
           <div className="glass-card text-center mb-5">
             <h1 className="display-4 fw-bold mb-3">
-              <i className="bi bi-joystick me-2"></i>
+              <Icon icon="mdi:gamepad-variant" className="me-2" />
               Guess My Number
             </h1>
             <p className="lead">A Modern Number Puzzle Challenge</p>
@@ -48,29 +49,32 @@ export default function Target() {
 
           <div className="glass-card rules-section mb-5">
             <h2 className="text-center mb-4">
-              <i className="bi bi-book me-2"></i>
+              <Icon icon="mdi:book-open-variant" className="me-2" />
               Game Rules
             </h2>
             <div className="row g-4">
               <div className="col-md-4">
                 <div className="rule-card">
-                  <i className="bi bi-unique fs-1 mb-3"></i>
+                  <Icon icon="mdi:numeric" className="rule-icon" />
                   <h3>Unique Digits</h3>
                   <p>All digits must be distinct</p>
+                  <div className="rule-number">01</div>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="rule-card">
-                  <i className="bi bi-123 fs-1 mb-3"></i>
+                  <Icon icon="mdi:approval" className="rule-icon" />
                   <h3>Number Match (N)</h3>
                   <p>Correct digits in any position</p>
+                  <div className="rule-number">02</div>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="rule-card">
-                  <i className="bi bi-geo-alt fs-1 mb-3"></i>
+                  <Icon icon="mdi:crosshairs-gps" className="rule-icon" />
                   <h3>Position Match (O)</h3>
                   <p>Digits in correct position</p>
+                  <div className="rule-number">03</div>
                 </div>
               </div>
             </div>
@@ -78,7 +82,7 @@ export default function Target() {
 
           <div className="glass-card text-center">
             <h2 className="mb-4">
-              <i className="bi bi-key me-2"></i>
+              <Icon icon="mdi:key" className="me-2" />
               Set Your Secret Number
             </h2>
             <div className="input-group justify-content-center">
@@ -97,7 +101,7 @@ export default function Target() {
                 onClick={handleSubmit}
                 disabled={!aim.trim()}
               >
-                <i className="bi bi-play-fill me-2"></i>
+                <Icon icon="mdi:play" className="me-2" />
                 Start Game
               </button>
             </div>
