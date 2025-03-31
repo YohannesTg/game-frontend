@@ -1,8 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
 import { Icon } from '@iconify/react';
+import PropTypes from 'prop-types';
 
-export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div className="error-fallback">Game Error - Please Refresh</div>;
+    }
+    return this.props.children;
+  }
+}
+
+function Guess({ onNewGuess, setOpponent, chatId, userId }) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confetti, setConfetti] = useState(null);
@@ -31,9 +47,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
 
   useEffect(() => {
     return () => {
-      if (confetti) {
-        confetti.clear();
-      }
+      confetti?.clear();
     };
   }, [confetti]);
 
@@ -47,7 +61,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
       
       if(data.order === 4 && data.number === 4) {
         if (canvasRef.current) {
-          if (confetti) confetti.clear();
+          confetti?.clear();
           const newConfetti = new ConfettiGenerator({ 
             target: canvasRef.current,
             max: 200,
@@ -76,46 +90,57 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
   };
 
   return (
-    <div className="current-guess">
-      <canvas 
-        ref={canvasRef} 
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 999
-        }}
-      />
-      <input
-        ref={inputRef}
-        className="form-control secret-input"
-        type="number"
-        value={guess}
-        onChange={handleInput}
-        placeholder="____"
-        disabled={isSubmitting}
-        maxLength="4"
-      />
-      <button
-        className="glow-button"
-        onClick={checkOnServer}
-        disabled={guess.length !== 4 || isSubmitting}
-      >
-        {isSubmitting ? (
-          <>
-            <Icon icon="mdi:loading" className="loading-spinner" />
-            Checking...
-          </>
-        ) : (
-          <>
-            <Icon icon="mdi:magic-staff" className="me-2" />
-            Check Code
-          </>
-        )}
-      </button>
-    </div>
+    <ErrorBoundary>
+      <div className="current-guess">
+        <canvas 
+          ref={canvasRef}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 999
+          }}
+        />
+        <input
+          ref={inputRef}
+          className="secret-input"
+          type="number"
+          value={guess}
+          onChange={handleInput}
+          placeholder="____"
+          disabled={isSubmitting}
+          maxLength="4"
+        />
+        <button
+          className="glow-button"
+          onClick={checkOnServer}
+          disabled={guess.length !== 4 || isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <Icon icon="mdi:loading" className="loading-spinner" />
+              Checking...
+            </>
+          ) : (
+            <>
+              <Icon icon="mdi:magic-staff" />
+              Check
+            </>
+          )}
+        </button>
+      </div>
+    </ErrorBoundary>
   );
 }
+
+Guess.propTypes = {
+  onNewGuess: PropTypes.func.isRequired,
+  setOpponent: PropTypes.func.isRequired,
+  chatId: PropTypes.string,
+  userId: PropTypes.string
+};
+
+export default Guess;
