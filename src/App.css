@@ -221,3 +221,118 @@ body {
     font-size: 1rem;
   }
 }
+/* Target Page Styles */
+.target-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+  color: #ffffff;
+}
+
+.hero-section {
+  padding: 4rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #6ab7ff, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.rule-card {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+}
+
+.rule-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1rem;
+}
+
+.input-section {
+  text-align: center;
+}
+
+.secret-input {
+  font-size: 2rem !important;
+  letter-spacing: 1rem !important;
+  padding: 1rem !important;
+  width: 250px !important;
+  text-align: center !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 15px !important;
+  color: #fff !important;
+  margin: 0 auto 1.5rem !important;
+}
+
+.secret-input:focus {
+  border-color: #6ab7ff !important;
+  box-shadow: 0 0 15px rgba(106, 183, 255, 0.3) !important;
+}
+
+.glow-button {
+  background: linear-gradient(45deg, #6ab7ff, #2575fc) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 25px !important;
+  color: white !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(106, 183, 255, 0.3) !important;
+}
+
+@media (max-width: 768px) {
+  .target-container {
+    padding: 1rem;
+  }
+  
+  .secret-input {
+    width: 100% !important;
+    font-size: 1.5rem !important;
+  }
+  
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-section {
+    padding: 2rem 0;
+  }
+}
