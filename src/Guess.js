@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ConfettiGenerator from "confetti-js";
+import { Icon } from '@iconify/react';
 
 export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
   const [guess, setGuess] = useState('');
@@ -103,7 +104,17 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent }) {
         onClick={checkOnServer}
         disabled={guess.length !== 4 || isSubmitting}
       >
-        {isSubmitting ? 'Checking...' : 'Check'}
+        {isSubmitting ? (
+          <>
+            <Icon icon="mdi:loading" className="loading-spinner" />
+            Checking...
+          </>
+        ) : (
+          <>
+            <Icon icon="mdi:magic-staff" className="me-2" />
+            Check Code
+          </>
+        )}
       </button>
     </div>
   );
