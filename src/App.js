@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Guess from './Guess';
 
@@ -6,24 +6,12 @@ function App(props) {
   const [guesses, setGuesses] = useState([]);
   const [score1, setScore1] = useState(0);
   const [score2, setScore2] = useState(0);
-  const [trialNum, setTrialNum] = useState(0);
-  const [trial2, setTrial2] = useState(0);
   const [opponentUsername, setOpponentUsername] = useState('');
   const [gameWon, setGameWon] = useState(false);
 
   const handleNewGuess = (guess, n, o) => {
     setGuesses(prev => [...prev, { guess, n, o }]);
-    setTrialNum(prev => prev + 1);
-    
-    if(n === 4 && o === 4) {
-      setScore1(prev => prev + 1);
-      setTrial2(prev => prev + 1);
-      setGameWon(true);
-    }
-  };
-
-  const handleReplay = () => {
-    window.location.reload(); // Reset the game
+    if(n === 4 && o === 4) setGameWon(true);
   };
 
   return (
@@ -33,8 +21,6 @@ function App(props) {
         oppName={opponentUsername}
         score1={score1}
         score2={score2}
-        trialNum={trialNum}
-        trial2={trial2}
       />
       
       <div className="game-content">
@@ -44,7 +30,6 @@ function App(props) {
             <span>N</span>
             <span>O</span>
           </div>
-          
           {guesses.map((item, index) => (
             <div key={index} className="guess-item">
               <div className="guess-number">{item.guess}</div>
@@ -60,13 +45,12 @@ function App(props) {
             setOpponent={setOpponentUsername}
             chatId={props.chatId}
             userId={props.userId}
-            setTrial2={setTrial2}
           />
         ) : (
-          <div className="replay-container">
+          <div className="text-center mt-4">
             <button 
-              className="replay-button"
-              onClick={handleReplay}
+              className="glow-button"
+              onClick={() => window.location.reload()}
             >
               Play Again
             </button>
