@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import App from './App';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
 
 export default function Target() {
   const [aim, setAim] = useState('');
@@ -30,11 +28,7 @@ export default function Target() {
     try {
       const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
       const response = await fetch(url, { method: 'GET' });
-      
       if (!response.ok) throw new Error('Failed to fetch');
-      
-      const data = await response.json();
-      console.log('Server response:', data);
       setClicked(true);
     } catch (error) {
       console.error('Error:', error);
@@ -45,16 +39,14 @@ export default function Target() {
     <div className="target-container">
       {!clicked ? (
         <div className="target-content">
-          {/* Hero Section */}
           <div className="hero-section text-center mb-5">
-            <h1 className="display-4 fw-bold text-gradient">
+            <h1 className="display-4 fw-bold">
               <i className="bi bi-joystick me-3"></i>
               Guess My Number
             </h1>
-            <p className="lead text-muted">A Modern Number Puzzle Challenge</p>
+            <p className="lead">A Modern Number Puzzle Challenge</p>
           </div>
 
-          {/* Rules Section */}
           <div className="glass-card rules-section mb-5">
             <h2 className="section-title">
               <i className="bi bi-book me-2"></i>
@@ -62,24 +54,24 @@ export default function Target() {
             </h2>
             <div className="rules-grid">
               <div className="rule-card">
-                <div className="rule-icon bg-primary">
-                  <i className="bi bi-unique"></i>
+                <div className="rule-icon">
+                  <i className="bi bi-unique text-dark"></i>
                 </div>
                 <h3>Unique Digits</h3>
                 <p>All digits must be distinct</p>
               </div>
               
               <div className="rule-card">
-                <div className="rule-icon bg-info">
-                  <i className="bi bi-123"></i>
+                <div className="rule-icon">
+                  <i className="bi bi-123 text-dark"></i>
                 </div>
                 <h3>Number Match (N)</h3>
                 <p>Correct digits in any position</p>
               </div>
               
               <div className="rule-card">
-                <div className="rule-icon bg-success">
-                  <i className="bi bi-geo-alt"></i>
+                <div className="rule-icon">
+                  <i className="bi bi-geo-alt text-dark"></i>
                 </div>
                 <h3>Position Match (O)</h3>
                 <p>Digits in correct position</p>
@@ -87,7 +79,6 @@ export default function Target() {
             </div>
           </div>
 
-          {/* Input Section */}
           <div className="glass-card input-section">
             <div className="input-group">
               <div className="input-header mb-4">
@@ -95,7 +86,7 @@ export default function Target() {
                   <i className="bi bi-key me-2"></i>
                   Set Your Secret Number
                 </h2>
-                <p className="text-muted">Enter 4 unique digits to start the game</p>
+                <p>Enter 4 unique digits to start the game</p>
               </div>
               
               <div className="number-input">
