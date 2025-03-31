@@ -39,53 +39,56 @@ export default function Target() {
     <div className="target-container">
       {!clicked ? (
         <div className="target-content">
+          {/* Header Card */}
           <div className="glass-card text-center mb-5">
-            <h1 className="display-4 fw-bold mb-3">
-              <Icon icon="mdi:gamepad-variant" className="me-2" />
-              Guess My Number
+            <h1 className="display-4 mb-3">
+              <Icon icon="mdi:brain" className="gold-icon" />
+              Code Breaker
             </h1>
-            <p className="lead">A Modern Number Puzzle Challenge</p>
+            <p className="lead">A Modern Bulls & Cows Implementation</p>
           </div>
 
+          {/* Rules Section */}
           <div className="glass-card rules-section mb-5">
             <h2 className="text-center mb-4">
-              <Icon icon="mdi:book-open-variant" className="me-2" />
+              <Icon icon="mdi:gamepad-round" className="me-2" />
               Game Rules
             </h2>
             <div className="row g-4">
               <div className="col-md-4">
                 <div className="rule-card">
-                  <Icon icon="mdi:numeric" className="rule-icon" />
-                  <h3>Unique Digits</h3>
-                  <p>All digits must be distinct</p>
-                  <div className="rule-number">01</div>
+                  <Icon icon="mdi:lock-pattern" className="rule-icon" />
+                  <h3>4-Digit Code</h3>
+                  <p>Create a unique 4-digit number with no repeating digits</p>
+                  <div className="rule-number">1</div>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="rule-card">
-                  <Icon icon="mdi:approval" className="rule-icon" />
-                  <h3>Number Match (N)</h3>
-                  <p>Correct digits in any position</p>
-                  <div className="rule-number">02</div>
+                  <Icon icon="mdi:lightbulb-on" className="rule-icon" />
+                  <h3>Bulls (N)</h3>
+                  <p>Correct digits in wrong position</p>
+                  <div className="rule-number">2</div>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="rule-card">
-                  <Icon icon="mdi:crosshairs-gps" className="rule-icon" />
-                  <h3>Position Match (O)</h3>
-                  <p>Digits in correct position</p>
-                  <div className="rule-number">03</div>
+                  <Icon icon="mdi:bullseye-arrow" className="rule-icon" />
+                  <h3>Cows (O)</h3>
+                  <p>Correct digits in right position</p>
+                  <div className="rule-number">3</div>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Input Section */}
           <div className="glass-card text-center">
             <h2 className="mb-4">
-              <Icon icon="mdi:key" className="me-2" />
-              Set Your Secret Number
+              <Icon icon="mdi:key-variant" className="me-2" />
+              Set Secret Code
             </h2>
-            <div className="input-group justify-content-center">
+            <div className="input-group">
               <input
                 type="text"
                 className="form-control secret-input mb-3"
@@ -97,12 +100,13 @@ export default function Target() {
                 inputMode="numeric"
               />
               <button 
-                className="glow-button w-100"
+                className="glow-button"
                 onClick={handleSubmit}
                 disabled={!aim.trim()}
+                style={{ marginTop: '1rem' }}
               >
-                <Icon icon="mdi:play" className="me-2" />
-                Start Game
+                <Icon icon="mdi:rocket-launch" className="me-2" />
+                Start Challenge
               </button>
             </div>
           </div>
