@@ -18,7 +18,7 @@ function App(props) {
   };
 
   const trialNum = guesses.length;
-  const trial2 = 0; // Replace with actual opponent data
+  const trial2 = 0;
 
   return (
     <div className="container-fluid">
@@ -35,21 +35,19 @@ function App(props) {
         <table className="trials-table">
           <thead>
             <tr>
+              <th>Guess</th>
               <th>N</th>
               <th>O</th>
-              <th>Count</th>
             </tr>
           </thead>
           <tbody>
-            {Array.from({length: 5}, (_, n) => 
-              Array.from({length: 5}, (_, o) => (
-                <tr key={`${n}-${o}`}>
-                  <td>{n}</td>
-                  <td>{o}</td>
-                  <td>{guesses.filter(g => g.n === n && g.o === o).length}</td>
-                </tr>
-              ))
-            ).flat()}
+            {guesses.map((guess, index) => (
+              <tr key={index}>
+                <td>{guess.guess}</td>
+                <td>{guess.n}</td>
+                <td>{guess.o}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
 
