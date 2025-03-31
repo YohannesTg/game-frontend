@@ -11,7 +11,10 @@ function App(props) {
 
   const handleNewGuess = (guess, n, o) => {
     setGuesses(prev => [...prev, { guess, n, o }]);
-    if(n === 4 && o === 4) setGameWon(true);
+    if(n === 4 && o === 4) {
+      setScore1(prev => prev + 1);
+      setGameWon(true);
+    }
   };
 
   return (
