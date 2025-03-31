@@ -9,17 +9,17 @@
   --text-secondary: rgba(255, 255, 255, 0.7);
 }
 
-html,
-body {
+/* Base Styles */
+html, body {
   height: 100%;
   margin: 0;
   background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
   font-family: var(--modern-font);
   color: var(--text-primary);
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
+/* Header Styles */
 .header-container {
   position: fixed;
   top: 0;
@@ -44,7 +44,8 @@ body {
 .player-card {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
+  min-width: 160px;
 }
 
 .player-name {
@@ -71,12 +72,20 @@ body {
   gap: 1rem;
 }
 
+/* Game Content */
 .game-content {
   margin-top: 100px;
   padding: 1rem;
+  height: calc(100vh - 180px);
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 180px);
+}
+
+/* Guess History Table */
+.guess-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 100px;
 }
 
 .trials-table {
@@ -84,28 +93,6 @@ body {
   border-collapse: collapse;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  overflow: hidden;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.trials-table thead {
-  position: sticky;
-  top: 0;
-  background: rgba(16, 18, 27, 0.95);
-  z-index: 100;
-}
-
-.trials-table tbody {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.trials-table tr {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  align-items: center;
 }
 
 .trials-table th,
@@ -122,19 +109,52 @@ body {
   top: 0;
 }
 
-.input-row {
-  position: sticky;
-  bottom: 0;
-  background: rgba(16, 18, 27, 0.95);
-  z-index: 100;
+.guess-number {
+  letter-spacing: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1rem 2rem !important;
+}
+
+.n-result {
+  background: rgba(0, 255, 255, 0.15);
+  color: #00ffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.o-result {
+  background: rgba(0, 255, 0, 0.15);
+  color: #76ff7a;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+/* Input Section */
+.current-guess {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(16, 18, 27, 0.9);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 }
 
 .secret-input {
-  height: 50px;
-  width: 100%;
-  font-size: 1.5rem;
-  letter-spacing: 0.5rem;
-  padding: 0.5rem;
+  width: 240px;
+  height: 60px;
+  font-size: 2rem;
+  letter-spacing: 0.8rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid transparent;
@@ -150,7 +170,7 @@ body {
 }
 
 .glow-button {
-  height: 50px;
+  height: 60px;
   padding: 0 2rem;
   background: var(--gold-gradient);
   border: none;
@@ -159,7 +179,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
-  width: 100%;
+  min-width: 120px;
 }
 
 .glow-button:disabled {
@@ -167,22 +187,95 @@ body {
   cursor: not-allowed;
 }
 
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Confetti Canvas */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .player-name, .opponent-name {
+  .player-card {
+    min-width: 120px;
+  }
+
+  .player-name,
+  .opponent-name {
     font-size: 1rem;
   }
-  
+
   .score-label {
     font-size: 0.8rem;
     gap: 0.5rem;
+    flex-direction: column;
   }
-  
+
   .secret-input {
+    width: 180px;
+    font-size: 1.5rem;
+    letter-spacing: 0.6rem;
+  }
+
+  .guess-number {
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+  }
+
+  .n-result,
+  .o-result {
     font-size: 1.2rem;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .current-guess {
+    width: 90%;
+    padding: 0.8rem;
+    bottom: 10px;
+  }
+
+  .secret-input {
+    width: 100%;
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+  }
+
+  .glow-button {
+    padding: 0 1rem;
+    min-width: 90px;
+  }
+
   .trials-table th,
   .trials-table td {
     padding: 0.75rem;
   }
+}
+
+.error-fallback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff6b6b;
+  font-size: 1.5rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
 }
