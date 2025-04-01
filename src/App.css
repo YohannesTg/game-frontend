@@ -1,7 +1,8 @@
 :root {
-  --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
   --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
-  --glass-bg: rgba(255, 255, 255, 0.1);
+  --gold-primary: #ffd700;
+  --gold-secondary: #ffaa00;
+  --glass-bg: rgba(255, 215, 0, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
   --text-secondary: rgba(255, 255, 255, 0.7);
@@ -22,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Shared Header Styles */
+/* ========== App Component Styles ========== */
 .header-container {
   position: fixed;
   top: 0;
@@ -36,7 +37,86 @@ body {
   width: 100%;
 }
 
-/* Target Page Specific Styles */
+.player-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.player-name {
+  color: var(--gold-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.opponent-name {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.game-content {
+  margin-top: 120px;
+  padding: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Guess history styles remain same as previous */
+.guess-history {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.guess-header,
+.guess-item {
+  display: grid;
+  grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.guess-header {
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  color: var(--gold-primary);
+  font-weight: 600;
+}
+
+.guess-item {
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.guess-number {
+  letter-spacing: 0.3rem;
+  font-size: 1.1rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--gold-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-number {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== Golden Target Page Styles ========== */
 .target-container {
   padding: 2rem 1rem;
   min-height: 100vh;
@@ -44,48 +124,53 @@ body {
   margin: 0 auto;
 }
 
-.hero-section {
+.golden-hero {
   text-align: center;
   padding: 4rem 0 2rem;
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), transparent);
+  border-radius: 20px;
+  margin: 2rem auto;
 }
 
-.text-gradient {
+.golden-gradient {
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
+.golden-glass {
+  background: rgba(255, 215, 0, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   padding: 2rem;
   margin: 2rem auto;
   width: 100%;
   max-width: 800px;
 }
 
-.rules-grid {
+.golden-rules-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
-.rule-card {
+.golden-rule-card {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 215, 0, 0.03);
   border-radius: 15px;
   transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
-.rule-card:hover {
+.golden-rule-card:hover {
   transform: translateY(-5px);
+  background: rgba(255, 215, 0, 0.05);
 }
 
-.rule-icon {
+.golden-icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -94,48 +179,51 @@ body {
   justify-content: center;
   font-size: 1.5rem;
   margin: 0 auto 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold-primary);
 }
 
-.input-section {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.secret-input {
+.golden-input {
   font-size: 1.5rem;
   letter-spacing: 0.5rem;
   padding: 1rem;
   width: 100%;
   max-width: 300px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 15px;
-  color: #fff;
+  color: var(--gold-primary);
   margin: 1rem auto;
 }
 
-/* Responsive Adjustments for Target Page */
+.golden-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* ========== Responsive Design ========== */
 @media (max-width: 768px) {
-  .target-container {
+  .game-content {
     padding: 1rem;
+    margin-top: 100px;
   }
 
-  .hero-section {
-    padding: 2rem 0 1rem;
+  /* Target Page Mobile */
+  .golden-hero {
+    padding: 2rem 1rem;
   }
 
-  .rules-grid {
+  .golden-rules-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .glass-card {
+  .golden-glass {
     padding: 1.5rem;
     margin: 1rem auto;
   }
 
-  .secret-input {
+  .golden-input {
     font-size: 1.2rem;
     max-width: 250px;
     padding: 0.8rem;
@@ -143,16 +231,35 @@ body {
 }
 
 @media (max-width: 480px) {
-  .secret-input {
+  .golden-input {
     font-size: 1rem;
     max-width: 200px;
     letter-spacing: 0.3rem;
   }
 
-  .rule-card {
+  .golden-rule-card {
     padding: 1rem;
   }
 }
 
-/* Keep previous App component styles below */
-/* [Rest of your original App component CSS here] */
+@keyframes golden-glow {
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+}
+
+/* ========== Shared Components ========== */
+.glow-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: var(--gold-gradient);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+  transform: scale(1.05);
+  animation: golden-glow 1.5s infinite;
+}
