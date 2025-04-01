@@ -45,7 +45,6 @@ export default function Target() {
     <div className="target-container">
       {!clicked ? (
         <div className="target-content">
-          {/* Golden Hero Section */}
           <div className="golden-hero text-center">
             <h1 className="display-4 fw-bold golden-gradient mb-4">
               <i className="bi bi-stars me-3 golden-icon"></i>
@@ -55,7 +54,6 @@ export default function Target() {
             <p className="lead golden-text">Decrypt the Digital Enigma</p>
           </div>
 
-          {/* Golden Rules Grid */}
           <div className="golden-glass rules-section">
             <h2 className="section-title golden-gradient mb-4">
               <i className="bi bi-shield-lock me-2"></i>
@@ -88,7 +86,6 @@ export default function Target() {
             </div>
           </div>
 
-          {/* Golden Input Section */}
           <div className="golden-glass input-section">
             <div className="golden-input-group">
               <div className="input-header mb-4">
@@ -105,26 +102,4 @@ export default function Target() {
                   className="golden-input"
                   value={aim}
                   onChange={handleInputChange}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                  placeholder="????"
-                  maxLength="4"
-                  inputMode="numeric"
-                />
-                <button 
-                  className="golden-button mt-4"
-                  onClick={handleSubmit}
-                  disabled={!aim.trim()}
-                >
-                  <i className="bi bi-play-circle me-2"></i>
-                  Initiate Sequence
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <App chatId={chatId} userId={userId} userName={userName} />
-      )}
-    </div>
-  );
-}
+                 
