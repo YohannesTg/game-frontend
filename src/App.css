@@ -1,0 +1,215 @@
+:root {
+    --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
+    --gold-primary: #FFD700;
+    --gold-secondary: #D4AF37;
+    --gold-gradient: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
+    --text-primary: rgba(255, 255, 255, 0.95);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+  }
+  
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
+    font-family: var(--modern-font);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  /* Header Styles */
+  .header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(16, 18, 27, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+  }
+  
+  .player-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  
+  .player-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #6ab7ff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(106, 183, 255, 0.3);
+  }
+  
+  .opponent-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+  }
+  
+  /* Game Area */
+  .game-content {
+    margin-top: 120px;
+    padding: 2rem;
+  }
+  
+  /* Guess History */
+  .guess-history {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    overflow-x: auto;
+  }
+  
+  .guess-header {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--gold-primary);
+    font-weight: 600;
+    min-width: 600px;
+  }
+  
+  .guess-item {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    min-width: 600px;
+  }
+  
+  .guess-number {
+    letter-spacing: 0.5rem;
+    font-size: 1.2rem;
+    font-family: 'Space Mono', monospace;
+    color: var(--gold-primary);
+    font-weight: 600;
+  }
+  
+  .result-number {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 10px;
+  }
+  
+  .n-result {
+    background: rgba(0, 255, 255, 0.15);
+    color: #00ffff;
+  }
+  
+  .o-result {
+    background: rgba(0, 255, 0, 0.15);
+    color: #76ff7a;
+  }
+  
+  /* Target Page Styles */
+  .target-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2rem;
+    color: var(--gold-primary);
+  }
+  
+  .hero-section {
+    padding: 4rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+  }
+  
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .rule-card {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    border: 2px solid var(--gold-primary);
+  }
+  
+  .rule-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .rule-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    background: var(--gold-primary);
+  }
+  
+  .secret-input {
+    font-size: 2rem !important;
+    letter-spacing: 1rem !important;
+    padding: 1rem !important;
+    width: 250px !important;
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid var(--gold-primary) !important;
+    border-radius: 15px !important;
+    color: var(--gold-primary) !important;
+  }
+  
+  .glow-button {
+    background: var(--gold-gradient) !important;
+    border: none !important;
+    padding: 1rem 2rem !important;
+    border-radius: 25px !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  @media (max-width: 768px) {
+    .guess-header,
+    .guess-item {
+      min-width: unset;
+      grid-template-columns: 1fr 80px 80px;
+    }
+    
+    .secret-input {
+      width: 100% !important;
+      font-size: 1.5rem !important;
+    }
+    
+    .game-content {
+      padding: 1rem;
+      margin-top: 100px;
+    }
+  }
+  
