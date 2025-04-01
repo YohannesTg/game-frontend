@@ -45,77 +45,78 @@ export default function Target() {
     <div className="target-container">
       {!clicked ? (
         <div className="target-content">
-          {/* Hero Section */}
-          <div className="hero-section text-center mb-5">
-            <h1 className="display-4 fw-bold text-gradient">
-              <i className="bi bi-joystick me-3"></i>
-              Guess My Number
+          {/* Golden Hero Section */}
+          <div className="golden-hero text-center">
+            <h1 className="display-4 fw-bold golden-gradient mb-4">
+              <i className="bi bi-stars me-3"></i>
+              CodeBreaker Challenge
+              <i className="bi bi-stars ms-3"></i>
             </h1>
-            <p className="lead text-muted">A Modern Number Puzzle Challenge</p>
+            <p className="lead golden-text">Decrypt the Digital Enigma</p>
           </div>
 
-          {/* Rules Section */}
-          <div className="glass-card rules-section mb-5">
-            <h2 className="section-title">
-              <i className="bi bi-book me-2"></i>
-              Game Rules
+          {/* Golden Rules Grid */}
+          <div className="golden-glass rules-section">
+            <h2 className="section-title golden-gradient mb-4">
+              <i className="bi bi-shield-lock me-2"></i>
+              Decryption Rules
             </h2>
-            <div className="rules-grid">
-              <div className="rule-card">
-                <div className="rule-icon bg-primary">
-                  <i className="bi bi-unique"></i>
+            <div className="golden-rules-grid">
+              <div className="golden-rule-card">
+                <div className="golden-icon">
+                  <i className="bi bi-fingerprint"></i>
                 </div>
-                <h3>Unique Digits</h3>
-                <p>All digits must be distinct</p>
+                <h3 className="golden-text">Unique Sequence</h3>
+                <p className="golden-subtext">All ciphers must be distinct</p>
               </div>
               
-              <div className="rule-card">
-                <div className="rule-icon bg-info">
-                  <i className="bi bi-123"></i>
+              <div className="golden-rule-card">
+                <div className="golden-icon">
+                  <i className="bi bi-puzzle"></i>
                 </div>
-                <h3>Number Match (N)</h3>
-                <p>Correct digits in any position</p>
+                <h3 className="golden-text">Cipher Match (N)</h3>
+                <p className="golden-subtext">Correct digits in any position</p>
               </div>
               
-              <div className="rule-card">
-                <div className="rule-icon bg-success">
+              <div className="golden-rule-card">
+                <div className="golden-icon">
                   <i className="bi bi-geo-alt"></i>
                 </div>
-                <h3>Position Match (O)</h3>
-                <p>Digits in correct position</p>
+                <h3 className="golden-text">Position Lock (O)</h3>
+                <p className="golden-subtext">Exact position matches</p>
               </div>
             </div>
           </div>
 
-          {/* Input Section */}
-          <div className="glass-card input-section">
-            <div className="input-group">
+          {/* Golden Input Section */}
+          <div className="golden-glass input-section">
+            <div className="golden-input-group">
               <div className="input-header mb-4">
-                <h2>
-                  <i className="bi bi-key me-2"></i>
-                  Set Your Secret Number
+                <h2 className="golden-gradient">
+                  <i className="bi bi-lock me-2"></i>
+                  Set Encryption Key
                 </h2>
-                <p className="text-muted">Enter 4 unique digits to start the game</p>
+                <p className="golden-subtext">Enter 4 unique ciphers to initiate</p>
               </div>
               
-              <div className="number-input">
+              <div className="golden-input-wrapper">
                 <input
                   type="text"
-                  className="form-control secret-input"
+                  className="golden-input"
                   value={aim}
                   onChange={handleInputChange}
                   onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                  placeholder="____"
+                  placeholder="????"
                   maxLength="4"
                   inputMode="numeric"
                 />
                 <button 
-                  className="glow-button"
+                  className="glow-button mt-4"
                   onClick={handleSubmit}
                   disabled={!aim.trim()}
                 >
-                  <i className="bi bi-play-fill me-2"></i>
-                  Start Game
+                  <i className="bi bi-play-circle me-2"></i>
+                  Initiate Sequence
                 </button>
               </div>
             </div>
