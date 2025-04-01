@@ -1,9 +1,7 @@
 :root {
+  --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
   --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
-  --gold-primary: #ffd700;
-  --gold-secondary: #ffaa00;
-  --dark-bg: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
-  --glass-bg: rgba(255, 215, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
   --text-secondary: rgba(255, 255, 255, 0.7);
@@ -18,13 +16,13 @@
 html,
 body {
   height: 100%;
-  background: var(--dark-bg);
+  background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
   font-family: var(--modern-font);
   color: var(--text-primary);
   overflow-x: hidden;
 }
 
-/* ========== App Component Styles ========== */
+/* Header Styles */
 .header-container {
   position: fixed;
   top: 0;
@@ -46,18 +44,27 @@ body {
   margin: 0 auto;
 }
 
-.player-name {
-  color: var(--gold-primary);
+.player-name,
+.opponent-name {
   font-size: 1.2rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.player-name {
+  color: #6ab7ff;
 }
 
 .opponent-name {
   color: #ff6b6b;
-  font-size: 1.2rem;
-  font-weight: 600;
 }
 
+.score-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Game Area */
 .game-content {
   margin-top: 120px;
   padding: 2rem;
@@ -66,32 +73,35 @@ body {
   margin-right: auto;
 }
 
+/* Guess History */
 .guess-history {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.guess-header {
-  display: grid;
-  grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(255, 215, 0, 0.1);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  color: var(--gold-primary);
-  font-weight: 600;
-}
-
+.guess-header,
 .guess-item {
   display: grid;
   grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
   gap: 1rem;
   padding: 1rem;
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+  width: 100%;
+}
+
+.guess-header {
+  background: rgba(255, 215, 0, 0.1);
   border-radius: 12px;
   margin-bottom: 1rem;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.guess-item {
+  align-items: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+  border-radius: 12px;
   animation: slideIn 0.3s ease;
 }
 
@@ -99,7 +109,8 @@ body {
   letter-spacing: 0.3rem;
   font-size: 1.1rem;
   font-family: 'Space Mono', monospace;
-  color: var(--gold-primary);
+  color: #ffd700;
+  font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -108,6 +119,7 @@ body {
 .result-number {
   text-align: center;
   font-size: 1.2rem;
+  font-weight: 700;
   padding: 4px 8px;
   border-radius: 8px;
   min-width: 60px;
@@ -126,92 +138,25 @@ body {
   color: #76ff7a;
 }
 
-/* ========== Golden Target Page Styles ========== */
-.target-container {
-  padding: 2rem 1rem;
-  min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.golden-hero {
-  text-align: center;
-  padding: 4rem 0 2rem;
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), transparent);
-  border-radius: 20px;
-  margin: 2rem auto;
-}
-
-.golden-gradient {
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.golden-glass {
-  background: rgba(255, 215, 0, 0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  margin: 2rem auto;
+/* Input and Buttons */
+.current-guess {
+  max-width: 600px;
+  margin: 2rem auto 0;
   width: 100%;
-  max-width: 800px;
 }
 
-.golden-rules-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.golden-rule-card {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 215, 0, 0.03);
-  border: 1px solid rgba(255, 215, 0, 0.1);
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.golden-rule-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 215, 0, 0.05);
-}
-
-.golden-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  margin: 0 auto 1rem;
-  background: rgba(255, 215, 0, 0.1);
-  color: var(--gold-primary);
-}
-
-.golden-input {
-  font-size: 1.5rem;
-  letter-spacing: 0.5rem;
-  padding: 1rem;
+.guess-input {
   width: 100%;
   max-width: 300px;
-  background: rgba(255, 215, 0, 0.1);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  border-radius: 15px;
-  color: var(--gold-primary);
-  margin: 1rem auto;
+  font-size: 1.1rem;
+  letter-spacing: 0.5rem;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 12px;
 }
 
-.golden-input:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-}
-
-/* ========== Shared Components ========== */
 .glow-button {
   padding: 12px 24px;
   border: none;
@@ -220,43 +165,14 @@ body {
   color: #000;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 600;
 }
 
-.glow-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-}
-
-.replay-container {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* ========== Animations ========== */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes golden-glow {
-  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-}
-
-/* ========== Responsive Design ========== */
+/* Responsive Design */
 @media (max-width: 768px) {
   .player-info {
     padding: 0 1rem;
   }
-
+  
   .game-content {
     padding: 1rem;
     margin-top: 100px;
@@ -277,27 +193,13 @@ body {
   .result-number {
     font-size: 1rem;
     min-width: 50px;
+    padding: 4px;
   }
 
-  /* Target Page Mobile */
-  .golden-hero {
-    padding: 2rem 1rem;
-  }
-
-  .golden-rules-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .golden-glass {
-    padding: 1.5rem;
-    margin: 1rem auto;
-  }
-
-  .golden-input {
-    font-size: 1.2rem;
+  .guess-input {
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
     max-width: 250px;
-    padding: 0.8rem;
   }
 }
 
@@ -307,14 +209,43 @@ body {
     font-size: 1rem;
   }
 
-  /* Target Page Mobile Small */
-  .golden-input {
-    font-size: 1rem;
-    max-width: 200px;
-    letter-spacing: 0.3rem;
+  .guess-header {
+    font-size: 0.9rem;
   }
 
-  .golden-rule-card {
-    padding: 1rem;
+  .guess-input {
+    max-width: 200px;
+    padding: 10px 15px;
   }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Replay Button */
+.replay-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.replay-button {
+  background: var(--gold-gradient);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.replay-button:hover {
+  transform: scale(1.05);
 }
