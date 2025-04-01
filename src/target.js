@@ -1,303 +1,129 @@
-:root {
-  --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
-  --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
-  --text-primary: rgba(255, 255, 255, 0.95);
-  --text-secondary: rgba(255, 255, 255, 0.7);
-}
+import React, { useState, useEffect } from 'react';
+import App from './App';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+export default function Target() {
+  const [aim, setAim] = useState('');
+  const [clicked, setClicked] = useState(false);
+  const [chatId, setChatId] = useState('');
+  const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
 
-html,
-body {
-  height: 100%;
-  background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
-  font-family: var(--modern-font);
-  color: var(--text-primary);
-  overflow-x: hidden;
-}
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setChatId(urlParams.get('chatId') || '');
+    setUserId(urlParams.get('userId') || '');
+    setUserName(urlParams.get('userName') || '');
+  }, []);
 
-/* ========== App Component Styles ========== */
-.header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(16, 18, 27, 0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 0;
-  width: 100%;
-}
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    const hasUniqueDigits = new Set(inputValue).size === inputValue.length;
+    if (inputValue.length <= 4 && /^\d*$/.test(inputValue) && hasUniqueDigits) {
+      setAim(inputValue);
+    }
+  };
 
-.player-info {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  const handleSubmit = async () => {
+    try {
+      const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
+      const response = await fetch(url, { method: 'GET' });
+      
+      if (!response.ok) throw new Error('Failed to fetch');
+      
+      const data = await response.json();
+      console.log('Server response:', data);
+      setClicked(true);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-.player-name {
-  color: #6ab7ff;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
+  return (
+    <div className="target-container">
+      {!clicked ? (
+        <div className="target-content">
+          {/* Hero Section */}
+          <div className="hero-section text-center mb-5">
+            <h1 className="display-4 fw-bold text-gradient">
+              <i className="bi bi-joystick me-3"></i>
+              Guess My Number
+            </h1>
+            <p className="lead text-muted">A Modern Number Puzzle Challenge</p>
+          </div>
 
-.opponent-name {
-  color: #ff6b6b;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
+          {/* Rules Section */}
+          <div className="glass-card rules-section mb-5">
+            <h2 className="section-title">
+              <i className="bi bi-book me-2"></i>
+              Game Rules
+            </h2>
+            <div className="rules-grid">
+              <div className="rule-card">
+                <div className="rule-icon bg-primary">
+                  <i className="bi bi-unique"></i>
+                </div>
+                <h3>Unique Digits</h3>
+                <p>All digits must be distinct</p>
+              </div>
+              
+              <div className="rule-card">
+                <div className="rule-icon bg-info">
+                  <i className="bi bi-123"></i>
+                </div>
+                <h3>Number Match (N)</h3>
+                <p>Correct digits in any position</p>
+              </div>
+              
+              <div className="rule-card">
+                <div className="rule-icon bg-success">
+                  <i className="bi bi-geo-alt"></i>
+                </div>
+                <h3>Position Match (O)</h3>
+                <p>Digits in correct position</p>
+              </div>
+            </div>
+          </div>
 
-.game-content {
-  margin-top: 120px;
-  padding: 2rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.guess-history {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.guess-header,
-.guess-item {
-  display: grid;
-  grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
-  gap: 1rem;
-  padding: 1rem;
-  width: 100%;
-}
-
-.guess-header {
-  background: rgba(255, 215, 0, 0.1);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  color: #ffd700;
-  font-weight: 600;
-}
-
-.guess-item {
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-  border-radius: 12px;
-  margin-bottom: 1rem;
-}
-
-.guess-number {
-  letter-spacing: 0.3rem;
-  font-size: 1.1rem;
-  font-family: 'Space Mono', monospace;
-  color: #ffd700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.result-number {
-  text-align: center;
-  font-size: 1.2rem;
-  padding: 4px 8px;
-  border-radius: 8px;
-  min-width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.n-result {
-  background: rgba(0, 255, 255, 0.15);
-  color: #00ffff;
-}
-
-.o-result {
-  background: rgba(0, 255, 0, 0.15);
-  color: #76ff7a;
-}
-
-.replay-container {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* ========== Target Page Styles ========== */
-.target-container {
-  padding: 2rem 1rem;
-  min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.hero-section {
-  text-align: center;
-  padding: 4rem 0 2rem;
-}
-
-.text-gradient {
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  margin: 2rem auto;
-  width: 100%;
-  max-width: 800px;
-}
-
-.rules-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.rule-card {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 15px;
-  transition: transform 0.3s ease;
-}
-
-.rule-card:hover {
-  transform: translateY(-5px);
-}
-
-.rule-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  margin: 0 auto 1rem;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.secret-input {
-  font-size: 1.5rem;
-  letter-spacing: 0.5rem;
-  padding: 1rem;
-  width: 100%;
-  max-width: 300px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: #fff;
-  margin: 1rem auto;
-}
-
-/* ========== Responsive Design ========== */
-@media (max-width: 768px) {
-  .player-info {
-    padding: 0 1rem;
-  }
-
-  .game-content {
-    padding: 1rem;
-    margin-top: 100px;
-  }
-
-  .guess-header,
-  .guess-item {
-    grid-template-columns: 1fr minmax(60px, auto) minmax(60px, auto);
-    gap: 0.5rem;
-    padding: 0.8rem;
-  }
-
-  .guess-number {
-    font-size: 1rem;
-    letter-spacing: 0.2rem;
-  }
-
-  .result-number {
-    font-size: 1rem;
-    min-width: 50px;
-  }
-
-  /* Target Page Mobile */
-  .target-container {
-    padding: 1rem;
-  }
-
-  .hero-section {
-    padding: 2rem 0 1rem;
-  }
-
-  .rules-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .glass-card {
-    padding: 1.5rem;
-    margin: 1rem auto;
-  }
-
-  .secret-input {
-    font-size: 1.2rem;
-    max-width: 250px;
-    padding: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .player-name,
-  .opponent-name {
-    font-size: 1rem;
-  }
-
-  /* Target Page Mobile Small */
-  .secret-input {
-    font-size: 1rem;
-    max-width: 200px;
-    letter-spacing: 0.3rem;
-  }
-
-  .rule-card {
-    padding: 1rem;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ========== Shared Components ========== */
-.glow-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  background: var(--gold-gradient);
-  color: #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.glow-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+          {/* Input Section */}
+          <div className="glass-card input-section">
+            <div className="input-group">
+              <div className="input-header mb-4">
+                <h2>
+                  <i className="bi bi-key me-2"></i>
+                  Set Your Secret Number
+                </h2>
+                <p className="text-muted">Enter 4 unique digits to start the game</p>
+              </div>
+              
+              <div className="number-input">
+                <input
+                  type="text"
+                  className="form-control secret-input"
+                  value={aim}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="____"
+                  maxLength="4"
+                  inputMode="numeric"
+                />
+                <button 
+                  className="glow-button"
+                  onClick={handleSubmit}
+                  disabled={!aim.trim()}
+                >
+                  <i className="bi bi-play-fill me-2"></i>
+                  Start Game
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <App chatId={chatId} userId={userId} userName={userName} />
+      )}
+    </div>
+  );
 }
