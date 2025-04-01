@@ -1,141 +1,44 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Guess from './Guess';
-import ConfettiGenerator from "confetti-js";
-import { Icon } from '@iconify/react';
+import './App.css';
 
-export default function App(props) {
+export default function App({ userName, chatId, userId }) {
   const [guesses, setGuesses] = useState([]);
-  const [score1, setScore1] = useState(0);
-  const [score2, setScore2] = useState(0);
-  const [opponentUsername, setOpponentUsername] = useState('');
-  const [gameWon, setGameWon] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const canvasRef = useRef(null);
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    if(gameWon) {
-      new ConfettiGenerator({
-        target: canvasRef.current,
-        max: 200,
-        animate: true,
-        props: ['circle', 'square', 'triangle', 'line'],
-        colors: [[165,104,246], [230,61,135], [0,199,228], [253,214,126]]
-      }).render();
-    }
-  }, [gameWon]);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [guesses]);
-
-  const handleSubmit = async (guess) => {
-    try {
-      setIsSubmitting(true);
-      const response = await fetch(
-        `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${props.chatId}&userId=${props.userId}`
-      );
-      const data = await response.json();
-      
-      setGuesses(prev => [...prev, { guess, n: data.number, o: data.order }]);
-      
-      if(data.number === 4 && data.order === 4) {
-        setScore1(prev => prev + 1);
-        setGameWon(true);
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const [scores, setScores] = useState({ player1: 0, player2: 0 });
 
   return (
-    <div className="container-fluid">
-      <canvas ref={canvasRef} style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 999
-      }} />
-      
+    <div className="game-container">
       <Header
-        userName={props.userName}
-        oppName={opponentUsername}
-        score1={score1}
-        score2={score2}
+        userName={userName}
+        score1={scores.player1}
+        score2={scores.player2}
         trialNum={guesses.length}
         trial2={0}
       />
 
-      <div className="game-content">
-        <div className="guess-history">
-          <table className="trials-table">
-            <thead>
-              <tr>
-                <th>Guess</th>
-                <th>N</th>
-                <th>O</th>
-              </tr>
-            </thead>
-            <tbody>
-              {guesses.map((item, index) => (
-                <tr key={index}>
-                  <td className="guess-number">{item.guess}</td>
-                  <td className="n-result">{item.n}</td>
-                  <td className="o-result">{item.o}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="game-board">
+        <div className="hologram-display">
+          {guesses.map((guess, index) => (
+            <div key={index} className="guess-row">
+              <span className="guess-number">{guess.number}</span>
+              <div className="result-badges">
+                <div className="bulls-badge">{guess.bulls}B</div>
+                <div className="cows-badge">{guess.cows}C</div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {!gameWon && (
-          <div className="current-guess">
-            <input
-              ref={inputRef}
-              className="secret-input"
-              type="number"
-              value={inputValue}
-              onChange={(e) => {
-                const val = e.target.value;
-                if(val.length <= 4 && /^\d*$/.test(val) && new Set(val).size === val.length) {
-                  setInputValue(val);
-                }
-              }}
-              placeholder="____"
-              disabled={isSubmitting}
-              maxLength="4"
-            />
-            <button
-              className="glow-button"
-              onClick={async () => {
-                if(inputValue.length === 4) {
-                  await handleSubmit(inputValue);
-                  setInputValue('');
-                }
-              }}
-              disabled={inputValue.length !== 4 || isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Icon icon="mdi:loading" className="loading-spinner" />
-                  Checking...
-                </>
-              ) : 'Check'}
-            </button>
-          </div>
-        )}
+        <Guess
+          onNewGuess={(guess, bulls, cows) => {
+            setGuesses([...guesses, { number: guess, bulls, cows }]);
+          }}
+          setOpponent={() => {}}
+          chatId={chatId}
+          userId={userId}
+        />
       </div>
     </div>
   );
 }
-
-App.defaultProps = {
-  userName: 'Player 1',
-  chatId: '',
-  userId: ''
-};
