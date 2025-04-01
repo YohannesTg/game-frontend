@@ -24,7 +24,20 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
 }
+/* Header Score Styles */
+.score-label {
+  font-size: 1rem;
+  color: var(--gold-primary) !important;
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);
+}
 
+.score-label span {
+  margin: 0 0.3rem;
+}
+
+.player-name, .opponent-name {
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.1);
+}
 /* ================== APP COMPONENT STYLES ================== */
 .header-container {
   position: fixed;
