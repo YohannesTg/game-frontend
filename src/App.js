@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Guess from './Guess';
 
@@ -23,7 +23,7 @@ function App(props) {
   };
 
   const handleReplay = () => {
-    window.location.reload(); // Reset the game
+    window.location.reload();
   };
 
   return (
@@ -65,9 +65,10 @@ function App(props) {
         ) : (
           <div className="replay-container">
             <button 
-              className="replay-button"
+              className="app-button replay-button"
               onClick={handleReplay}
             >
+              <i className="bi bi-arrow-repeat me-2"></i>
               Play Again
             </button>
           </div>
