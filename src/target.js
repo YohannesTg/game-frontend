@@ -45,6 +45,7 @@ export default function Target() {
     <div className="target-container">
       {!clicked ? (
         <div className="target-content">
+          {/* Golden Hero Section */}
           <div className="golden-hero text-center">
             <h1 className="display-4 fw-bold golden-gradient mb-4">
               <i className="bi bi-stars me-3 golden-icon"></i>
@@ -54,6 +55,7 @@ export default function Target() {
             <p className="lead golden-text">Decrypt the Digital Enigma</p>
           </div>
 
+          {/* Golden Rules Grid */}
           <div className="golden-glass rules-section">
             <h2 className="section-title golden-gradient mb-4">
               <i className="bi bi-shield-lock me-2"></i>
@@ -76,4 +78,53 @@ export default function Target() {
                 <p className="golden-subtext">Correct digits in any position</p>
               </div>
               
-             
+              <div className="golden-rule-card">
+                <div className="golden-icon">
+                  <i className="bi bi-geo-alt"></i>
+                </div>
+                <h3 className="golden-text">Position Lock (O)</h3>
+                <p className="golden-subtext">Exact position matches</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Golden Input Section */}
+          <div className="golden-glass input-section">
+            <div className="golden-input-group">
+              <div className="input-header mb-4">
+                <h2 className="golden-gradient">
+                  <i className="bi bi-lock me-2"></i>
+                  Set Encryption Key
+                </h2>
+                <p className="golden-subtext">Enter 4 unique ciphers to initiate</p>
+              </div>
+              
+              <div className="golden-input-wrapper">
+                <input
+                  type="text"
+                  className="golden-input"
+                  value={aim}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="????"
+                  maxLength="4"
+                  inputMode="numeric"
+                />
+                <button 
+                  className="golden-button mt-4"
+                  onClick={handleSubmit}
+                  disabled={!aim.trim()}
+                >
+                  <i className="bi bi-play-circle me-2"></i>
+                  Initiate Sequence
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <App chatId={chatId} userId={userId} userName={userName} />
+      )}
+    </div>
+  );
+}
