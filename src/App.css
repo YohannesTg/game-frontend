@@ -81,8 +81,14 @@ body {
   background: rgba(255, 215, 0, 0.1);
   border-radius: 12px;
   margin-bottom: 1rem;
-  color: #ffd700;
+  color: var(--gold-primary);
   font-weight: 600;
+}
+
+.guess-header span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .guess-item {
@@ -100,7 +106,7 @@ body {
   letter-spacing: 0.3rem;
   font-size: 1.1rem;
   font-family: 'Space Mono', monospace;
-  color: #ffd700;
+  color: var(--gold-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -162,6 +168,34 @@ body {
   transform: translateY(1px);
 }
 
+/* Guess Input Styles */
+.guess-input {
+  width: 100%;
+  max-width: 300px;
+  font-size: 1.4rem;
+  letter-spacing: 0.8rem;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(106, 183, 255, 0.3);
+  color: #6ab7ff;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.guess-input::placeholder {
+  color: rgba(106, 183, 255, 0.3);
+  letter-spacing: 0.8rem;
+  content: "_";
+}
+
+.check-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
 /* ================== TARGET PAGE STYLES ================== */
 .target-container {
   padding: 2rem 1rem;
@@ -194,6 +228,12 @@ body {
   backdrop-filter: blur(8px);
   border-radius: 20px;
   margin: 2rem auto;
+}
+
+.golden-gradient {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .golden-glass {
@@ -244,7 +284,7 @@ body {
 
 .golden-input {
   font-size: 1.5rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.8rem;
   padding: 1rem;
   width: 100%;
   max-width: 300px;
@@ -253,6 +293,12 @@ body {
   border-radius: 15px;
   color: var(--gold-primary);
   margin: 1rem auto;
+  text-align: center;
+}
+
+.golden-input::placeholder {
+  color: rgba(255, 215, 0, 0.3);
+  letter-spacing: 0.8rem;
 }
 
 .golden-input:focus {
@@ -260,7 +306,16 @@ body {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
 }
 
-/* Enhanced Golden Button */
+.golden-text {
+  color: var(--gold-primary) !important;
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);
+}
+
+.golden-subtext {
+  color: rgba(255, 215, 0, 0.8) !important;
+  font-size: 0.9rem;
+}
+
 .golden-button {
   padding: 1.2rem 2.5rem;
   border: none;
@@ -336,7 +391,6 @@ body {
     min-width: 50px;
   }
 
-  /* Target Page */
   .golden-hero {
     padding: 2rem 1rem;
   }
@@ -367,7 +421,6 @@ body {
     font-size: 1rem;
   }
 
-  /* Target Page */
   .golden-input {
     font-size: 1rem;
     max-width: 200px;
