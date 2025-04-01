@@ -24,6 +24,42 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
 }
+
+/* Header Score Row */
+.score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.score-label {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.score-label span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  .score-row {
+    gap: 0.5rem;
+  }
+  
+  .score-label {
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .player-name, .opponent-name {
+    font-size: 1rem;
+  }
+}
+
 /* Header Score Styles */
 .score-label {
   font-size: 1rem;
