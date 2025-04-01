@@ -26,9 +26,12 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
 
   // Confetti setup
   useEffect(() => {
+    let confetti;
     if(canvasRef.current) {
-      const confetti = new ConfettiGenerator({ target: canvasRef.current });
-      return () => confetti.clear();
+      confetti = new ConfettiGenerator({ target: canvasRef.current });
+    }
+    return () => {
+      if(confetti) confetti.clear();
     }
   }, []);
 
@@ -55,7 +58,6 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       setTrial2(prev => prev + 1);
       setGuess('');
       
-      // Force focus after state updates
       setTimeout(() => inputRef.current?.focus(), 0);
     } catch(error) {
       console.error('Error:', error);
@@ -82,27 +84,30 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       }} />
 
       <div className="current-guess">
-        <input
-          ref={inputRef}
-          className="guess-input"
-          type="number"
-          value={guess}
-          onChange={handleInput}
-          placeholder="____"
-          disabled={isSubmitting}
-          maxLength="4"
-          inputMode="numeric"
-          pattern="[0-9]*"
-        />
-        
-        <button
-          className="glow-button"
-          onClick={checkOnServer}
-          disabled={guess.length !== 4 || isSubmitting}
-          tabIndex="-1" // Prevent button from stealing focus
-        >
-          {isSubmitting ? 'Checking...' : 'Check'}
-        </button>
+        <div className="input-group">
+          <input
+            ref={inputRef}
+            className="guess-input"
+            type="text"  // Changed from number for better mobile UX
+            value={guess}
+            onChange={handleInput}
+            placeholder="____"
+            disabled={isSubmitting}
+            maxLength="4"
+            inputMode="numeric"
+            pattern="[0-9]*"
+          />
+          
+          <button
+            className="app-button check-button"
+            onClick={checkOnServer}
+            disabled={guess.length !== 4 || isSubmitting}
+            tabIndex="-1"
+          >
+            <i className="bi bi-search me-2"></i>
+            {isSubmitting ? 'Checking...' : 'Check Guess'}
+          </button>
+        </div>
       </div>
     </>
   );
