@@ -102,4 +102,26 @@ export default function Target() {
                   className="golden-input"
                   value={aim}
                   onChange={handleInputChange}
-                 
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="____"
+                  maxLength="4"
+                  inputMode="numeric"
+                />
+                <button 
+                  className="golden-button mt-4"
+                  onClick={handleSubmit}
+                  disabled={!aim.trim()}
+                >
+                  <i className="bi bi-play-circle me-2"></i>
+                  Initiate Sequence
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <App chatId={chatId} userId={userId} userName={userName} />
+      )}
+    </div>
+  );
+}
