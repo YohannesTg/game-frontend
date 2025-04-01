@@ -2,6 +2,7 @@
   --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
   --gold-primary: #ffd700;
   --gold-secondary: #ffaa00;
+  --dark-bg: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
   --glass-bg: rgba(255, 215, 0, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
@@ -17,7 +18,7 @@
 html,
 body {
   height: 100%;
-  background: linear-gradient(45deg, #1a1a2e 0%, #16213e 100%);
+  background: var(--dark-bg);
   font-family: var(--modern-font);
   color: var(--text-primary);
   overflow-x: hidden;
@@ -65,23 +66,17 @@ body {
   margin-right: auto;
 }
 
-/* Guess history styles remain same as previous */
 .guess-history {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.guess-header,
-.guess-item {
+.guess-header {
   display: grid;
   grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
   gap: 1rem;
   padding: 1rem;
-  width: 100%;
-}
-
-.guess-header {
   background: rgba(255, 215, 0, 0.1);
   border-radius: 12px;
   margin-bottom: 1rem;
@@ -90,9 +85,14 @@ body {
 }
 
 .guess-item {
+  display: grid;
+  grid-template-columns: 1fr minmax(70px, auto) minmax(70px, auto);
+  gap: 1rem;
+  padding: 1rem;
   background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
   border-radius: 12px;
   margin-bottom: 1rem;
+  animation: slideIn 0.3s ease;
 }
 
 .guess-number {
@@ -114,6 +114,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.n-result {
+  background: rgba(0, 255, 255, 0.15);
+  color: #00ffff;
+}
+
+.o-result {
+  background: rgba(0, 255, 0, 0.15);
+  color: #76ff7a;
 }
 
 /* ========== Golden Target Page Styles ========== */
@@ -141,8 +151,8 @@ body {
 .golden-glass {
   background: rgba(255, 215, 0, 0.05);
   backdrop-filter: blur(12px);
-  border-radius: 20px;
   border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
   padding: 2rem;
   margin: 2rem auto;
   width: 100%;
@@ -160,9 +170,9 @@ body {
   text-align: center;
   padding: 1.5rem;
   background: rgba(255, 215, 0, 0.03);
-  border-radius: 15px;
-  transition: transform 0.3s ease;
   border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 15px;
+  transition: all 0.3s ease;
 }
 
 .golden-rule-card:hover {
@@ -201,11 +211,72 @@ body {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
 }
 
+/* ========== Shared Components ========== */
+.glow-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: var(--gold-gradient);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.glow-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.replay-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* ========== Animations ========== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes golden-glow {
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+}
+
 /* ========== Responsive Design ========== */
 @media (max-width: 768px) {
+  .player-info {
+    padding: 0 1rem;
+  }
+
   .game-content {
     padding: 1rem;
     margin-top: 100px;
+  }
+
+  .guess-header,
+  .guess-item {
+    grid-template-columns: 1fr minmax(60px, auto) minmax(60px, auto);
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .guess-number {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .result-number {
+    font-size: 1rem;
+    min-width: 50px;
   }
 
   /* Target Page Mobile */
@@ -231,6 +302,12 @@ body {
 }
 
 @media (max-width: 480px) {
+  .player-name,
+  .opponent-name {
+    font-size: 1rem;
+  }
+
+  /* Target Page Mobile Small */
   .golden-input {
     font-size: 1rem;
     max-width: 200px;
@@ -240,26 +317,4 @@ body {
   .golden-rule-card {
     padding: 1rem;
   }
-}
-
-@keyframes golden-glow {
-  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-}
-
-/* ========== Shared Components ========== */
-.glow-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  background: var(--gold-gradient);
-  color: #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.glow-button:hover {
-  transform: scale(1.05);
-  animation: golden-glow 1.5s infinite;
 }
