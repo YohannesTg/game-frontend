@@ -1,8 +1,6 @@
 :root {
   --primary-gradient: linear-gradient(45deg, #6ab7ff, #2575fc);
-  --gold-primary: #FFD700;
-  --gold-secondary: #D4AF37;
-  --gold-gradient: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
+  --gold-gradient: linear-gradient(45deg, #ffd700, #ffaa00);
   --glass-bg: rgba(255, 255, 255, 0.1);
   --modern-font: 'Inter', system-ui, -apple-system, sans-serif;
   --text-primary: rgba(255, 255, 255, 0.95);
@@ -55,6 +53,11 @@ body {
   text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
 }
 
+.score-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
 /* Game Area */
 .game-content {
   margin-top: 120px;
@@ -63,25 +66,27 @@ body {
 
 /* Guess History */
 .guess-history {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 0 1rem;
-  overflow-x: auto;
 }
 
 .guess-header {
   display: grid;
-  grid-template-columns: 1fr 100px 100px;
+  grid-template-columns: 1fr 80px 80px;
   gap: 1rem;
   padding: 1rem;
-  color: var(--gold-primary);
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  color: #ffd700;
   font-weight: 600;
-  min-width: 600px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  text-align: center;
 }
 
 .guess-item {
   display: grid;
-  grid-template-columns: 1fr 100px 100px;
+  grid-template-columns: 1fr 80px 80px;
   gap: 1rem;
   align-items: center;
   padding: 1rem;
@@ -89,45 +94,150 @@ body {
   background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
   border-radius: 12px;
   border: 1px solid rgba(255, 215, 0, 0.2);
-  min-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .guess-number {
   letter-spacing: 0.5rem;
   font-size: 1.2rem;
   font-family: 'Space Mono', monospace;
-  color: var(--gold-primary);
+  color: #ffd700;
   font-weight: 600;
+  padding-left: 0.5rem;
 }
 
 .result-number {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  padding: 10px;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .n-result {
   background: rgba(0, 255, 255, 0.15);
   color: #00ffff;
+  border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
 .o-result {
   background: rgba(0, 255, 0, 0.15);
   color: #76ff7a;
+  border: 1px solid rgba(0, 255, 0, 0.3);
 }
 
+/* Current Guess */
+.current-guess {
+  max-width: 600px;
+  margin: 2rem auto 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.guess-input {
+  width: 200px;
+  font-size: 1.2rem;
+  letter-spacing: 0.8rem;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 12px;
+  font-family: 'Space Mono', monospace;
+}
+
+.glow-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: var(--gold-gradient);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+/* Replay Button */
+.replay-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.replay-button {
+  background: var(--gold-gradient);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.replay-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-info {
+    padding: 0 1rem;
+  }
+  
+  .game-content {
+    padding: 1rem;
+    margin-top: 100px;
+  }
+  
+  .guess-header,
+  .guess-item {
+    grid-template-columns: 1fr 60px 60px;
+  }
+  
+  .guess-number {
+    font-size: 1rem;
+  }
+  
+  .result-number {
+    font-size: 1rem;
+  }
+  
+  .guess-input {
+    width: 160px;
+    font-size: 1rem;
+  }
+}
 /* Target Page Styles */
 .target-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 2rem;
-  color: var(--gold-primary);
+  color: #ffffff;
 }
 
 .hero-section {
   padding: 4rem 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #6ab7ff, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .glass-card {
@@ -154,7 +264,6 @@ body {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 15px;
   transition: transform 0.3s ease;
-  border: 2px solid var(--gold-primary);
 }
 
 .rule-card:hover {
@@ -170,7 +279,10 @@ body {
   justify-content: center;
   font-size: 1.5rem;
   margin: 0 auto 1rem;
-  background: var(--gold-primary);
+}
+
+.input-section {
+  text-align: center;
 }
 
 .secret-input {
@@ -180,26 +292,35 @@ body {
   width: 250px !important;
   text-align: center !important;
   background: rgba(255, 255, 255, 0.1) !important;
-  border: 2px solid var(--gold-primary) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 15px !important;
-  color: var(--gold-primary) !important;
+  color: #fff !important;
+  margin: 0 auto 1.5rem !important;
+}
+
+.secret-input:focus {
+  border-color: #6ab7ff !important;
+  box-shadow: 0 0 15px rgba(106, 183, 255, 0.3) !important;
 }
 
 .glow-button {
-  background: var(--gold-gradient) !important;
+  background: linear-gradient(45deg, #6ab7ff, #2575fc) !important;
   border: none !important;
   padding: 1rem 2rem !important;
   border-radius: 25px !important;
-  color: #000 !important;
+  color: white !important;
   font-weight: 600 !important;
   transition: all 0.3s ease !important;
 }
 
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(106, 183, 255, 0.3) !important;
+}
+
 @media (max-width: 768px) {
-  .guess-header,
-  .guess-item {
-    min-width: unset;
-    grid-template-columns: 1fr 80px 80px;
+  .target-container {
+    padding: 1rem;
   }
   
   .secret-input {
@@ -207,8 +328,11 @@ body {
     font-size: 1.5rem !important;
   }
   
-  .game-content {
-    padding: 1rem;
-    margin-top: 100px;
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-section {
+    padding: 2rem 0;
   }
 }
