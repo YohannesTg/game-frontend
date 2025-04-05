@@ -48,7 +48,7 @@ export default function Target() {
           <div className="golden-hero text-center">
             <h1 className="display-4 fw-bold golden-gradient mb-4">
               <i className="bi bi-stars me-3 golden-icon"></i>
-              CodeBreaker Challenge
+              Gues My Number
               <i className="bi bi-stars ms-3 golden-icon"></i>
             </h1>
             <p className="lead golden-text">Decrypt the Digital Enigma</p>
