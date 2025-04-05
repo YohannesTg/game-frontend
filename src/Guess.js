@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ConfettiGenerator from "confetti-js";
+import confetti from 'canvas-confetti';
 
 export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTrial2 }) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
   const inputRef = useRef(null);
-  const confettiRef = useRef(null); // Added to persist confetti instance
 
   // Fetch opponent name
   useEffect(() => {
@@ -25,15 +24,22 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     if(chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
-  // Confetti cleanup
-  useEffect(() => {
-    return () => {
-      if (confettiRef.current) {
-        confettiRef.current.clear();
-        confettiRef.current = null;
-      }
-    };
-  }, []);
+  // Confetti setup
+  const runConfetti = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const myConfetti = confetti.create(canvas, {
+      resize: true,
+      useWorker: true
+    });
+
+    myConfetti({
+      particleCount: 200,
+      spread: 160,
+      origin: { y: 0.6 }
+    });
+  };
 
   // Auto-focus after submission completes
   useEffect(() => {
@@ -51,17 +57,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       const data = await response.json();
       
       if(data.order === 4 && data.number === 4) {
-        // Clear existing confetti and create new instance
-        if (confettiRef.current) {
-          confettiRef.current.clear();
-        }
-        confettiRef.current = new ConfettiGenerator({ 
-          target: canvasRef.current,
-          max: 200,
-          animate: true,
-          props: ['circle', 'square', 'triangle']
-        });
-        confettiRef.current.render();
+        runConfetti();
       }
       
       onNewGuess(guess, data.number, data.order);
@@ -89,10 +85,10 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
         position: 'fixed',
         top: 0,
         left: 0,
-        width: '100vw',  // Added
-        height: '100vh', // Added
         pointerEvents: 'none',
-        zIndex: 1000
+        zIndex: 1000,
+        width: '100%',
+        height: '100%'
       }} />
 
       <div className="current-guess">
