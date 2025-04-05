@@ -6,6 +6,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
   const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef(null);
   const inputRef = useRef(null);
+  const confettiRef = useRef(null); // Added to persist confetti instance
 
   // Fetch opponent name
   useEffect(() => {
@@ -24,15 +25,14 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     if(chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
-  // Confetti setup
+  // Confetti cleanup
   useEffect(() => {
-    let confetti;
-    if(canvasRef.current) {
-      confetti = new ConfettiGenerator({ target: canvasRef.current });
-    }
     return () => {
-      if(confetti) confetti.clear();
-    }
+      if (confettiRef.current) {
+        confettiRef.current.clear();
+        confettiRef.current = null;
+      }
+    };
   }, []);
 
   // Auto-focus after submission completes
@@ -51,7 +51,17 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       const data = await response.json();
       
       if(data.order === 4 && data.number === 4) {
-        ConfettiGenerator({ target: canvasRef.current }).render();
+        // Clear existing confetti and create new instance
+        if (confettiRef.current) {
+          confettiRef.current.clear();
+        }
+        confettiRef.current = new ConfettiGenerator({ 
+          target: canvasRef.current,
+          max: 200,
+          animate: true,
+          props: ['circle', 'square', 'triangle']
+        });
+        confettiRef.current.render();
       }
       
       onNewGuess(guess, data.number, data.order);
@@ -79,6 +89,8 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
         position: 'fixed',
         top: 0,
         left: 0,
+        width: '100vw',  // Added
+        height: '100vh', // Added
         pointerEvents: 'none',
         zIndex: 1000
       }} />
@@ -88,7 +100,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
           <input
             ref={inputRef}
             className="guess-input"
-            type="text"  // Changed from number for better mobile UX
+            type="text"
             value={guess}
             onChange={handleInput}
             placeholder="____"
