@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Target from './Target';
+import Target from './target';
 
 // Parse URL parameters
 const urlParams = new URLSearchParams(window.location.search);
