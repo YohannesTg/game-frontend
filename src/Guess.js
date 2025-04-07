@@ -7,7 +7,7 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
   const canvasRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Fetch opponent name
+  // ✅ Fetch opponent name
   useEffect(() => {
     const fetchOpponent = async () => {
       try {
@@ -20,14 +20,22 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
         console.error('Error fetching opponent:', error);
       }
     };
-    
-    if(chatId && userId) fetchOpponent();
+
+    if (chatId && userId) fetchOpponent();
   }, [chatId, userId, setOpponent]);
 
-  // Confetti setup
+  // ✅ Confetti setup
   const runConfetti = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      // fallback if canvas fails
+      confetti({
+        particleCount: 100,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+      return;
+    }
 
     const myConfetti = confetti.create(canvas, {
       resize: true,
@@ -41,31 +49,30 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
     });
   };
 
-  // Auto-focus after submission completes
+  // ✅ Keep input focused
   useEffect(() => {
-    if (!isSubmitting) {
-      inputRef.current?.focus();
-    }
+    if (!isSubmitting) inputRef.current?.focus();
   }, [isSubmitting]);
 
   const checkOnServer = async () => {
     try {
       setIsSubmitting(true);
+
       const response = await fetch(
         `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${chatId}&userId=${userId}`
       );
       const data = await response.json();
-      
-      if(data.order === 4 && data.number === 4) {
+      console.log('Server response:', data);
+
+      if (data.order === 4 && data.number === 4) {
         runConfetti();
       }
-      
+
       onNewGuess(guess, data.number, data.order);
       setTrial2(prev => prev + 1);
       setGuess('');
-      
       setTimeout(() => inputRef.current?.focus(), 0);
-    } catch(error) {
+    } catch (error) {
       console.error('Error:', error);
     } finally {
       setIsSubmitting(false);
@@ -74,23 +81,33 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
 
   const handleInput = (e) => {
     const input = e.target.value;
-    if(input.length <= 4 && /^\d*$/.test(input) && new Set(input).size === input.length) {
+    if (
+      input.length <= 4 &&
+      /^\d*$/.test(input) &&
+      new Set(input).size === input.length
+    ) {
       setGuess(input);
     }
   };
 
   return (
     <>
-      <canvas ref={canvasRef} style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        pointerEvents: 'none',
-        zIndex: 1000,
-        width: '100%',
-        height: '100%'
-      }} />
+      {/* ✅ Confetti Canvas */}
+      <canvas
+        ref={canvasRef}
+        id="confetti-canvas"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+          zIndex: 9999,
+          width: '100vw',
+          height: '100vh'
+        }}
+      />
 
+      {/* Input UI */}
       <div className="current-guess">
         <div className="input-group">
           <input
@@ -105,7 +122,6 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
             inputMode="numeric"
             pattern="[0-9]*"
           />
-          
           <button
             className="app-button check-button"
             onClick={checkOnServer}
