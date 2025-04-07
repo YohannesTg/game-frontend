@@ -1,14 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Target from './target'
+import App from './App';
+import Target from './Target';
 
+// Parse URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const gameMode = urlParams.get('mode');
 
-
-
+// Create root element
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Conditional rendering logic
+const renderComponent = () => {
+  switch(gameMode) {
+    case 'solo':
+      return <App />;
+    case 'multi':
+      return <Target />;
+    default:
+      return (
+        <div style={{
+          padding: '20px',
+          textAlign: 'center',
+          fontFamily: 'Arial, sans-serif'
+        }}>
+          <h2>🚫 Invalid Access Method</h2>
+          <p>Please launch the game through the Telegram bot using:</p>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li><code>?mode=solo</code> - Single Player Mode</li>
+            <li><code>?mode=multi</code> - Multiplayer Mode</li>
+          </ul>
+        </div>
+      );
+  }
+};
+
+// Render the appropriate component
 root.render(
   <React.StrictMode>
-    <Target />
+    {renderComponent()}
   </React.StrictMode>
 );
 
