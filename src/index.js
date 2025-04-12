@@ -31,7 +31,7 @@ const RootComponent = () => {
           if (data.inputValue) {
             setHasExistingInput(true);
             setInputValue(data.inputValue);
-            setShowPopup(true);  // Show the custom popup
+            setShowPopup(true);
             return;
           }
         }
@@ -159,24 +159,166 @@ const RootComponent = () => {
       {showPopup && (
         <div style={{
           position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          background: 'rgba(0, 0, 0, 0.8)',
-          color: 'white',
-          padding: '20px',
-          borderRadius: '8px',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          backdropFilter: 'blur(8px)',
           zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          animation: 'fadeIn 0.3s ease-out'
         }}>
-          <h3>Game Starter with previous code number {inputValue}</h3>
-          <button onClick={closePopup} style={{
-            background: '#ff4c4c',
-            color: 'white',
-            border: 'none',
-            padding: '10px',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}>Close</button>
+          <div style={{
+            background: 'linear-gradient(145deg, #1a1a2e 0%, #16213e 100%)',
+            borderRadius: '20px',
+            padding: '2rem',
+            width: '90%',
+            maxWidth: '400px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+            position: 'relative',
+            transform: 'translateY(0)',
+            animation: 'slideUp 0.3s ease-out'
+          }}>
+            <button 
+              onClick={closePopup}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                transition: 'all 0.2s ease',
+                ':hover': {
+                  background: 'rgba(255, 255, 255, 0.1)'
+                }
+              }}
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="rgba(255, 255, 255, 0.8)" 
+                strokeWidth="2"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div style={{
+              textAlign: 'center',
+              padding: '1rem'
+            }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '50%',
+                width: '60px',
+                height: '60px',
+                margin: '0 auto 1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <span style={{ 
+                  fontSize: '2rem',
+                  background: 'linear-gradient(45deg, #00b4d8, #90e0ef)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>
+                  🕹️
+                </span>
+              </div>
+              
+              <h3 style={{
+                margin: '0 0 1rem',
+                color: 'white',
+                fontSize: '1.5rem',
+                fontWeight: '600'
+              }}>
+                Continue Existing Game
+              </h3>
+              
+              <p style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '1rem',
+                lineHeight: '1.5',
+                marginBottom: '2rem'
+              }}>
+                We found an existing game with code:
+              </p>
+              
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '12px',
+                padding: '1rem',
+                marginBottom: '2rem',
+                display: 'inline-block'
+              }}>
+                <span style={{
+                  fontFamily: 'monospace',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  background: 'linear-gradient(45deg, #00b4d8, #90e0ef)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>
+                  {inputValue}
+                </span>
+              </div>
+              
+              <button 
+                onClick={closePopup}
+                style={{
+                  background: 'linear-gradient(45deg, #00b4d8, #90e0ef)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.8rem 2rem',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  width: '100%',
+                  ':hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 15px rgba(0, 180, 216, 0.4)'
+                  }
+                }}
+              >
+                Continue Playing
+              </button>
+            </div>
+          </div>
+          
+          <style>{`
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes slideUp {
+              from {
+                transform: translateY(20px);
+                opacity: 0;
+              }
+              to {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+            @media (max-width: 480px) {
+              .popup-content {
+                width: 95%;
+                padding: 1.5rem;
+              }
+            }
+          `}</style>
         </div>
       )}
       {renderContent()}
