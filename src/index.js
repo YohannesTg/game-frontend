@@ -13,6 +13,7 @@ const RootComponent = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const chatId = urlParams.get('chatId');
         const userId = urlParams.get('userId');
+        const userName = urlParams.get('userName');
 
         if (chatId && userId) {
           const response = await fetch(`https://gamechecker.vercel.app/exist?chatId=${chatId}&userId=${userId}`);
@@ -38,12 +39,12 @@ const RootComponent = () => {
     const gameMode = urlParams.get('mode');
 
     if (hasExistingInput) {
-      return <App />;
+      return <App chatId={chatId} userId={userId} userName={userName} />;
     }
 
     switch(gameMode) {
       case 'solo':
-        return <App />;
+        return <App chatId={chatId} userId={userId} userName={userName} />;
       case 'multi':
         return <Target />;
       default:
