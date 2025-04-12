@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';        // make sure the path is correct
-import Target from './target'; 
+import App from './App';
+import Target from './target';
 
 const RootComponent = () => {
   const [isChecking, setIsChecking] = useState(true);
@@ -9,6 +9,7 @@ const RootComponent = () => {
   const [chatId, setChatId] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
 
   useEffect(() => {
     const checkExistingGame = async () => {
@@ -28,6 +29,9 @@ const RootComponent = () => {
 
           if (data.inputValue) {
             setHasExistingInput(true);
+            setInputValue(data.inputValue);
+            // Show the popup message
+            alert(`Game Starter with previous code number ${data.inputValue}`);
             return;
           }
         }
@@ -46,7 +50,7 @@ const RootComponent = () => {
     const gameMode = urlParams.get('mode');
 
     if (hasExistingInput) {
-      return <App chatId={chatId} userId={userId} userName={userName} />;
+      return <App chatId={chatId} userId={userId} userName={userName} inputValue={inputValue} />;
     }
 
     switch (gameMode) {
@@ -86,3 +90,10 @@ const RootComponent = () => {
 
   return renderContent();
 };
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <RootComponent />
+  </React.StrictMode>
+);
