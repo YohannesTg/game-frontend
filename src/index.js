@@ -1,3 +1,8 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';        // make sure the path is correct
+import Target from './target'; 
+
 const RootComponent = () => {
   const [isChecking, setIsChecking] = useState(true);
   const [hasExistingInput, setHasExistingInput] = useState(false);
