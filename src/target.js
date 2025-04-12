@@ -28,6 +28,8 @@ export default function Target() {
 
   const handleSubmit = async () => {
     try {
+      if (aim.length !== 4) return;
+      
       const url = `https://gamechecker.vercel.app/submit-data?chatId=${chatId}&userId=${userId}&inputValue=${aim}&userName=${userName}`;
       const response = await fetch(url, { method: 'GET' });
       
@@ -110,7 +112,7 @@ export default function Target() {
                 <button 
                   className="golden-button mt-4"
                   onClick={handleSubmit}
-                  disabled={!aim.trim()}
+                  disabled={aim.length !== 4}
                 >
                   <i className="bi bi-play-circle me-2"></i>
                   Initiate Sequence
