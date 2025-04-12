@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Target from './Target';
+import Target from './target';
 
 const RootComponent = () => {
   const [isChecking, setIsChecking] = useState(true);
