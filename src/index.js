@@ -76,17 +76,79 @@ const RootComponent = () => {
     }
   };
 
-  if (isChecking) {
-    return (
+if (isChecking) {
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+      color: '#fff',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif'
+    }}>
       <div style={{
-        padding: '20px',
         textAlign: 'center',
-        fontFamily: 'Arial, sans-serif'
+        padding: '2rem',
+        borderRadius: '16px',
+        background: 'rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(10px)'
       }}>
-        <p>Checking game status...</p>
+        <div style={{
+          display: 'inline-block',
+          width: '50px',
+          height: '50px',
+          borderRadius: '50%',
+          border: '3px solid rgba(255, 255, 255, 0.3)',
+          borderTopColor: '#00b4d8',
+          animation: 'spin 1s ease-in-out infinite',
+          marginBottom: '1.5rem'
+        }}></div>
+        <h2 style={{
+          margin: '0',
+          fontSize: '1.5rem',
+          fontWeight: '600',
+          letterSpacing: '0.5px',
+          background: 'linear-gradient(45deg, #00b4d8, #90e0ef)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          animation: 'fadeInUp 0.5s ease-out'
+        }}>
+          Checking Game Status
+        </h2>
+        <p style={{
+          marginTop: '0.5rem',
+          color: 'rgba(255, 255, 255, 0.8)',
+          fontSize: '0.9rem',
+          animation: 'fadeIn 0.5s ease-out 0.2s',
+          animationFillMode: 'backwards'
+        }}>
+          Securely verifying your game session...
+        </p>
       </div>
-    );
-  }
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+}
 
   return renderContent();
 };
