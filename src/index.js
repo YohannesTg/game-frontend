@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import Target from './target';
-
 const RootComponent = () => {
   const [isChecking, setIsChecking] = useState(true);
   const [hasExistingInput, setHasExistingInput] = useState(false);
+  const [chatId, setChatId] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     const checkExistingGame = async () => {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const chatId = urlParams.get('chatId');
-        const userId = urlParams.get('userId');
-        const userName = urlParams.get('userName');
+        const chatIdParam = urlParams.get('chatId');
+        const userIdParam = urlParams.get('userId');
+        const userNameParam = urlParams.get('userName');
 
-        if (chatId && userId) {
-          const response = await fetch(`https://gamechecker.vercel.app/exist?chatId=${chatId}&userId=${userId}`);
+        setChatId(chatIdParam);
+        setUserId(userIdParam);
+        setUserName(userNameParam);
+
+        if (chatIdParam && userIdParam) {
+          const response = await fetch(`https://gamechecker.vercel.app/exist?chatId=${chatIdParam}&userId=${userIdParam}`);
           const data = await response.json();
-          
+
           if (data.inputValue) {
             setHasExistingInput(true);
             return;
@@ -42,7 +44,7 @@ const RootComponent = () => {
       return <App chatId={chatId} userId={userId} userName={userName} />;
     }
 
-    switch(gameMode) {
+    switch (gameMode) {
       case 'solo':
         return <App chatId={chatId} userId={userId} userName={userName} />;
       case 'multi':
@@ -79,10 +81,3 @@ const RootComponent = () => {
 
   return renderContent();
 };
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <RootComponent />
-  </React.StrictMode>
-);
