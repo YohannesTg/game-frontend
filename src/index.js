@@ -6,10 +6,10 @@ import Target from './target';
 const RootComponent = () => {
   const [isChecking, setIsChecking] = useState(true);
   const [hasExistingInput, setHasExistingInput] = useState(false);
-  const [chatId, setChatId] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [inputValue, setInputValue] = useState(null);
+  const [chatId, setChatId] = useState('');
+  const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     const checkExistingGame = async () => {
