@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ userName, oppName, score1, score2, trialNum, trial2 }) {
+export default function Header({ userName, oppName, score1, score2, trial1, trial2 }) {
   return (
     <div className="header-container">
       <div className="container">
