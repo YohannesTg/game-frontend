@@ -26,7 +26,7 @@ export default function Guess({
         );
         const data = await response.json();
         setOpponent(data.userName);
-        setScore2(data.score);
+        setScore2(data.Score);
       } catch (error) {
         console.error('Error fetching opponent:', error);
       }
