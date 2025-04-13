@@ -9,7 +9,7 @@ export default function Header({ userName, oppName, score1, score2, trialNum, tr
             <div className="player-name">{userName}</div>
             <div className="score-label">
               <span className="golden-text">🏆 {score1}</span>
-              <span className="golden-text">🎯 {trialNum}</span>
+              <span className="golden-text">🎯 {trial1}</span>
             </div>
           </div>
           
