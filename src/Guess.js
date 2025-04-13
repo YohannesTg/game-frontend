@@ -120,18 +120,23 @@ export default function Guess({
             width: '500px',
             margin: '1rem'
           }}>
-            <img 
-              src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" 
-              alt="Crying emoji" 
-              style={{
-                width: '220px',
-                height: '220px',
-                marginBottom: '2rem',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '4px solid rgba(255, 255, 255, 0.1)'
-              }}
-            />
+            <picture>
+              <source 
+                srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f62d/512.webp" 
+                type="image/webp" 
+              />
+              <img
+                src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f62d/512.gif"
+                alt="😭"
+                style={{
+                  width: '160px',
+                  height: '160px',
+                  marginBottom: '2rem',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+                }}
+              />
+            </picture>
             <h2 style={{
               margin: '0 0 2rem',
               fontSize: '2.8rem',
@@ -186,8 +191,8 @@ export default function Guess({
                 font-size: 2.2rem !important;
               }
               img {
-                width: 180px !important;
-                height: 180px !important;
+                width: 120px !important;
+                height: 120px !important;
               }
               button {
                 font-size: 1.1rem !important;
@@ -199,8 +204,8 @@ export default function Guess({
                 font-size: 2rem !important;
               }
               img {
-                width: 150px !important;
-                height: 150px !important;
+                width: 100px !important;
+                height: 100px !important;
               }
             }
           `}</style>
