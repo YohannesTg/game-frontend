@@ -60,7 +60,7 @@ function App(props) {
             setOpponent={setOpponentUsername}
             chatId={props.chatId}
             userId={props.userId}
-            setTrial1={setTrial2}
+            setTrial1={setTrial1}
             setTrial2={setTrial2}
             setScore1={setScore1}    
             setScore2={setScore2}
