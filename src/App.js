@@ -35,6 +35,7 @@ function App(props) {
         score1={score1}
         score2={score2}
         trialNum={trialNum}
+        trial1={trial1}
         trial2={trial2}
       />
       
