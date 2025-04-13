@@ -1,9 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 
-export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTrial2 }) {
+export default function Guess({ 
+  onNewGuess, 
+  chatId, 
+  userId, 
+  setOpponent, 
+  setTrial2, 
+  setScore1, 
+  setScore2, 
+  score1, 
+  score2 
+}) {
   const [guess, setGuess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLoss, setShowLoss] = useState(false);
   const inputRef = useRef(null);
 
   // Fetch opponent name
@@ -15,13 +26,14 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
         );
         const data = await response.json();
         setOpponent(data.userName);
+        setScore2(data.score2);
       } catch (error) {
         console.error('Error fetching opponent:', error);
       }
     };
 
     if (chatId && userId) fetchOpponent();
-  }, [chatId, userId, setOpponent]);
+  }, [chatId, userId, setOpponent, setScore2]);
 
   // Auto-focus after submission completes
   useEffect(() => {
@@ -46,10 +58,19 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
       );
       const data = await response.json();
 
+      // Check for score difference first
+      if (data.score2 !== score2) {
+        setShowLoss(true);
+        setScore2(data.score2);
+        return;
+      }
+
+      // Handle win condition
       if (data.order === 4 && data.number === 4) {
         runConfetti();
       }
 
+      // Process valid guess
       onNewGuess(guess, data.number, data.order);
       setTrial2((prev) => prev + 1);
       setGuess('');
@@ -64,13 +85,37 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
 
   const handleInput = (e) => {
     const input = e.target.value;
-    if (input.length <= 4 && /^\d*$/.test(input) && new Set(input).size === input.length) {
+    if (input.length <= 4 && 
+        /^\d*$/.test(input) && 
+        new Set(input).size === input.length) {
       setGuess(input);
     }
   };
 
-  return (
-    <div className="current-guess">
+  const handleReplay = () => {
+    window.location.reload();
+  };
+
+  const renderContent = () => {
+    if (showLoss) {
+      return (
+        <div className="loss-container">
+          <div className="loss-message">
+            <div className="emoji">😭</div>
+            <h2>You Lose!</h2>
+            <button
+              className="app-button replay-button"
+              onClick={handleReplay}
+            >
+              <i className="bi bi-arrow-repeat me-2"></i>
+              Play Again
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
       <div className="input-group">
         <input
           ref={inputRef}
@@ -95,6 +140,12 @@ export default function Guess({ onNewGuess, chatId, userId, setOpponent, setTria
           {isSubmitting ? 'Checking...' : 'Check Guess'}
         </button>
       </div>
+    );
+  };
+
+  return (
+    <div className="current-guess">
+      {renderContent()}
     </div>
   );
 }
