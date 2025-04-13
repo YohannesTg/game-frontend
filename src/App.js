@@ -62,7 +62,9 @@ function App(props) {
             userId={props.userId}
             setTrial2={setTrial2}
             setScore1={setScore1}    
-            setScore2={setScore2}     
+            setScore2={setScore2}
+            score1={score1}    
+            score2={score2}  
           />
         ) : (
           <div className="replay-container">
