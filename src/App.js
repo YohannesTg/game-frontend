@@ -61,6 +61,8 @@ function App(props) {
             chatId={props.chatId}
             userId={props.userId}
             setTrial2={setTrial2}
+            setScore1={setScore1}    
+            setScore2={setScore2}     
           />
         ) : (
           <div className="replay-container">
