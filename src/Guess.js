@@ -26,7 +26,7 @@ export default function Guess({
         );
         const data = await response.json();
         setOpponent(data.userName);
-        setScore2(data.Score);
+        setScore2(data.score2);
       } catch (error) {
         console.error('Error fetching opponent:', error);
       }
@@ -58,19 +58,16 @@ export default function Guess({
       );
       const data = await response.json();
 
-      // Check for score difference first
       if (data.score2 !== score2) {
         setShowLoss(true);
         setScore2(data.score2);
         return;
       }
 
-      // Handle win condition
       if (data.order === 4 && data.number === 4) {
         runConfetti();
       }
 
-      // Process valid guess
       onNewGuess(guess, data.number, data.order);
       setTrial2((prev) => prev + 1);
       setGuess('');
@@ -99,18 +96,114 @@ export default function Guess({
   const renderContent = () => {
     if (showLoss) {
       return (
-        <div className="loss-container">
-          <div className="loss-message">
-            <div className="emoji">😭</div>
-            <h2>You Lose!</h2>
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backdropFilter: 'blur(12px)',
+          animation: 'fadeIn 0.3s ease-out'
+        }}>
+          <div style={{
+            textAlign: 'center',
+            padding: '2rem',
+            borderRadius: '24px',
+            background: 'linear-gradient(145deg, #2a2a2e 0%, #1a1a2e 100%)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
+            maxWidth: '90%',
+            width: '500px',
+            margin: '1rem'
+          }}>
+            <img 
+              src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" 
+              alt="Crying emoji" 
+              style={{
+                width: '220px',
+                height: '220px',
+                marginBottom: '2rem',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '4px solid rgba(255, 255, 255, 0.1)'
+              }}
+            />
+            <h2 style={{
+              margin: '0 0 2rem',
+              fontSize: '2.8rem',
+              background: 'linear-gradient(45deg, #ff4d4d, #ff9f4d)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 4px 8px rgba(255, 0, 0, 0.2)',
+              animation: 'popIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
+            }}>
+              YOU LOSE!
+            </h2>
             <button
-              className="app-button replay-button"
+              style={{
+                background: 'linear-gradient(45deg, #ff4d4d, #ff8000)',
+                color: 'white',
+                border: 'none',
+                padding: '1.2rem 3rem',
+                borderRadius: '50px',
+                fontSize: '1.3rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 6px 20px rgba(255, 0, 0, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.8rem',
+                margin: '0 auto',
+                ':hover': {
+                  transform: 'translateY(-3px)',
+                  boxShadow: '0 8px 25px rgba(255, 0, 0, 0.4)'
+                }
+              }}
               onClick={handleReplay}
             >
-              <i className="bi bi-arrow-repeat me-2"></i>
+              <i className="bi bi-arrow-repeat" style={{ fontSize: '1.4rem' }}></i>
               Play Again
             </button>
           </div>
+          <style>{`
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes popIn {
+              0% { transform: scale(0.7); opacity: 0; }
+              80% { transform: scale(1.05); }
+              100% { transform: scale(1); opacity: 1; }
+            }
+            @media (max-width: 480px) {
+              div > h2 {
+                font-size: 2.2rem !important;
+              }
+              img {
+                width: 180px !important;
+                height: 180px !important;
+              }
+              button {
+                font-size: 1.1rem !important;
+                padding: 1rem 2rem !important;
+              }
+            }
+            @media (max-width: 360px) {
+              div > h2 {
+                font-size: 2rem !important;
+              }
+              img {
+                width: 150px !important;
+                height: 150px !important;
+              }
+            }
+          `}</style>
         </div>
       );
     }
@@ -128,6 +221,14 @@ export default function Guess({
           maxLength="4"
           inputMode="numeric"
           pattern="[0-9]*"
+          style={{
+            fontSize: '1.2rem',
+            padding: '0.8rem 1.2rem',
+            borderRadius: '8px',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+            background: 'rgba(0, 0, 0, 0.3)',
+            color: 'white'
+          }}
         />
 
         <button
@@ -135,6 +236,17 @@ export default function Guess({
           onClick={checkOnServer}
           disabled={guess.length !== 4 || isSubmitting}
           tabIndex="-1"
+          style={{
+            background: 'linear-gradient(45deg, #00b4d8, #0077b6)',
+            color: 'white',
+            padding: '0.8rem 1.5rem',
+            fontSize: '1.1rem',
+            borderRadius: '8px',
+            transition: 'all 0.2s ease',
+            ':hover': {
+              transform: 'translateY(-2px)'
+            }
+          }}
         >
           <i className="bi bi-search me-2"></i>
           {isSubmitting ? 'Checking...' : 'Check Guess'}
