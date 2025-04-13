@@ -73,7 +73,7 @@ export default function Guess({
       }
 
       onNewGuess(guess, data.number, data.order);
-      setTrial2((prev) => prev + 1);
+      setTrial1((prev) => prev + 1);
       setGuess('');
 
       setTimeout(() => inputRef.current?.focus(), 0);
