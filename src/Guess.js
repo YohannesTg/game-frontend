@@ -61,7 +61,8 @@ export default function Guess({
         `https://gamechecker.vercel.app/check?guess=${guess}&chatId=${chatId}&userId=${userId}`
       );
       const data = await response.json();
-
+      setTrial1(data.trial1);
+      setTrial2(data.trial2);
       if (data.score2 !== score2) {
         setShowLoss(true);
         setScore2(data.score2);
