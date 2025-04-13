@@ -6,7 +6,6 @@ function App(props) {
   const [guesses, setGuesses] = useState([]);
   const [score1, setScore1] = useState(0);
   const [score2, setScore2] = useState(0);
-  const [trialNum, setTrialNum] = useState(0);
   const [trial1, setTrial1] = useState(0);
   const [trial2, setTrial2] = useState(0);
   const [opponentUsername, setOpponentUsername] = useState('');
@@ -14,7 +13,7 @@ function App(props) {
 
   const handleNewGuess = (guess, n, o) => {
     setGuesses(prev => [...prev, { guess, n, o }]);
-    setTrialNum(prev => prev + 1);
+    setTrial1(prev => prev + 1);
     
     if(n === 4 && o === 4) {
       setScore1(prev => prev + 1);
@@ -34,7 +33,6 @@ function App(props) {
         oppName={opponentUsername}
         score1={score1}
         score2={score2}
-        trialNum={trialNum}
         trial1={trial1}
         trial2={trial2}
       />
