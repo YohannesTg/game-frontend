@@ -5,7 +5,8 @@ export default function Guess({
   onNewGuess, 
   chatId, 
   userId, 
-  setOpponent, 
+  setOpponent,
+  setTrial1,
   setTrial2, 
   setScore1, 
   setScore2, 
@@ -29,7 +30,7 @@ export default function Guess({
         setScore1(data.score1);
         setScore2(data.score2);
         setTrial1(data.trial1);
-        setTrial1(data.trial2);
+        setTrial2(data.trial2);
       } catch (error) {
         console.error('Error fetching opponent:', error);
       }
